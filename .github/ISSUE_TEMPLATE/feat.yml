@@ -1,0 +1,21 @@
+name: feat
+description: 새로운 기능이나 사양이 있나요?
+title: "[feature] "
+labels: ["feat"]
+body:
+  - type: textarea
+    id: feat-description
+    attributes:
+      label: 📄 설명
+      description: 새로운 기능을 설명해주세요.
+      placeholder: 자세한 설명을 제공해주세요!
+    validations:
+      required: true
+  - type: textarea
+    id: feat-tasks
+    attributes:
+      label: ✅ 작업 목록
+      description: 수행해야 할 작업을 나열해주세요.
+      placeholder: 가능한 한 세분화하세요!
+    validations:
+      required: false

@@ -1,0 +1,17 @@
+addReviewers: true
+
+reviewers:
+  - nakyeonko3
+  - love1ace
+  - ssumanlife
+  - haruyam15
+
+addAssignees: author
+numberOfReviewers: 2
+
+skipKeywords:
+  - wip  
+  - WIP  
+  - draft  
+  - "do not review"  
+  - "not ready"  
