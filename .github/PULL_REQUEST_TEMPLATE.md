@@ -1,19 +1,21 @@
-# 🚀 Pull Request Proposal
+다음은 요청하신 내용을 한글로 번역한 것입니다:
 
-**[Please briefly describe the work done]**
+# 🚀 풀 리퀘스트 제안
 
-## 📋 Work Details
+**[작업 내용을 간단히 설명해 주세요]**
 
-Please provide a detailed explanation of the changes made or features added.
+## 📋 작업 세부 사항
 
-## 🔧 Changes Summary
+변경 사항이나 추가된 기능에 대해 자세히 설명해 주세요.
 
-Summarize the key changes made.
+## 🔧 변경 사항 요약
 
-## 📸 Screenshots (Optional)
+주요 변경 사항을 요약해 주세요.
 
-You can attach screenshots demonstrating the modified screens or features.
+## 📸 스크린샷 (선택 사항)
 
-## 📄 Additional Information
+수정된 화면이나 기능을 보여주는 스크린샷을 첨부할 수 있습니다.
 
-If you have any additional information or special requests, please include them here.
+## 📄 추가 정보
+
+추가 정보나 특별한 요청 사항이 있다면 여기에 포함해 주세요.

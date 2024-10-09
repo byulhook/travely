@@ -1,0 +1,46 @@
+# Ignore build output directories
+dist/
+
+# Ignore node modules
+node_modules/
+
+# Ignore specific configuration files
+*.config.js
+
+# Ignore environment variables files
+.env
+.env.*
+.firebaserc
+
+# Ignore logs
+*.log
+
+# Ignore compiled files
+*.min.js
+*.min.css
+
+# Ignore specific file types
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Ignore other generated files
+coverage/
+
+# Ignore artifacts:
+build
+coverage
+
+
+# node module
+node_modules
+scripts/workshop-setup.js
+
+# .github
+.github/
+
+# firebase
+firebase.json
+.firebase/
