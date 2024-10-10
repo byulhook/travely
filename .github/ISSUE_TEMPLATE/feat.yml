@@ -1,7 +1,7 @@
-name: feat
+name: 기능 추가
 description: 새로운 기능이나 사양이 있나요?
-title: "[feature] "
-labels: ["feat"]
+title: '[feature] '
+labels: ['feat']
 body:
   - type: textarea
     id: feat-description
@@ -18,4 +18,4 @@ body:
       description: 수행해야 할 작업을 나열해주세요.
       placeholder: 가능한 한 세분화하세요!
     validations:
-      required: false
+      required: true
