@@ -43,7 +43,7 @@ const tagCardWrap = css`
     border-radius: 100%;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.1s ease;
+    transition: transform 0.3s ease;
     .tag-img {
       width: 100%;
       height: 100%;
@@ -67,11 +67,14 @@ const tagCardWrap = css`
       color: #fff;
     }
     .tag-name:hover {
-      border: 3px solid #4a95f2;
+      /* border: 3px solid #4a95f2; */
     }
   }
   li:hover {
     transform: translateY(-3px);
+    &:before {
+      display: none;
+    }
   }
 
   li:before {
