@@ -1,7 +1,7 @@
-name: setting
-description: 프로젝트 구성 변경을 하고 있습니까?
-title: "[setting] "
-labels: ["setting"]
+name: 설정 변경
+description: 프로젝트 구성 변경(npm, env, db, 등)
+title: '[setting] '
+labels: ['setting']
 body:
   - type: textarea
     id: setting-details
@@ -9,26 +9,27 @@ body:
       label: 📄 구성 변경 상세 내용
       description: 프로젝트 구성 변경에 대해 설명해주세요.
       placeholder: |
-        다음 내용을 포함하여 작성해주세요:
-
         - 어떤 구성을 변경하나요? 
-        - 예: 
-            - npm 종속성 추가
+        - 예시: 
+            - npm 종속성
             - package-lock.json 변경
             - .env 환경 변수 관련 세팅 변경
-            - 그외(디비 세팅, 배포 환경 관련 세팅 변경)
+            - 그외
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        > 다음 내용을 포함하여 작성해주세요:
 
-        주의사항:
+        ## 어떤 구성을 변경하나요? 
+        ### 예시 
+        - npm 종속성 추가
+        - package-lock.json 변경
+        - .env 환경 변수 관련 세팅 변경
+        - 그외(디비 세팅, 배포 환경 관련 세팅 변경)
+
+        ### 주의사항
         - npm 종속성 추가 시 정확한 버전을 명시해주세요.
         - package-lock.json 변경 시 전체 팀에 공유해주세요.
         - 환경 변수 변경 시 .env.example 파일도 업데이트해주세요.
-    validations:
-      required: true
-
-  - type: textarea
-    id: setting-notes
-    attributes:
-      label: 📝 추가 메모
-      description: 기타 고려사항이나 주의점이 있다면 작성해주세요.
-    validations:
-      required: false

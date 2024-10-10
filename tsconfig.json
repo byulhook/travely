@@ -29,5 +29,6 @@
     "noFallthroughCasesInSwitch": true,
     "allowJs": true
   },
-  "include": ["src", "server"]
+  "include": ["src", "server"],
+  "exclude": ["node_modules", "node_modules/@types/react-router-dom"]
 }
