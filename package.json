@@ -15,13 +15,9 @@
     "prepare": "husky"
   },
   "lint-staged": {
-<<<<<<< HEAD
-    "*.{js,jsx,ts,tsx}": "eslint . --fix"
-=======
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
->>>>>>> main
   },
   "dependencies": {
     "@emotion/styled": "^11.13.0",
