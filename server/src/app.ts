@@ -23,20 +23,15 @@ const startServer = async () => {
 async function bootstrap() {
   const app = await startServer();
 
+  // middlewares
   app.use(json());
   app.use(morgan('dev'));
   app.use(helmet());
-  app.use(json());
   app.use(
     cors({
       origin: '*',
     }),
   );
-
-  //! 테트용 라우터
-  app.get('/', (_req, res) => {
-    res.send('test server hello world');
-  });
 
   // global Error handler
   app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
