@@ -1,7 +1,6 @@
 import { css, SerializedStyles } from '@emotion/react';
 
 import Main from '@/layouts/Main';
-import Header from '@/layouts/Header';
 
 interface ContainerLayoutProps {
   customStyle?: SerializedStyles;
@@ -11,7 +10,6 @@ interface ContainerLayoutProps {
 const ContainerLayout: React.FC = ({ customStyle, mainCustomStyle }: ContainerLayoutProps) => {
   return (
     <div css={[containerStyle, customStyle]}>
-      <Header />
       <Main customStyle={mainCustomStyle} />
     </div>
   );
