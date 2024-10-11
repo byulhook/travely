@@ -5,6 +5,9 @@ const fontSizes = {};
 const fontWeights = {};
 
 const width = {};
+const height = {
+  header: '160px',
+};
 
 const zIndex = {
   base: 1,
@@ -23,6 +26,7 @@ const shadows = {
 export type ColorsType = typeof colors;
 export type FontSizeType = typeof fontSizes;
 export type WidthType = typeof width;
+export type HeightType = typeof height;
 export type ZIndexType = typeof zIndex;
 export type FontWeightType = typeof fontWeights;
 export type ShadowsType = typeof shadows;
@@ -32,6 +36,7 @@ interface Theme {
   fontSizes: FontSizeType;
   fontWeights: FontWeightType;
   width: WidthType;
+  height: HeightType;
   zIndex: ZIndexType;
   shadows: ShadowsType;
 }
@@ -41,6 +46,7 @@ const theme: Theme = {
   fontSizes,
   fontWeights,
   width,
+  height,
   zIndex,
   shadows,
 };
