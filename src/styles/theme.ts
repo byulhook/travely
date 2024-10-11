@@ -1,4 +1,7 @@
-const colors = {};
+const colors = {
+  primaryBlue: '#4A95F2',
+  secondaryBlue: '#4A95F2',
+};
 
 const fontSizes = {};
 
