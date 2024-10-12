@@ -1,5 +1,5 @@
-import MyTravelContent from '@/components/MyTravelContent';
-import MyTravelTab from '@/components/MyTravelTab';
+import MyTravelContent from '@/components/MyTravel/MyTravelContent';
+import MyTravelTab from '@/components/MyTravel/MyTravelTab';
 
 const MyTravelList = () => {
   return (
