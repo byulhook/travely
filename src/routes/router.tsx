@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import ContainerLayout from '@/layouts/ContainerLayout';
+import MyTravelListPage from '@/pages/MyTravelList';
 
 const PATH = {
   HOME: '/',
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
                 path: 'my-travel-list',
                 element: (
                   <div>
-                    <h1>마이페이지-내 여행</h1>
+                    <MyTravelListPage />
                   </div>
                 ),
               },
