@@ -1,8 +1,8 @@
-import { useTabStore } from '@/stores/tabStore'; // Zustand 스토어를 가져옴
+import { useTabStore } from '@/stores/tabStore';
 import styled from '@emotion/styled';
 
 const MyTravelTab = () => {
-  const { selectedTab, setSelectedTab } = useTabStore(); // Zustand에서 상태와 상태 변경 함수를 가져옴
+  const { selectedTab, setSelectedTab } = useTabStore();
 
   return (
     <TabContainer>
@@ -22,10 +22,9 @@ const MyTravelTab = () => {
   );
 };
 
-// 스타일 정의
 const TabContainer = styled.div`
   display: flex;
-  border-bottom: 1px solid #ddd;
+  width: 270px;
   margin-bottom: 20px;
 `;
 
@@ -36,10 +35,9 @@ const TabButton = styled.button<{ selected: boolean }>`
   background-color: transparent;
   border: none;
   outline: none;
-  font-size: 16px;
-  color: ${(props) => (props.selected ? '#007bff' : '#555')};
-  font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
-  border-bottom: ${(props) => (props.selected ? '2px solid #007bff' : 'none')};
+  font-size: 20px;
+  font-weight: bold;
+  color: ${(props) => (props.selected ? '#2467E3' : '#888888')};
 `;
 
 export default MyTravelTab;
