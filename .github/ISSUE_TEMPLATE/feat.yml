@@ -1,6 +1,6 @@
 name: 기능 추가
 description: 새로운 기능이나 사양이 있나요?
-title: '[feature] '
+title: '[feat] '
 labels: ['feat']
 body:
   - type: textarea
