@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import ContainerLayout from '@/layouts/ContainerLayout';
+import ManageMyTravel from '@/pages/ManageMyTravel';
 
 const PATH = {
   HOME: '/',
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
                 ),
               },
             ],
+          },
+          {
+            path: 'manage-my-travel',
+            element: <ManageMyTravel />,
           },
         ],
       },

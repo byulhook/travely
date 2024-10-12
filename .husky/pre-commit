@@ -1,3 +1,0 @@
-# npm test
-npx lint-staged
-npm run type-check
