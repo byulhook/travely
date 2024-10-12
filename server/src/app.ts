@@ -3,6 +3,7 @@ import express, { json, Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
+import { connectDatabase } from './db/connect';
 
 dotenv.config();
 
@@ -10,11 +11,10 @@ const startServer = async () => {
   const app = express();
   const PORT = process.env.PORT || 3000;
 
-  //! DB 연결 함수 호출은 여기에 추가해주세요
-  // await connectDatabase();
+  await connectDatabase();
 
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`서버가 포트 ${PORT}에서 실행 중입니다`);
   });
 
   return app;
