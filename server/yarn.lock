@@ -5093,7 +5093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pm2@npm:^5.4.2":
+"pm2@npm:5.4.2":
   version: 5.4.2
   resolution: "pm2@npm:5.4.2"
   dependencies:
@@ -6303,7 +6303,7 @@ __metadata:
     morgan: "npm:^1.10.0"
     multer: "npm:^1.4.5-lts.1"
     nodemon: "npm:^3.1.7"
-    pm2: "npm:^5.4.2"
+    pm2: "npm:5.4.2"
     prettier: "npm:^3.3.3"
     ts-node: "npm:^10.9.2"
     ts-node-dev: "npm:^2.0.0"

@@ -51,3 +51,10 @@ dist-ssr
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+server/.yarn/*
+server/!.yarn/patches
+server/!.yarn/plugins
+server/!.yarn/releases
+server/!.yarn/sdks
+server/!.yarn/versions

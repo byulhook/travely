@@ -56,7 +56,4 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /var/www/travely
-          corepack enable
-          yarn set version berry
-          yarn build
           yarn start:pm2
