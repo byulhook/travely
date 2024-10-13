@@ -56,4 +56,5 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /var/www/travely
+          yarn install
           yarn start:pm2
