@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Rating from '../Rating';
 
 interface ITripCardProps {
   title: string;
@@ -23,11 +24,7 @@ const TripCard: React.FC<ITripCardProps> = ({
       <TripInfo>
         <TitleContainer>
           <Title>{title}</Title>
-          <RatingContainer>
-            <Star>★</Star>
-            <RatingScore>{rating}</RatingScore>
-            <RatingCount>({reviews})</RatingCount>
-          </RatingContainer>
+          <Rating rating={rating} reviewCount={String(reviews)} />
         </TitleContainer>
         <Price>
           {price} <PricePerPerson>/ 1인</PricePerPerson>
@@ -72,28 +69,6 @@ const TitleContainer = styled.div`
 const Title = styled.h3`
   font-size: 18px;
   font-weight: bold;
-`;
-
-const RatingContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Star = styled.span`
-  color: #ffbf00;
-  font-size: 14px;
-`;
-
-const RatingScore = styled.span`
-  color: black;
-  font-size: 14px;
-  margin-left: 5px;
-`;
-
-const RatingCount = styled.span`
-  color: #888;
-  font-size: 14px;
-  margin-left: 5px;
 `;
 
 const Price = styled.p`
