@@ -13,6 +13,7 @@ const MyTravelContent = () => {
       price: '123,000원',
       badgeCount: 16,
       updateDate: '2024.01.05',
+      isDisabled: true, // 첫 번째 카드는 비활성화
     },
     {
       title: '부산 국밥 투어',
@@ -21,6 +22,7 @@ const MyTravelContent = () => {
       price: '50,000원',
       badgeCount: 16,
       updateDate: '2024.01.05',
+      isDisabled: false, // 이 카드는 활성화 상태
     },
     {
       title: '대한민국 고궁 투어',
@@ -29,6 +31,7 @@ const MyTravelContent = () => {
       price: '123,000원',
       badgeCount: 16,
       updateDate: '2024.01.05',
+      isDisabled: false,
     },
     {
       title: '대한민국 고궁 투어',
@@ -37,6 +40,7 @@ const MyTravelContent = () => {
       price: '123,000원',
       badgeCount: 16,
       updateDate: '2024.01.05',
+      isDisabled: false,
     },
   ];
 
@@ -60,6 +64,7 @@ const MyTravelContent = () => {
               price={trip.price}
               badgeCount={trip.badgeCount}
               updateDate={trip.updateDate}
+              isDisabled={trip.isDisabled}
             />
           ))}
         </MyMadeTripsContainer>

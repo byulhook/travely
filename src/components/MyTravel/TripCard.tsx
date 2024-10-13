@@ -9,6 +9,7 @@ interface ITripCardProps {
   price: string;
   badgeCount: number;
   updateDate: string;
+  isDisabled?: boolean;
 }
 
 const TripCard: React.FC<ITripCardProps> = ({
@@ -18,10 +19,16 @@ const TripCard: React.FC<ITripCardProps> = ({
   price,
   badgeCount,
   updateDate,
+  isDisabled = false,
 }) => {
   return (
     <TripCardContainer>
-      <TripInfo>
+      {isDisabled && (
+        <Overlay>
+          <DisabledText>비활성화</DisabledText>
+        </Overlay>
+      )}
+      <TripInfo isDisabled={isDisabled}>
         <TitleContainer>
           <Title>{title}</Title>
           <Rating rating={rating} reviewCount={String(reviews)} />
@@ -44,19 +51,38 @@ const TripCard: React.FC<ITripCardProps> = ({
 
 // 스타일 정의
 const TripCardContainer = styled.div`
+  position: relative;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 18px;
   background-color: #fff;
   width: 344px;
   height: 190px;
-  gap: 40px;
 `;
 
-const TripInfo = styled.div`
+const TripInfo = styled.div<{ isDisabled: boolean }>`
   display: flex;
   flex-direction: column;
-  position: relative;
+  opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+`;
+
+const DisabledText = styled.p`
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 const TitleContainer = styled.div`
