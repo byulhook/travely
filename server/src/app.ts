@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
 import { connectDatabase } from './db/connect';
+import imageRoutes from './api/routes/image.routes';
 
 dotenv.config();
 
@@ -32,6 +33,9 @@ async function bootstrap() {
       origin: '*',
     }),
   );
+
+  // 라우터 추가
+  app.use('/api/images', imageRoutes);
 
   // global Error handler
   app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
