@@ -1,11 +1,14 @@
 module.exports = {
   apps: [{
-    name: "my-express-app",
-    script: "./src/app.ts",
-    interpreter: "node",
-    interpreterArgs: "--require ts-node/register --require tsconfig-paths/register",
+    name: "express-api",
+    script: "./dist/app.js",
+    interpreter: "yarn",
+    interpreter_args: "node",
+    instances: "max",
+    exec_mode: "cluster",
     env_production: {
       NODE_ENV: "production",
+      PORT: 3000
     }
   }]
 };

@@ -4,7 +4,7 @@
   "description": "User CRUD API with Express and MongoDB",
   "main": "dist/app.js",
   "scripts": {
-    "start:pm2": "yarn node --require ./.pnp.cjs $(yarn bin pm2) start ecosystem.config.js --env production",
+    "start:pm2": "pm2 start dist/app.js --name travel-server",
     "log:pm2": "pm2 logs",
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/app.ts",
     "build": "tsc",
