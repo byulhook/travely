@@ -37,6 +37,7 @@ async function bootstrap() {
   // 라우터 추가
   app.use('/api/images', imageRoutes);
 
+  //! 배포 테스트용 라우트
   app.get('/', (_req, res) => {
     res.send('Hello World');
   });

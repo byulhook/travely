@@ -12,10 +12,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install dependencies
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: Check out the code
       run: |
         cd server
-        npm install
+        bun install
+        bun run type-check
     
     - name: Create .env file
       run: |
@@ -29,7 +35,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "server/*"
-        target: "/var/www/your_project_directory"
+        target: "/var/www/travely"
         strip_components: 1
 
     - name: Setup environment and start PM2
@@ -39,6 +45,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /var/www/your_project_directory
-          npm install
+          cd /var/www/travely
+          bun install
+          bun run build
           pm2 start ecosystem.config.js --env production
