@@ -1,9 +1,9 @@
-import express, { Request, Response } from 'express';
-import multer from 'multer';
 import { uploadImage } from '../../utils/imageUpload';
+import { Router, Request, Response } from 'express';
+import multer, { memoryStorage } from 'multer';
 
-const router = express.Router();
-const upload = multer({ storage: multer.memoryStorage() });
+const router = Router();
+const upload = multer({ storage: memoryStorage() });
 
 router.post(
   '/upload',

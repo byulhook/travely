@@ -4,12 +4,18 @@
   "description": "User CRUD API with Express and MongoDB",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
-    "dev": "nodemon --exec ts-node src/app.ts",
+    "start:pm2": "yarn node --require ./.pnp.cjs $(yarn bin pm2) start ecosystem.config.js --env production",
+    "log:pm2": "pm2 logs",
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/app.ts",
     "build": "tsc",
     "lint": "eslint . --fix",
     "type-check": "tsc --noEmit",
     "test": "jest"
+  },
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
   },
   "keywords": [
     "express",
@@ -20,9 +26,9 @@
   "author": "Your Name",
   "license": "ISC",
   "dependencies": {
-    "@types/mongoose": "^5.11.97",
     "@aws-sdk/client-s3": "^3.670.0",
     "@aws-sdk/s3-request-presigner": "^3.670.0",
+    "@types/mongoose": "^5.11.97",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
@@ -31,6 +37,7 @@
     "mongoose": "^8.7.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "pm2": "^5.4.2",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
@@ -44,6 +51,7 @@
     "@typescript-eslint/parser": "^8.8.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -53,5 +61,6 @@
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.5.4"
-  }
+  },
+  "packageManager": "yarn@4.3.1+sha224.934d21773e22af4b69a7032a2d3b4cb38c1f7c019624777cc9916b23"
 }

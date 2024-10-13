@@ -49,12 +49,8 @@ module.exports = {
       typescript: {
         project: './tsconfig.json',
       },
-      node: {
-        extensions: ['.js', '.ts'],
-        paths: ['src'],
-      },
       alias: {
-        map: [['@', './src']],
+        map: [['@server', './src']],
         extensions: ['.ts', '.js', '.json'],
       },
     },

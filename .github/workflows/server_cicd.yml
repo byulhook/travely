@@ -12,16 +12,26 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup Bun
-      uses: oven-sh/setup-bun@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
       with:
-        bun-version: latest
+        node-version: '18'
 
-    - name: Check out the code
+    - name: Setup Yarn Berry
       run: |
         cd server
-        bun install
-        bun run type-check
+        corepack enable
+        yarn set version berry
+
+    - name: Install dependencies
+      run: |
+          cd server
+          yarn install
+
+    - name: Type check
+      run: |
+        cd server
+        yarn type-check
     
     - name: Create .env file
       run: |
@@ -46,6 +56,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /var/www/travely
-          bun install
-          bun run build
-          pm2 start ecosystem.config.js --env production
+          corepack enable
+          yarn set version berry
+          yarn build
+          yarn start:pm2
