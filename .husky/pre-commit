@@ -1,7 +1,1 @@
-# npm test
-<<<<<<< HEAD
-npx lint-staged
-=======
-npx lint-staged
-npm run type-check
->>>>>>> main
+
