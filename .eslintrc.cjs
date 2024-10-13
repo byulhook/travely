@@ -31,7 +31,11 @@ module.exports = {
       },
     ],
   },
+<<<<<<< HEAD
+  ignorePatterns: ['node_modules/', 'build/', 'dist/', '.github', '.tmp', 'index.html', 'server'],
+=======
   ignorePatterns: ['node_modules/', 'build/', 'dist/', '.github', '.tmp', 'index.html'],
+>>>>>>> main
   settings: {
     react: {
       version: 'detect',
