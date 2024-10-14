@@ -4,6 +4,7 @@ import ManageMyTravel from '@/pages/ManageMyTravel';
 import MyTravelListPage from '@/pages/MyTravelList';
 import Home from '@/pages/Home';
 import TravelList from '@/pages/TravelList';
+import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
 
 const PATH = {
   HOME: '/',
@@ -51,9 +52,11 @@ const router = createBrowserRouter([
           },
           {
             path: 'my-page',
+            element: <MyPageContainerLayout />,
             children: [
               {
-                path: 'profile',
+                index: true,
+                path: 'my-account',
                 element: (
                   <div>
                     <h1>마이페이지-계정</h1>
