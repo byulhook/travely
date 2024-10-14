@@ -5,7 +5,9 @@ import { useLocation } from 'react-router-dom';
 const Visual = () => {
   const location = useLocation();
   const path = location.pathname.split('/').filter((item) => item !== '')[1];
-  if (!path) return null;
+  if (!location.pathname.startsWith('/travel-list/') || !path) {
+    return null;
+  }
   const pageTitle = tagDatas.filter((data) => data.path === path)[0].name;
   const imgSrc = tagDatas.filter((data) => data.path === path)[0].imgSrc;
 

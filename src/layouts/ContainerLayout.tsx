@@ -15,6 +15,8 @@ const ContainerLayout: React.FC = ({ customStyle, mainCustomStyle }: ContainerLa
   );
 };
 
-const containerStyle = css``;
+const containerStyle = css`
+  min-width: 1080px;
+`;
 
 export default ContainerLayout;

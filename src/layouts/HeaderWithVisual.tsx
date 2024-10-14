@@ -1,6 +1,8 @@
 import Visual from '@/layouts/Visual';
+import Logo from '@/layouts/Logo';
 import { css } from '@emotion/react';
-import { Link } from 'react-router-dom';
+import Nav from '@/layouts/Nav';
+import Auth from '@/layouts/\bAuth';
 
 const HeaderWithVisual = () => {
   return (
@@ -8,21 +10,11 @@ const HeaderWithVisual = () => {
       <Visual />
       <header>
         <div className="header-inner">
-          <h1>
-            <Link to="/">
-              <img src="/src/assets/logo-white.png" alt="" />
-            </Link>
-          </h1>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/travel-list">함께 떠나요</Link>
-              </li>
-              <li>
-                <Link to="">가이드 찾아요</Link>
-              </li>
-            </ul>
-          </nav>
+          <div className="header-left">
+            <Logo light={true} />
+            <Nav />
+          </div>
+          <Auth light={true} />
         </div>
       </header>
     </div>
@@ -49,21 +41,10 @@ const headerWrap = css`
     margin: 0 auto;
     display: flex;
     align-items: center;
-
-    h1 {
-      width: 100px;
-      margin-right: 100px;
-    }
-    nav {
-      ul {
-        display: flex;
-        gap: 40px;
-
-        li {
-          font-size: 18px;
-          font-weight: bold;
-        }
-      }
+    justify-content: space-between;
+    .header-left {
+      display: flex;
+      align-items: center;
     }
   }
 `;

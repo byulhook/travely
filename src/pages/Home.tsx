@@ -108,9 +108,7 @@ const datas: IDatas[] = [
 const Home = () => {
   return (
     <div css={home}>
-      <div>
-        <TagCardWrap shape="square" />
-      </div>
+      <TagCardWrap shape="square" />
 
       <div className="card-wrap">
         <h3>🔥 함께 떠나요 NEW</h3>

@@ -64,7 +64,7 @@ function TagCardWrap({ shape = 'round' }: ITagCardWrap) {
             setIsEnd(swiper.isEnd);
           }}
           autoplay={{
-            delay: 2000,
+            delay: 5000,
             disableOnInteraction: false,
           }}
         >
@@ -94,6 +94,7 @@ const tagCardWrap = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   li {
     position: relative;
     width: 90px;
@@ -102,6 +103,7 @@ const tagCardWrap = css`
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s ease;
+    flex-shrink: 0;
     .tag-img {
       width: 100%;
       height: 100%;
@@ -146,17 +148,26 @@ const tagCardWrap = css`
 
 const squareTagCardWrap = css`
   position: relative;
-  padding: 30px;
+  padding: 45px 0 30px;
   .card {
     position: relative;
-    width: 230px;
-    height: 300px;
-    border-radius: 4px;
+    width: 100%;
+    height: 350px;
+    border-radius: 10px;
     overflow: hidden;
 
     &:hover {
       button {
-        transform: scale(1.05);
+        width: 80px;
+        padding-right: 24px;
+        padding-left: 8px;
+      }
+      button:after {
+        opacity: 1;
+        right: 7px;
+      }
+      .card-img:before {
+        background-color: rgba(0, 0, 0, 0.4);
       }
     }
 
@@ -187,20 +198,28 @@ const squareTagCardWrap = css`
       position: absolute;
       top: 20px;
       left: 20px;
-      font-size: 22px;
+      font-size: 26px;
       color: #fff;
       font-weight: bold;
       letter-spacing: 1px;
     }
     button {
-      height: 35px;
+      height: 40px;
       position: absolute;
       bottom: 20px;
       left: 20px;
       color: #333;
       font-weight: bold;
-      font-size: 13px;
       border-radius: 4px;
+      transition: 0.2s;
+    }
+    button:after {
+      content: '»';
+      position: absolute;
+      opacity: 0;
+      top: 10px;
+      right: -20px;
+      transition: 0.3s;
     }
   }
   .custom-swiper-btn-prev,
@@ -211,9 +230,9 @@ const squareTagCardWrap = css`
     cursor: pointer;
   }
   .custom-swiper-btn-prev {
-    left: -20px;
+    left: -55px;
   }
   .custom-swiper-btn-next {
-    right: -20px;
+    right: -55px;
   }
 `;
