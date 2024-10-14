@@ -26,9 +26,9 @@ const MyPageContainerLayout = () => {
 
 const myPageLayout = css`
   display: flex;
-  gap: 30px;
+  gap: 80px;
   position: relative;
-  top: 30px;
+  top: 60px;
 `;
 
 export default MyPageContainerLayout;

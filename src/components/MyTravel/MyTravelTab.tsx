@@ -26,13 +26,13 @@ const TabContainer = styled.div`
   display: flex;
   width: 270px;
   margin-bottom: 20px;
+  gap: 30px;
 `;
 
 const TabButton = styled.button<{ selected: boolean }>`
-  flex: 1;
-  padding: 10px;
   cursor: pointer;
   background-color: transparent;
+  text-align: start;
   border: none;
   outline: none;
   font-size: 20px;
