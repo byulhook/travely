@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from '@emotion/styled';
-import Rating from '../Rating';
+import Rating from '@/components/Rating';
 
 interface ITripCardProps {
   title: string;
@@ -56,7 +56,6 @@ const TripCard: React.FC<ITripCardProps> = ({
   );
 };
 
-// 스타일 정의
 const TripCardContainer = styled.div`
   position: relative;
   border: 1px solid #ddd;
