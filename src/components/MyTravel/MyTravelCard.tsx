@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import Rating from '../Rating';
 
@@ -10,6 +10,7 @@ interface ITripCardProps {
   badgeCount: number;
   updateDate: string;
   isDisabled?: boolean;
+  onEnable?: () => void;
 }
 
 const TripCard: React.FC<ITripCardProps> = ({
@@ -20,12 +21,18 @@ const TripCard: React.FC<ITripCardProps> = ({
   badgeCount,
   updateDate,
   isDisabled = false,
+  onEnable,
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <TripCardContainer>
+    <TripCardContainer
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {isDisabled && (
-        <Overlay>
-          <DisabledText>비활성화</DisabledText>
+        <Overlay onClick={onEnable}>
+          <DisabledText isHovered={isHovered}>{isHovered ? '활성화하기' : '비활성화'}</DisabledText>
         </Overlay>
       )}
       <TripInfo isDisabled={isDisabled}>
@@ -38,10 +45,10 @@ const TripCard: React.FC<ITripCardProps> = ({
         </Price>
         <Buttons>
           <ManageButtonContainer>
-            <ManageButton>관리</ManageButton>
+            <ManageButton isDisabled={isDisabled}>관리</ManageButton>
             <ManageBadge>{badgeCount}</ManageBadge>
           </ManageButtonContainer>
-          <EditButton>수정</EditButton>
+          <EditButton isDisabled={isDisabled}>수정</EditButton>
         </Buttons>
         <UpdateDate>업데이트: {updateDate}</UpdateDate>
       </TripInfo>
@@ -63,7 +70,8 @@ const TripCardContainer = styled.div`
 const TripInfo = styled.div<{ isDisabled: boolean }>`
   display: flex;
   flex-direction: column;
-  opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
+  opacity: ${(props) => (props.isDisabled ? 0.4 : 1)};
+  pointer-events: ${(props) => (props.isDisabled ? 'none' : 'auto')};
 `;
 
 const Overlay = styled.div`
@@ -72,17 +80,19 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
-const DisabledText = styled.p`
+const DisabledText = styled.p<{ isHovered: boolean }>`
   color: white;
   font-size: 20px;
   font-weight: bold;
+  cursor: ${(props) => (props.isHovered ? 'pointer' : 'default')};
 `;
 
 const TitleContainer = styled.div`
@@ -105,7 +115,7 @@ const Price = styled.p`
 
 const PricePerPerson = styled.span`
   font-size: 20px;
-  color: #888; /* 회색 */
+  color: #888;
 `;
 
 const Buttons = styled.div`
@@ -124,7 +134,7 @@ const ManageButtonContainer = styled.div`
   flex-grow: 1;
 `;
 
-const ManageButton = styled.button`
+const ManageButton = styled.button<{ isDisabled: boolean }>`
   background-color: #4a95f2;
   color: white;
   border: none;
@@ -137,6 +147,7 @@ const ManageButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: ${(props) => (props.isDisabled ? 'none' : 'auto')};
 `;
 
 const ManageBadge = styled.span`
@@ -150,7 +161,7 @@ const ManageBadge = styled.span`
   right: -10px;
 `;
 
-const EditButton = styled.button`
+const EditButton = styled.button<{ isDisabled: boolean }>`
   background-color: #e0e0e0;
   color: #888;
   border: none;
@@ -163,6 +174,7 @@ const EditButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: ${(props) => (props.isDisabled ? 'none' : 'auto')};
 `;
 
 const UpdateDate = styled.p`
