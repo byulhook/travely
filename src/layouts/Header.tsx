@@ -44,6 +44,7 @@ const headerWrap = css`
     align-items: center;
 
     h1 {
+      width: 100px;
       margin-right: 100px;
     }
     nav {

@@ -1,4 +1,5 @@
 import useHeaderWithVisual from '@/hooks/useHeaderWithVisual';
+import BreadCrumb from '@/layouts/Breadcrumb';
 import Header from '@/layouts/Header';
 import HeaderWithVisual from '@/layouts/HeaderWithVisual';
 import { css, SerializedStyles } from '@emotion/react';
@@ -14,6 +15,7 @@ const Main: React.FC<RootLayoutProps> = ({ customStyle }) => {
     <>
       {isHeaderWithVisual ? <HeaderWithVisual /> : <Header />}
       <main css={[mainStyle, customStyle]}>
+        <BreadCrumb />
         <Outlet />
       </main>
     </>
@@ -21,8 +23,11 @@ const Main: React.FC<RootLayoutProps> = ({ customStyle }) => {
 };
 
 export const mainStyle = css`
-  margin: 0 auto;
+  margin: 0 auto 50px;
   max-width: 1080px;
-  min-height: 100vh;
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
 `;
 export default Main;

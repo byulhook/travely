@@ -4,6 +4,7 @@ import ManageMyTravel from '@/pages/ManageMyTravel';
 import MyTravelListPage from '@/pages/MyTravelList';
 import Home from '@/pages/Home';
 import TravelList from '@/pages/TravelList';
+import { tagDatas } from '@/data/tagDatas';
 import AddTravel from '@/pages/AddTravel';
 import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
 import MyReviews from '@/pages/MyReviews';
@@ -12,6 +13,11 @@ import TravelDetail from '@/pages/TravelDetail';
 const PATH = {
   HOME: '/',
 } as const;
+
+const tagPathList = tagDatas.map((data) => ({
+  path: data.path,
+  element: null,
+}));
 
 const router = createBrowserRouter([
   {
@@ -26,11 +32,7 @@ const router = createBrowserRouter([
           {
             path: 'travel-list',
             element: <TravelList />,
-            children: [
-              {
-                path: 'food',
-              },
-            ],
+            children: tagPathList,
           },
           {
             path: 'travel-detail',

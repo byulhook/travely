@@ -9,3 +9,15 @@ export type TagType =
   | 'K-DRAMA'
   | 'JEJU'
   | 'etc.';
+
+export type TagPath =
+  | 'food'
+  | 'culture'
+  | 'healing'
+  | 'nature'
+  | 'sports'
+  | 'festival'
+  | 'kpop'
+  | 'kdrama'
+  | 'jeju'
+  | 'etc';

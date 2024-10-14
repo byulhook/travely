@@ -1,18 +1,17 @@
-import { useHeaderStore } from '@/stores/headerStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const useHeaderWithVisual = () => {
-  const { pathname } = useLocation();
-  const isHeaderWithVisual = useHeaderStore((state) => state.isHeaderWithVisual);
-  const setIsHeaderWithVisual = useHeaderStore((state) => state.setIsHeaderWithVisual);
+  const pathName = useLocation().pathname;
+  const [isHeaderWithVisual, setIsHeaderWithVisual] = useState(false);
+
   useEffect(() => {
-    if (pathname.startsWith('/travel-list/') && pathname !== '/travel-list/') {
+    if (pathName.startsWith('/travel-list/') && pathName !== '/travel-list/') {
       setIsHeaderWithVisual(true);
     } else {
       setIsHeaderWithVisual(false);
     }
-  }, [pathname]);
+  }, [pathName]);
 
   return isHeaderWithVisual;
 };
