@@ -1,14 +1,15 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { Star } from 'lucide-react';
 
 interface IRatingProps {
   rating: string;
   reviewCount?: string;
+  customStyle?: SerializedStyles;
 }
 
-function Rating({ rating, reviewCount }: IRatingProps) {
+function Rating({ rating, reviewCount, customStyle }: IRatingProps) {
   return (
-    <div css={ratingWrap}>
+    <div css={[ratingWrap, customStyle]}>
       <Star size="13" fill="#FFBF00" stroke="#FFBF00" />
       <p className="score">
         {rating}

@@ -6,6 +6,7 @@ import Home from '@/pages/Home';
 import TravelList from '@/pages/TravelList';
 import AddTravel from '@/pages/AddTravel';
 import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
+import MyReviews from '@/pages/MyReviews';
 
 const PATH = {
   HOME: '/',
@@ -61,11 +62,7 @@ const router = createBrowserRouter([
               },
               {
                 path: 'my-reviews',
-                element: (
-                  <div>
-                    <h1>마이페이지-작성한 후기</h1>
-                  </div>
-                ),
+                element: <MyReviews />,
               },
               {
                 path: 'my-inquiries',
