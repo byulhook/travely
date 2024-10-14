@@ -13,6 +13,7 @@ export default Introduction;
 
 const textbox = css`
   width: 100%;
+  height: 180px;
   background-color: transparent;
   border: none;
 `;
