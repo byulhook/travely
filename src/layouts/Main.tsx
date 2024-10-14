@@ -1,4 +1,6 @@
-import theme from '@/styles/theme';
+import useHeaderWithVisual from '@/hooks/useHeaderWithVisual';
+import Header from '@/layouts/Header';
+import HeaderWithVisual from '@/layouts/HeaderWithVisual';
 import { css, SerializedStyles } from '@emotion/react';
 import { Outlet } from 'react-router-dom';
 
@@ -7,8 +9,10 @@ interface RootLayoutProps {
 }
 
 const Main: React.FC<RootLayoutProps> = ({ customStyle }) => {
+  const isHeaderWithVisual = useHeaderWithVisual();
   return (
     <>
+      {isHeaderWithVisual ? <HeaderWithVisual /> : <Header />}
       <main css={[mainStyle, customStyle]}>
         <Outlet />
       </main>
@@ -17,8 +21,8 @@ const Main: React.FC<RootLayoutProps> = ({ customStyle }) => {
 };
 
 export const mainStyle = css`
+  margin: 0 auto;
+  max-width: 1080px;
   min-height: 100vh;
-  padding-top: ${theme.height.header}; /* 테스트용 헤더 높이만큼 여백 추가 */
-  background-color: #f5f5f5;
 `;
 export default Main;

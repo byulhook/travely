@@ -80,6 +80,7 @@ const baseStyles = css`
     justify-content: center;
     align-items: center;
     font-size: 16px;
+    color: #333;
   }
 
   input,

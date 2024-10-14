@@ -1,5 +1,12 @@
+import CardWrap from '@/components/home/CardWrap';
+
 const Home = () => {
-  return <div>home</div>;
+  return (
+    <div>
+      <h2>Home</h2>
+      <CardWrap />
+    </div>
+  );
 };
 
 export default Home;
