@@ -4,6 +4,7 @@ import ManageMyTravel from '@/pages/ManageMyTravel';
 import MyTravelListPage from '@/pages/MyTravelList';
 import Home from '@/pages/Home';
 import TravelList from '@/pages/TravelList';
+import AddTravel from '@/pages/AddTravel';
 import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
 import MyReviews from '@/pages/MyReviews';
 
@@ -25,21 +26,8 @@ const router = createBrowserRouter([
             path: 'travel-list',
             element: <TravelList />,
             children: [
-              // {
-              //   path: '',
-              //   element: (
-              //     <div>
-              //       <h2>전체</h2>
-              //     </div>
-              //   ),
-              // },
               {
                 path: 'food',
-                // element: (
-                //   <div>
-                //     <h2>Food</h2>
-                //   </div>
-                // ),
               },
             ],
           },
@@ -97,6 +85,10 @@ const router = createBrowserRouter([
           {
             path: 'manage-my-travel',
             element: <ManageMyTravel />,
+          },
+          {
+            path: 'add-travel',
+            element: <AddTravel />,
           },
         ],
       },
