@@ -41,7 +41,7 @@ const FloatingMenu = () => {
           onClick={() => toggleSection('포함내용')}
           isOpen={openSections.includes('포함내용')}
         >
-          {openSections.includes('포함내용') ? <CircleMinus size={20} /> : <CirclePlus size={20} />}
+          {openSections.includes('포함내용') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
         </ToggleIcon>
       </MenuItem>
       <MenuItem isOpen={openSections.includes('미포함내용')}>
@@ -51,9 +51,9 @@ const FloatingMenu = () => {
           isOpen={openSections.includes('미포함내용')}
         >
           {openSections.includes('미포함내용') ? (
-            <CircleMinus size={20} />
+            <CircleMinus size={22} />
           ) : (
-            <CirclePlus size={20} />
+            <CirclePlus size={22} />
           )}
         </ToggleIcon>
       </MenuItem>
@@ -63,13 +63,13 @@ const FloatingMenu = () => {
           onClick={() => toggleSection('이용안내')}
           isOpen={openSections.includes('이용안내')}
         >
-          {openSections.includes('이용안내') ? <CircleMinus size={20} /> : <CirclePlus size={20} />}
+          {openSections.includes('이용안내') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
         </ToggleIcon>
       </MenuItem>
       <MenuItem isOpen={openSections.includes('FAQ')}>
         <span>FAQ</span>
         <ToggleIcon onClick={() => toggleSection('FAQ')} isOpen={openSections.includes('FAQ')}>
-          {openSections.includes('FAQ') ? <CircleMinus size={20} /> : <CirclePlus size={20} />}
+          {openSections.includes('FAQ') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
         </ToggleIcon>
       </MenuItem>
 
@@ -102,6 +102,7 @@ const MenuItem = styled.div<{ isOpen?: boolean }>`
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
+  font-weight: 500;
   margin-bottom: 12px;
   color: ${(props) => (props.isOpen ? '#000' : props.isOpen === undefined ? '#000' : '#898989')};
 `;
