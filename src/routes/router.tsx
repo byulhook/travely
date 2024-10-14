@@ -8,6 +8,7 @@ import AddTravel from '@/pages/AddTravel';
 import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
 import MyReviews from '@/pages/MyReviews';
 
+import TravelDetail from '@/pages/TravelDetail';
 const PATH = {
   HOME: '/',
 } as const;
@@ -33,11 +34,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'travel-detail',
-            element: (
-              <div>
-                <h1>여행 상세 페이지</h1>
-              </div>
-            ),
+            element: <TravelDetail />,
           },
           {
             path: 'my-page',
