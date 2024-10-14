@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import SideContainerHeader from '../components/travelDetail/SideContainerHeader';
 import SideTravelTeam, { TeamInfo } from '../components/travelDetail/SideTravelTeam';
+import Rating from '../components/Rating';
+import image from '../assets/kt.jpg';
 
 const TravelDetail = () => {
   const price = 123000;
@@ -16,7 +18,16 @@ const TravelDetail = () => {
   return (
     <div css={travelDetailContainer}>
       <div css={mainContainer}>
-        fsadfasd
+        <div css={titleContainer}>
+          <h1>한국의 고궁 투어 ( 너무 너무 재밌어요 )</h1>
+          <Rating rating="5.0" />
+        </div>
+        <div css={imageContainer}>
+          <img src={image} alt="image" />
+        </div>
+        <p>
+          #food #travel #korea #culture #history
+        </p>
       </div>
 
       <div css={sideContainer}>
@@ -32,12 +43,12 @@ export default TravelDetail;
 const travelDetailContainer = css`
   display: flex;
   flex-direction: space-between;
+  margin-top: 40px;
 `;
 
 const mainContainer = css`
   width: 680px;
   height: 100%;
-  background: red;
   margin-right: 60px;
 `;
 
@@ -47,4 +58,30 @@ const sideContainer = css`
   display: flex;
   flex-direction: column;
   gap: 14px;
+`;
+
+const titleContainer = css`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+  }
+`;
+
+const imageContainer = css`
+  width: 100%;
+  height: 360px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
