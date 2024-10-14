@@ -35,10 +35,6 @@ const addTravelWrapper = css`
     font-size: 24px;
     margin-bottom: 20px;
   }
-  & p {
-    font-size: 18px;
-    margin-top: 15px;
-  }
 `;
 
 const noneStyleInput = css`

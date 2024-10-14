@@ -10,7 +10,7 @@ interface GrayBackProps {
 const GrayBack = ({ children, title, price, padding }: GrayBackProps) => {
   return (
     <>
-      <p>{title}</p>
+      <p css={{ fontSize: '18px', marginTop: '15px' }}>{title}</p>
       <div css={GrayBackWrapper(price, padding)}>{children}</div>
     </>
   );
