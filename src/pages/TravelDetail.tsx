@@ -156,8 +156,9 @@ export default TravelDetail;
 
 const travelDetailContainer = css`
   display: flex;
-  flex-direction: space-between;
+  justify-content: space-between;
   margin-top: 40px;
+  align-items: flex-start;
 `;
 
 const mainContainer = css`
@@ -173,6 +174,9 @@ const sideContainer = css`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
 `;
 
 const titleContainer = css`
