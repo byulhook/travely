@@ -22,6 +22,8 @@ const Details = ({ title }: DetailsProps) => {
     option = 'notInclusionList';
   } else if (title === 'FAQ') {
     option = 'faqs';
+  } else if (title === '이용안내') {
+    option = 'userGuide';
   }
 
   const addFieldPmCheck = () => {
@@ -49,40 +51,64 @@ const Details = ({ title }: DetailsProps) => {
 
   return (
     <GrayBack title={title} padding={true}>
-      <DetailsList option={option} />
-      <div css={{ display: 'flex' }}>
-        {title === 'FAQ' ? (
-          <input
-            css={textBox}
-            ref={newFieldRef}
-            type="text"
-            placeholder="30자 내외로 질문을 작성해주세요."
-            maxLength={30}
-          />
-        ) : (
-          <input
-            css={textBox}
-            ref={newFieldRef}
-            onKeyDown={(e) => handleKeyDown(e)}
-            onCompositionStart={() => setIsComposing(true)}
-            onCompositionEnd={() => setIsComposing(false)}
-            maxLength={40}
-            type="text"
-            placeholder="40자 내외로 내용을 작성해주세요."
-          />
-        )}
-        <button css={plusBtn} onClick={addFieldPmCheck}>
-          <CirclePlus size={24} />
-        </button>
-      </div>
-      {title === 'FAQ' ? (
+      {title === '이용안내' ? (
+        <>
+          <span css={{ fontSize: '18px' }}>만나는 시간</span>
+          <DetailsList option={option} />
+          <div css={{ display: 'flex' }}>
+            <input
+              css={textBox}
+              ref={newFieldRef}
+              onKeyDown={(e) => handleKeyDown(e)}
+              onCompositionStart={() => setIsComposing(true)}
+              onCompositionEnd={() => setIsComposing(false)}
+              maxLength={40}
+              type="text"
+              placeholder="40자 내외로 내용을 작성해주세요."
+            />
+            <button css={plusBtn} onClick={addFieldPmCheck}>
+              <CirclePlus size={24} />
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <DetailsList option={option} /> {/* 다른 페이지에서는 일반 필드 추가 */}
+          <div css={{ display: 'flex' }}>
+            {title === 'FAQ' ? (
+              <input
+                css={textBox}
+                ref={newFieldRef}
+                type="text"
+                placeholder="30자 내외로 질문을 작성해주세요."
+                maxLength={30}
+              />
+            ) : (
+              <input
+                css={textBox}
+                ref={newFieldRef}
+                onKeyDown={(e) => handleKeyDown(e)}
+                onCompositionStart={() => setIsComposing(true)}
+                onCompositionEnd={() => setIsComposing(false)}
+                maxLength={40}
+                type="text"
+                placeholder="40자 내외로 내용을 작성해주세요."
+              />
+            )}
+            <button css={plusBtn} onClick={addFieldPmCheck}>
+              <CirclePlus size={24} />
+            </button>
+          </div>
+        </>
+      )}
+      {title === 'FAQ' && (
         <textarea
           css={textBox2}
           ref={answer}
           maxLength={150}
           placeholder="150자 내외로 답변을 작성해주세요."
         />
-      ) : null}
+      )}
     </GrayBack>
   );
 };

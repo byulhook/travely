@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type Options = 'inclusionList' | 'notInclusionList' | 'faqs' | 'courseList';
+export type Options = 'inclusionList' | 'notInclusionList' | 'faqs' | 'userGuide' | 'courseList';
 interface Faqs {
   question: string;
   answer: string;
@@ -9,6 +9,7 @@ interface Fields {
   inclusionList: string[];
   notInclusionList: string[];
   faqs: Faqs[];
+  userGuide: string[];
   courseList: string[];
 }
 
@@ -26,6 +27,7 @@ const useFieldStore = create<State & Action>((set) => ({
     inclusionList: [],
     notInclusionList: [],
     faqs: [],
+    userGuide: [],
     courseList: [],
   },
   addField: (option: Options, newField: string, answer?: string) =>
@@ -57,6 +59,7 @@ const useFieldStore = create<State & Action>((set) => ({
         inclusionList: [],
         notInclusionList: [],
         faqs: [],
+        userGuide: [],
         courseList: [],
       },
     }),
