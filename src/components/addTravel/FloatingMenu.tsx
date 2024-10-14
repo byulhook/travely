@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { CircleMinus, CirclePlus } from 'lucide-react';
 import { useState } from 'react';
 
-const FloatingMenu = () => {
+export const FloatingMenu = () => {
   const [openSections, setOpenSections] = useState<string[]>([]);
 
   const toggleSection = (section: string) => {
@@ -83,10 +83,10 @@ const FloatingMenu = () => {
 
 // 스타일 정의
 const MenuContainer = styled.div`
-  position: absolute;
-  top: 60px;
-  right: -340px;
-  width: 220px;
+  position: sticky;
+  top: 20px;
+  min-width: 240px;
+  height: 520px;
   padding: 16px;
   border: 1px solid #d2d2d2;
   border-radius: 8px;
@@ -95,6 +95,7 @@ const MenuContainer = styled.div`
   justify-content: space-between;
   font-size: 14px;
   z-index: 1000;
+  overflow-y: auto;
 `;
 
 const MenuItem = styled.div<{ isOpen?: boolean }>`
@@ -136,5 +137,3 @@ const CompleteButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
 `;
-
-export default FloatingMenu;
