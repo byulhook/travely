@@ -1,14 +1,15 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 interface BorderBtnProps {
   children: React.ReactNode;
   color: string;
   size?: string;
   onClick?: () => void;
+  customStyle?: SerializedStyles;
 }
 
-const BorderBtn = ({ children, color, size, onClick }: BorderBtnProps) => {
+const BorderBtn = ({ children, color, size, onClick, customStyle }: BorderBtnProps) => {
   return (
-    <button css={borderBtn(color, size)} onClick={onClick}>
+    <button css={[borderBtn(color, size), customStyle]} onClick={onClick}>
       {children}
     </button>
   );

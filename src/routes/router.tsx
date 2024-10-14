@@ -5,7 +5,11 @@ import MyTravelListPage from '@/pages/MyTravelList';
 import Home from '@/pages/Home';
 import TravelList from '@/pages/TravelList';
 import { tagDatas } from '@/data/tagDatas';
+import AddTravel from '@/pages/AddTravel';
+import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
+import MyReviews from '@/pages/MyReviews';
 
+import TravelDetail from '@/pages/TravelDetail';
 const PATH = {
   HOME: '/',
 } as const;
@@ -32,17 +36,15 @@ const router = createBrowserRouter([
           },
           {
             path: 'travel-detail',
-            element: (
-              <div>
-                <h1>여행 상세 페이지</h1>
-              </div>
-            ),
+            element: <TravelDetail />,
           },
           {
             path: 'my-page',
+            element: <MyPageContainerLayout />,
             children: [
               {
-                path: 'profile',
+                index: true,
+                path: 'my-account',
                 element: (
                   <div>
                     <h1>마이페이지-계정</h1>
@@ -59,11 +61,7 @@ const router = createBrowserRouter([
               },
               {
                 path: 'my-reviews',
-                element: (
-                  <div>
-                    <h1>마이페이지-작성한 후기</h1>
-                  </div>
-                ),
+                element: <MyReviews />,
               },
               {
                 path: 'my-inquiries',
@@ -86,6 +84,10 @@ const router = createBrowserRouter([
           {
             path: 'manage-my-travel',
             element: <ManageMyTravel />,
+          },
+          {
+            path: 'add-travel',
+            element: <AddTravel />,
           },
         ],
       },
