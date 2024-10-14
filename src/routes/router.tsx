@@ -7,6 +7,7 @@ import TravelList from '@/pages/TravelList';
 import AddTravel from '@/pages/AddTravel';
 import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
 import AddTravel from '@/pages/AddTravel';
+import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
 
 const PATH = {
   HOME: '/',
