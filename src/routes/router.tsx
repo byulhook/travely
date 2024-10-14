@@ -4,6 +4,7 @@ import ManageMyTravel from '@/pages/ManageMyTravel';
 import MyTravelListPage from '@/pages/MyTravelList';
 import Home from '@/pages/Home';
 import TravelList from '@/pages/TravelList';
+import AddTravel from '@/pages/AddTravel';
 
 const PATH = {
   HOME: '/',
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
           {
             path: 'manage-my-travel',
             element: <ManageMyTravel />,
+          },
+          {
+            path: 'add-travel',
+            element: <AddTravel />,
           },
         ],
       },

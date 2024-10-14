@@ -34,6 +34,10 @@ const filedBtn = (color: string, size: string | undefined) => css`
   `
     width: 70px;
   `}
+  ${size === 'mdHeight' &&
+  `
+    height: 40px;
+  `}
   ${size === 'lg' &&
   `
     width: 140px;
