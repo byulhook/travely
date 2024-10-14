@@ -15,11 +15,6 @@ const ContainerLayout: React.FC = ({ customStyle, mainCustomStyle }: ContainerLa
   );
 };
 
-const containerStyle = css`
-  margin: 0 auto;
-  max-width: 1080px;
-  box-sizing: border-box;
-  background-color: aliceblue; /* 테스트용 컨테이너 배경색 */
-`;
+const containerStyle = css``;
 
 export default ContainerLayout;

@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import ContainerLayout from '@/layouts/ContainerLayout';
 import MyTravelListPage from '@/pages/MyTravelList';
+import Home from '@/pages/Home';
+import TravelList from '@/pages/TravelList';
 
 const PATH = {
   HOME: '/',
@@ -14,19 +16,29 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/',
-            element: (
-              <div>
-                <h1>home</h1>
-              </div>
-            ),
+            element: <Home />,
           },
           {
             path: 'travel-list',
-            element: (
-              <div>
-                <h1>여행리스트</h1>
-              </div>
-            ),
+            element: <TravelList />,
+            children: [
+              // {
+              //   path: '',
+              //   element: (
+              //     <div>
+              //       <h2>전체</h2>
+              //     </div>
+              //   ),
+              // },
+              {
+                path: 'food',
+                // element: (
+                //   <div>
+                //     <h2>Food</h2>
+                //   </div>
+                // ),
+              },
+            ],
           },
           {
             path: 'travel-detail',

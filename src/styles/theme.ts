@@ -6,7 +6,7 @@ const fontWeights = {};
 
 const width = {};
 const height = {
-  header: '160px',
+  header: '100px',
 };
 
 const zIndex = {
