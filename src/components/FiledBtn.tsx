@@ -1,14 +1,16 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 interface FiledBtnProps {
   children: React.ReactNode;
   color: string;
   size?: string;
   onClick?: () => void;
+  cutomStyle?: SerializedStyles;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const FiledBtn = ({ children, color, size, onClick }: FiledBtnProps) => {
+const FiledBtn = ({ children, color, size, onClick, cutomStyle, type }: FiledBtnProps) => {
   return (
-    <button css={filedBtn(color, size)} onClick={onClick}>
+    <button css={[filedBtn(color, size), cutomStyle]} onClick={onClick} type={type}>
       {children}
     </button>
   );
