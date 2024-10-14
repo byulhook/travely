@@ -4,10 +4,16 @@ import ManageMyTravel from '@/pages/ManageMyTravel';
 import MyTravelListPage from '@/pages/MyTravelList';
 import Home from '@/pages/Home';
 import TravelList from '@/pages/TravelList';
+import { tagDatas } from '@/data/tagDatas';
 
 const PATH = {
   HOME: '/',
 } as const;
+
+const tagPathList = tagDatas.map((data) => ({
+  path: data.path,
+  element: null,
+}));
 
 const router = createBrowserRouter([
   {
@@ -22,24 +28,7 @@ const router = createBrowserRouter([
           {
             path: 'travel-list',
             element: <TravelList />,
-            children: [
-              // {
-              //   path: '',
-              //   element: (
-              //     <div>
-              //       <h2>전체</h2>
-              //     </div>
-              //   ),
-              // },
-              {
-                path: 'food',
-                // element: (
-                //   <div>
-                //     <h2>Food</h2>
-                //   </div>
-                // ),
-              },
-            ],
+            children: tagPathList,
           },
           {
             path: 'travel-detail',

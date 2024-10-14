@@ -11,8 +11,8 @@ interface ITagsProps {
 function Tags({ items, textAlign = 'left' }: ITagsProps) {
   return (
     <div css={tags(textAlign)}>
-      {items.map((item) => (
-        <span>#{item}</span>
+      {items.map((item, i) => (
+        <span key={i}>#{item}</span>
       ))}
     </div>
   );
