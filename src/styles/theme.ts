@@ -1,4 +1,7 @@
-const colors = {};
+const colors = {
+  primary: '#4A95F2', // 주 색상
+  borderColor: '#e0e0e0', // 테두리 색상
+};
 
 const fontSizes = {};
 
