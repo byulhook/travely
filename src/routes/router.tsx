@@ -25,21 +25,8 @@ const router = createBrowserRouter([
             path: 'travel-list',
             element: <TravelList />,
             children: [
-              // {
-              //   path: '',
-              //   element: (
-              //     <div>
-              //       <h2>전체</h2>
-              //     </div>
-              //   ),
-              // },
               {
                 path: 'food',
-                // element: (
-                //   <div>
-                //     <h2>Food</h2>
-                //   </div>
-                // ),
               },
             ],
           },
