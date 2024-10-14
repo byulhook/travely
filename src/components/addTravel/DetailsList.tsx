@@ -71,6 +71,7 @@ const DetailsList = ({ option }: DetailsListProps) => {
 };
 
 export default DetailsList;
+
 const list = css`
   display: flex;
   align-items: center;

@@ -1,4 +1,5 @@
 import ChoiceTags from '@/components/addTravel/ChoiceTags';
+import Course from '@/components/addTravel/Course';
 import Details from '@/components/addTravel/Details';
 import Introduction from '@/components/addTravel/Introduction';
 import Thumbnail from '@/components/addTravel/Thumbnail';
@@ -14,6 +15,7 @@ const AddTravel = () => {
       </GrayBack>
       <Thumbnail />
       <Introduction />
+      <Course />
       <ChoiceTags />
       <GrayBack title={'가격'} price={true} padding={true}>
         <input css={noneStyleInput} type="number" placeholder="0" />

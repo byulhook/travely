@@ -89,7 +89,7 @@ const Details = ({ title }: DetailsProps) => {
 
 export default Details;
 
-const textBox = css`
+export const textBox = css`
   border: 1px solid #dedede;
   border-radius: 8px;
   height: 35px;
@@ -97,7 +97,7 @@ const textBox = css`
   margin: 10px 0;
 `;
 
-const plusBtn = css`
+export const plusBtn = css`
   margin-left: 10px;
   display: flex;
   align-items: center;
