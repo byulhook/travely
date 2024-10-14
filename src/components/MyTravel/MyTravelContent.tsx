@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import TripCard from './TripCard';
+import TripCard from './MyTravelCard';
 
 const MyTravelContent = () => {
   const [trips, setTrips] = useState([
