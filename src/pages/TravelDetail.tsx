@@ -7,6 +7,7 @@ import { MapPin } from 'lucide-react';
 import MoreBtn from '../components/travelDetail/MoreBtn';
 import Check from '../assets/check.png';
 import Remove from '../assets/remove.png';
+import Location from '../assets/map.png';
 
 const TravelDetail = () => {
   const price = 123000;
@@ -74,14 +75,16 @@ const TravelDetail = () => {
           </div>
         </div>
         <div css={infoContainer}>
-          <h2>만나는 시간</h2>
+          <h2>이용 안내</h2>
+          <h3>만나는 시간</h3>
           <p>오전 9시30분
           늦으실시 기다려드리는것이 불가능합니다. 시간을 엄수해주세요.</p>
           <div css={infoLocation}>
-            <p>만나는 장소</p>
+            <h3>만나는 장소</h3>
             <img src={Location} alt="location" />
           </div>
         </div>
+        <div css={reviewContainer}>afsasdfasdfasd</div>
       </div>
       <div css={sideContainer}>
         <SideContainerHeader price={price} bookmark={bookmark} />
@@ -260,23 +263,39 @@ const infoContainer = css`
     font-weight: 600;
     color: #333;
   }
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
   p {
     font-size: 16px;
     font-weight: 400;
     color: #333;
+    margin-bottom: 14px;
   }
 `;
 
 const infoLocation = css`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+
   img {
     width: 680px;
-    height: 360px;
+    height: 300px;
     object-fit: cover;
+    border-radius: 4px;
   }
 `;
 
+
+const reviewContainer = css`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+`;
 
