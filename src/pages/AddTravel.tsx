@@ -6,20 +6,29 @@ import Introduction from '@/components/addTravel/Introduction';
 import Thumbnail from '@/components/addTravel/Thumbnail';
 import GrayBack from '@/components/GrayBack';
 import { css } from '@emotion/react';
+import { useRef } from 'react';
 
 const AddTravel = () => {
+  const titleRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
+
   return (
     <div css={addTravelWrapper}>
       <h1>새로운 여행 계획하기</h1>
       <GrayBack title={'제목'} padding={true}>
-        <input css={noneStyleInput} type="text" placeholder="30자 내외로 작성해주세요." />
+        <input
+          ref={titleRef}
+          css={noneStyleInput}
+          type="text"
+          placeholder="30자 내외로 작성해주세요."
+        />
       </GrayBack>
       <Thumbnail />
       <Introduction />
       <Course />
       <ChoiceTags />
       <GrayBack title={'가격'} price={true} padding={true}>
-        <input css={noneStyleInput} type="number" placeholder="0" />
+        <input ref={priceRef} css={noneStyleInput} type="number" placeholder="0" />
         <span css={{ marginRight: '5px' }}>원</span>
         <span css={{ fontSize: '14px' }}>/ 1인</span>
       </GrayBack>
@@ -47,4 +56,8 @@ const noneStyleInput = css`
   width: 100%;
   background-color: transparent;
   border: none;
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    display: none;
+  }
 `;
