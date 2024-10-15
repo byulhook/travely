@@ -1,5 +1,6 @@
 import ChoiceTags from '@/components/addTravel/ChoiceTags';
 import Course from '@/components/addTravel/Course';
+import ScheduleTeam from '@/components/addTravel/ScheduleTeam';
 import Details from '@/components/addTravel/Details';
 import { FloatingMenu } from '@/components/addTravel/FloatingMenu';
 import Introduction from '@/components/addTravel/Introduction';
@@ -28,6 +29,7 @@ const AddTravel = () => {
         <Introduction />
         <Course />
         <ChoiceTags />
+        <ScheduleTeam />
         <GrayBack title={'가격'} price={true} padding={true}>
           <input ref={priceRef} css={noneStyleInput} type="number" placeholder="0" />
           <span css={{ marginRight: '5px' }}>원</span>
@@ -55,7 +57,7 @@ const addTravelWrapper = css`
   }
 `;
 
-const noneStyleInput = css`
+export const noneStyleInput = css`
   width: 100%;
   background-color: transparent;
   border: none;
