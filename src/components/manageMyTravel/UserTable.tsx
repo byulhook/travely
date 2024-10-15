@@ -9,9 +9,9 @@ interface UserTableProps {
 
 const UserTable = ({ data }: UserTableProps) => {
   const statusData = [
-    { state: 'waiting', data: data.filter((user) => user.state === 'waiting') },
-    { state: 'approval', data: data.filter((user) => user.state === 'approval') },
-    { state: 'refusal', data: data.filter((user) => user.state === 'refusal') },
+    { status: 'waiting', data: data.filter((user) => user.status === 'waiting') },
+    { status: 'approval', data: data.filter((user) => user.status === 'approval') },
+    { status: 'refusal', data: data.filter((user) => user.status === 'refusal') },
   ];
 
   return (
@@ -27,20 +27,20 @@ const UserTable = ({ data }: UserTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {statusData.map(({ state, data }) =>
+        {statusData.map(({ status, data }) =>
           data.map((user, index) => (
-            <tr key={`${state}-${index}`}>
+            <tr key={`${status}-${index}`}>
               <td css={{ minWidth: '80px' }}>
                 <div>
-                  <Profile url={user.profile} size={'40px'} /> {user.name}
+                  <Profile url={user.userProfileImage} size={'40px'} /> {user.userName}
                 </div>
               </td>
               <td>{user.mbti}</td>
-              <td>{user.phone}</td>
-              <td>{user.email}</td>
-              <td>20{user.applicationDate}</td>
+              <td>{user.phoneNumber}</td>
+              <td>{user.userId}</td>
+              <td>20{user.appliedAt}</td>
               <td css={{ minWidth: '145px' }}>
-                {state === 'waiting' ? (
+                {status === 'waiting' ? (
                   <div>
                     <div css={{ marginRight: '5px' }}>
                       <FiledBtn color={'#4A95F2'} size={'sm'}>
@@ -51,7 +51,7 @@ const UserTable = ({ data }: UserTableProps) => {
                       거절
                     </FiledBtn>
                   </div>
-                ) : state === 'approval' ? (
+                ) : status === 'approval' ? (
                   '승인'
                 ) : (
                   '거절'

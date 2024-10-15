@@ -10,21 +10,19 @@ const ManageMyTravel = () => {
 
   const today = new Date();
 
-  const ongoingTripData = data.schedules.filter((schedule) => {
-    const endStr = schedule.travelDate.split('~')[1];
-    const endDate = new Date(`20${endStr.replace('.', '-')}`);
+  const ongoingTripData = data.travelTeams.filter((travelTeam) => {
+    const endDate = new Date(`20${travelTeam.travelEndDate.replace('.', '-')}`);
     return endDate >= today;
   });
-  const completedTripData = data.schedules.filter((schedule) => {
-    const endStr = schedule.travelDate.split('~')[1];
-    const endDate = new Date(`20${endStr.replace('.', '-')}`);
+  const completedTripData = data.travelTeams.filter((travelTeam) => {
+    const endDate = new Date(`20${travelTeam.travelEndDate.replace('.', '-')}`);
     return endDate < today;
   });
 
   return (
     <section css={{ color: '#333' }}>
       <div css={titleWrapper}>
-        <h1>{data.title}</h1>
+        <h1>{data.travelTitle}</h1>
         <div css={btnWrapper}>
           <BorderBtn color={'#4A95F2'}>비활성화</BorderBtn>
           <BorderBtn color={'#FF5757'} size={'sm'}>
@@ -33,8 +31,8 @@ const ManageMyTravel = () => {
         </div>
       </div>
       <div css={dateWrapper}>
-        <p>게시일: {data.postedData}</p>
-        <p>마지막 업데이트: {data.lastUpdated}</p>
+        <p>게시일: {data.createAt}</p>
+        <p>마지막 업데이트: {data.updateAt}</p>
       </div>
       <div css={{ display: 'flex', marginBottom: '15px' }}>
         <button css={ongoingTab(tab)} onClick={() => setTab(true)}>

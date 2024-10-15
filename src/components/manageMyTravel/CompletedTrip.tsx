@@ -1,17 +1,17 @@
 import { css } from '@emotion/react';
 import UserTable from '@/components/manageMyTravel/UserTable';
-import { ScheduleData } from '@/types/travelDataType';
+import { travelTeamData } from '@/types/travelDataType';
 
 interface CompletedTripProps {
-  data: ScheduleData[];
+  data: travelTeamData[];
 }
 const CompletedTrip = ({ data }: CompletedTripProps) => {
   return (
     <>
-      {data.map((schedule) => (
-        <div key={schedule.travelDate} css={scheduleWrappeer}>
-          <p>{schedule.travelDate}</p>
-          <UserTable data={schedule.applicationUser} />
+      {data.map((travelTeam) => (
+        <div key={travelTeam.travelStartDate} css={teamWrappeer}>
+          <p>{travelTeam.travelStartDate + ' ~ ' + travelTeam.travelEndDate}</p>
+          <UserTable data={travelTeam.appliedUserId} />
         </div>
       ))}
     </>
@@ -19,7 +19,7 @@ const CompletedTrip = ({ data }: CompletedTripProps) => {
 };
 
 export default CompletedTrip;
-const scheduleWrappeer = css`
+const teamWrappeer = css`
   margin-bottom: 20px;
   & p {
     font-weight: 700;

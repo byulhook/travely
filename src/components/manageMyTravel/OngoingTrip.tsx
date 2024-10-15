@@ -1,18 +1,18 @@
 import { css } from '@emotion/react';
 import UserTable from '@/components/manageMyTravel/UserTable';
-import { ScheduleData } from '@/types/travelDataType';
+import { travelTeamData } from '@/types/travelDataType';
 
 interface OngoingTripProps {
-  data: ScheduleData[];
+  data: travelTeamData[];
 }
 
 const OngoingTrip = ({ data }: OngoingTripProps) => {
   return (
     <>
-      {data.map((schedule) => (
-        <div key={schedule.travelDate} css={scheduleWrappeer}>
-          <p>{schedule.travelDate}</p>
-          <UserTable data={schedule.applicationUser} />
+      {data.map((travelTeam) => (
+        <div key={travelTeam.travelStartDate} css={teamWrappeer}>
+          <p>{travelTeam.travelStartDate + ' ~ ' + travelTeam.travelEndDate}</p>
+          <UserTable data={travelTeam.appliedUserId} />
         </div>
       ))}
     </>
@@ -21,7 +21,7 @@ const OngoingTrip = ({ data }: OngoingTripProps) => {
 
 export default OngoingTrip;
 
-const scheduleWrappeer = css`
+const teamWrappeer = css`
   margin-bottom: 20px;
   & p {
     font-weight: 700;
