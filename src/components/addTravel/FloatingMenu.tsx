@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { CircleMinus, CirclePlus } from 'lucide-react';
 import { useState } from 'react';
 
-const FloatingMenu = () => {
+export const FloatingMenu = () => {
   const [openSections, setOpenSections] = useState<string[]>([]);
 
   const toggleSection = (section: string) => {
@@ -41,7 +41,7 @@ const FloatingMenu = () => {
           onClick={() => toggleSection('포함내용')}
           isOpen={openSections.includes('포함내용')}
         >
-          {openSections.includes('포함내용') ? <CircleMinus size={20} /> : <CirclePlus size={20} />}
+          {openSections.includes('포함내용') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
         </ToggleIcon>
       </MenuItem>
       <MenuItem isOpen={openSections.includes('미포함내용')}>
@@ -51,9 +51,9 @@ const FloatingMenu = () => {
           isOpen={openSections.includes('미포함내용')}
         >
           {openSections.includes('미포함내용') ? (
-            <CircleMinus size={20} />
+            <CircleMinus size={22} />
           ) : (
-            <CirclePlus size={20} />
+            <CirclePlus size={22} />
           )}
         </ToggleIcon>
       </MenuItem>
@@ -63,13 +63,13 @@ const FloatingMenu = () => {
           onClick={() => toggleSection('이용안내')}
           isOpen={openSections.includes('이용안내')}
         >
-          {openSections.includes('이용안내') ? <CircleMinus size={20} /> : <CirclePlus size={20} />}
+          {openSections.includes('이용안내') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
         </ToggleIcon>
       </MenuItem>
       <MenuItem isOpen={openSections.includes('FAQ')}>
         <span>FAQ</span>
         <ToggleIcon onClick={() => toggleSection('FAQ')} isOpen={openSections.includes('FAQ')}>
-          {openSections.includes('FAQ') ? <CircleMinus size={20} /> : <CirclePlus size={20} />}
+          {openSections.includes('FAQ') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
         </ToggleIcon>
       </MenuItem>
 
@@ -83,10 +83,10 @@ const FloatingMenu = () => {
 
 // 스타일 정의
 const MenuContainer = styled.div`
-  position: absolute;
-  top: 60px;
-  right: -340px;
-  width: 220px;
+  position: sticky;
+  top: 20px;
+  min-width: 240px;
+  height: 520px;
   padding: 16px;
   border: 1px solid #d2d2d2;
   border-radius: 8px;
@@ -95,6 +95,7 @@ const MenuContainer = styled.div`
   justify-content: space-between;
   font-size: 14px;
   z-index: 1000;
+  overflow-y: auto;
 `;
 
 const MenuItem = styled.div<{ isOpen?: boolean }>`
@@ -102,6 +103,7 @@ const MenuItem = styled.div<{ isOpen?: boolean }>`
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
+  font-weight: 500;
   margin-bottom: 12px;
   color: ${(props) => (props.isOpen ? '#000' : props.isOpen === undefined ? '#000' : '#898989')};
 `;
@@ -135,5 +137,3 @@ const CompleteButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
 `;
-
-export default FloatingMenu;
