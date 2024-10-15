@@ -17,7 +17,7 @@ interface ICardProps {
   bookMark: boolean;
 }
 
-function Card({
+function TravelCard({
   imgSrc,
   title,
   userName,
@@ -51,7 +51,7 @@ function Card({
   );
 }
 
-export default Card;
+export default TravelCard;
 
 const card = () => css`
   width: 250px;
