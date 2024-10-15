@@ -29,6 +29,6 @@
     "noFallthroughCasesInSwitch": true,
     "allowJs": true
   },
-  "include": ["src", "server", ".tmp/MyTravel"],
-  "exclude": ["node_modules", "node_modules/@types/react-router-dom"]
+  "include": ["src", ".tmp/MyTravel"],
+  "exclude": ["node_modules", "node_modules/@types/react-router-dom", "server", ".tmp"]
 }

@@ -1,7 +1,7 @@
 import { css, SerializedStyles } from '@emotion/react';
 
 import Main from '@/layouts/Main';
-import ScrollToTop from '@/utils/scrollToTop';
+import ScrollToTop from '@/utils/ScrollToTop';
 
 interface ContainerLayoutProps {
   customStyle?: SerializedStyles;
