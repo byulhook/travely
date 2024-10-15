@@ -10,6 +10,7 @@ import MyPageContainerLayout from '@/components/myPage/MyPageContainer';
 import MyReviews from '@/pages/MyReviews';
 
 import TravelDetail from '@/pages/TravelDetail';
+import Bookmark from '@/pages/Bookmark';
 const PATH = {
   HOME: '/',
 } as const;
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             path: 'travel-list',
             element: <TravelList />,
             children: tagPathList,
+          },
+          {
+            path: 'bookmark',
+            element: <Bookmark />,
           },
           {
             path: 'travel-detail',
