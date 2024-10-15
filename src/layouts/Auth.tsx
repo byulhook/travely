@@ -12,7 +12,7 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
         <ul>
           <li>
             <Link to="/my-page/my-travel-list">내 여행</Link>
-            <AlarmBadge cnt={0} top={-12} right={-19} />
+            <AlarmBadge cnt={3} top={-11} right={-17} />
           </li>
           <li>
             <Link to="/bookmark">북마크</Link>

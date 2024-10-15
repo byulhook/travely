@@ -12,12 +12,11 @@ const alarmBadge = (top: number, right: number) => css`
   top: ${top}px;
   right: ${right}px;
   display: block;
-  width: 30px;
+  width: 25px;
   padding: 1px 0;
   text-align: center;
   background-color: #ff5757;
   color: white;
   border-radius: 15px;
   font-size: 12px;
-  border: 2px solid #fff;
 `;
