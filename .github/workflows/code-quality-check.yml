@@ -20,13 +20,11 @@ jobs:
 
     - name: Run type check
       run: |
-        output=$(npm run type-check 2>&1) || echo "TYPE_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV && echo "$output" >> $GITHUB_ENV && echo "EOF" >> $GITHUB_ENV
-      id: type-check
-
+        npm run type-check || echo "TYPE_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV && npm run type-check >> $GITHUB_ENV 2>&1 && echo "EOF" >> $GITHUB_ENV
+   
     - name: Run lint
       run: |
-        output=$(npm run lint 2>&1) || echo "LINT_OUTPUT<<EOF" >> $GITHUB_ENV && echo "$output" >> $GITHUB_ENV && echo "EOF" >> $GITHUB_ENV
-      id: lint
+        npm run lint || echo "LINT_OUTPUT<<EOF" >> $GITHUB_ENV && npm run lint >> $GITHUB_ENV 2>&1 && echo "EOF" >> $GITHUB_ENV
 
     - name: Create comment
       if: failure()
