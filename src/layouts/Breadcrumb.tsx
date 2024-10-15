@@ -19,6 +19,7 @@ const breadcrumbsMap: { [key: string]: string } = {
   'my-page': '마이페이지',
   'my-reviews': '작성한 후기',
   'my-travel-list': '내 여행',
+  'my-account': '계정',
 };
 // 홈, 마이페이지, 내여행, 참여한 여행 (/my-page/my-travel-list)
 // 홈, 마이페이지, 내여행, 내가 만든 여행(/my-page/my-travel-list)
@@ -29,6 +30,11 @@ const BreadCrumb = () => {
   const paths = location.pathname.split('/').filter((item) => item !== '');
   if (paths.length === 0) return null;
   let link = '/';
+  paths.forEach((path, _, arr) => {
+    if (path === 'add-travel') {
+      arr.unshift('travel-list');
+    }
+  });
 
   return (
     <ol css={breadcrumbWrap}>
@@ -39,6 +45,9 @@ const BreadCrumb = () => {
       </li>
       {paths.map((path, i) => {
         link += `${path}/`;
+        if (path === 'add-travel') {
+          link = '/add-travel';
+        }
         return (
           <li key={i + 1}>
             <Link to={link}>{breadcrumbsMap[path]}</Link>

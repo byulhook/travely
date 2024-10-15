@@ -45,7 +45,12 @@ function TravelCard({
         </div>
       </div>
       <p className="book-mark">
-        <Bookmark size="23" stroke="#fff" strokeWidth="1.5" fill={bookMark ? '#fff' : 'none'} />
+        <Bookmark
+          size="23"
+          stroke={bookMark ? '#4a95f2' : '#fff'}
+          strokeWidth="1.5"
+          fill={bookMark ? '#4a95f2' : 'none'}
+        />
       </p>
     </div>
   );
