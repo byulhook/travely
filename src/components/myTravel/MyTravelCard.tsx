@@ -30,11 +30,6 @@ const TripCard: React.FC<ITripCardProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {isDisabled && (
-        <Overlay onClick={onEnable}>
-          <DisabledText isHovered={isHovered}>{isHovered ? '활성화하기' : '비활성화'}</DisabledText>
-        </Overlay>
-      )}
       <TripInfo isDisabled={isDisabled}>
         <TitleContainer>
           <Title>{title}</Title>
@@ -52,6 +47,11 @@ const TripCard: React.FC<ITripCardProps> = ({
         </Buttons>
         <UpdateDate>업데이트: {updateDate}</UpdateDate>
       </TripInfo>
+      {isDisabled && (
+        <Overlay onClick={onEnable}>
+          <DisabledText isHovered={isHovered}>{isHovered ? '활성화' : '비활성화'}</DisabledText>
+        </Overlay>
+      )}
     </TripCardContainer>
   );
 };
@@ -69,7 +69,7 @@ const TripCardContainer = styled.div`
 const TripInfo = styled.div<{ isDisabled: boolean }>`
   display: flex;
   flex-direction: column;
-  opacity: ${(props) => (props.isDisabled ? 0.4 : 1)};
+
   pointer-events: ${(props) => (props.isDisabled ? 'none' : 'auto')};
 `;
 
