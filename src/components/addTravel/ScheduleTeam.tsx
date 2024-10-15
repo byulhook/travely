@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import useFieldStore from '@/stores/useFieldStore';
+import useFieldStore, { Schedule } from '@/stores/useFieldStore';
 import { CirclePlus, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import Team from '@/components/Team';
@@ -19,7 +19,7 @@ const ScheduleTeam = () => {
       return;
     }
     if (startDateRef.current && endDateRef.current && membersRef.current) {
-      const newSchedule = {
+      const newSchedule: Schedule = {
         date: `${startDateRef.current.value} ~ ${endDateRef.current.value}`,
         members: membersRef.current.value,
       };

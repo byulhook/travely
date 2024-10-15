@@ -59,7 +59,11 @@ const DetailsList = ({ option }: DetailsListProps) => {
             <li key={index}>
               <div css={list}>
                 <Dot size={22} />
-                <p>{field}</p>
+                {typeof field === 'string' ? (
+                  <p>{field}</p>
+                ) : (
+                  <p>{`${field.date} / ${field.members}`}</p>
+                )}
                 <button onClick={() => removeField(option, index)}>
                   <X size={20} />
                 </button>
