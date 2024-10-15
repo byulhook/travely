@@ -4,12 +4,12 @@ import FiledBtn from '@/components/FiledBtn';
 import Modal from '@/components/Modal';
 import theme from '@/styles/theme';
 import { css } from '@emotion/react';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import BorderBtn from '@/components/BorderBtn';
 
 import UserProfile from '@/components/UserProfile';
 import StarRating from '@/components/StarRating';
-import FileUpload from '@/components/FileUpload';
+import FileUploadBtn from '@/components/FileUploadBtn';
 
 export interface ReviewWriteModalProps {
   reviewTitle: string;
@@ -18,6 +18,11 @@ export interface ReviewWriteModalProps {
   imgURL?: string;
 }
 
+const isValideFile = (file: File) => {
+  const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'video/mp4'];
+  return validTypes.includes(file.type);
+};
+
 const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWriteModalProps) => {
   const [open, setOpen] = useState(false);
   const [travelRating, setTravelRating] = useState(0);
@@ -25,9 +30,35 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
   const [files, setFiles] = useState<File[]>([]);
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
+      if (!isValideFile(event.target.files[0])) {
+        alert('지원하지 않는 파일 형식입니다.');
+        return;
+      }
+      if (files.length + event.target.files.length > 4) {
+        alert('파일은 최대 4개까지 업로드 가능합니다.');
+        return;
+      }
       setFiles([...files, ...Array.from(event.target.files)]);
     }
   };
+
+  const onCloseModal = () => {
+    setFiles([]);
+    setOpen(false);
+  };
+
+  const onSumitReview = () => {
+    setFiles([]);
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    if (!open) {
+      setFiles([]);
+      setTravelRating(0);
+      setUserRating(0);
+    }
+  }, [open]);
 
   return (
     <>
@@ -69,7 +100,11 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
                 <p className="userName">{userName}</p>
                 <textarea placeholder="리뷰를 작성해주세요" />
               </div>
-              <FileUpload files={files} handleFileUpload={handleFileUpload} setFiles={setFiles} />
+              <FileUploadBtn
+                files={files}
+                handleFileUpload={handleFileUpload}
+                setFiles={setFiles}
+              />
               <div css={guideReviewContainer}>
                 <div className="advice">함께한 가이드가 훌륭했다면 별점을 남겨주세요</div>
                 <div className="guideInfo">
@@ -87,8 +122,7 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
                 cutomStyle={css`
                   width: 120px;
                 `}
-                onClick={() => setOpen(false)}
-                type="submit"
+                onClick={() => onSumitReview()}
               />
               <BorderBtn
                 children="닫기"
@@ -96,7 +130,7 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
                 customStyle={css`
                   width: 120px;
                 `}
-                onClick={() => setOpen(false)}
+                onClick={() => onCloseModal()}
               />
             </div>
           </div>
@@ -120,8 +154,8 @@ const ReviewWriteModalStyle = css`
       border-radius: 10px;
       margin-bottom: 10px;
       overflow: hidden;
-      width: 150px;
-      height: 170px;
+      width: 130px;
+      height: 144px;
       img {
         width: 100%;
         height: 100%;
