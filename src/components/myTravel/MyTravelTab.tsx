@@ -1,20 +1,31 @@
-import { useTabStore } from '@/stores/tabStore';
+import { useTabStore } from '@/stores/usetabStore';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 const MyTravelTab = () => {
   const { selectedTab, setSelectedTab } = useTabStore();
+  const navigate = useNavigate();
+
+  const handleTabClick = (tab: '참여한 여행' | '내가 만든 여행') => {
+    setSelectedTab(tab);
+    if (tab === '참여한 여행') {
+      navigate('/my-page/my-travel-list');
+    } else if (tab === '내가 만든 여행') {
+      navigate('/my-page/my-created-travel');
+    }
+  };
 
   return (
     <TabContainer>
       <TabButton
         selected={selectedTab === '참여한 여행'}
-        onClick={() => setSelectedTab('참여한 여행')}
+        onClick={() => handleTabClick('참여한 여행')}
       >
         참여한 여행
       </TabButton>
       <TabButton
         selected={selectedTab === '내가 만든 여행'}
-        onClick={() => setSelectedTab('내가 만든 여행')}
+        onClick={() => handleTabClick('내가 만든 여행')}
       >
         내가 만든 여행
       </TabButton>
