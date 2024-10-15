@@ -5,7 +5,7 @@ const Logo: React.FC<{ light?: boolean }> = ({ light = false }) => {
   return (
     <h1 css={logo}>
       <Link to="/">
-        <img src={`/src/assets/${light ? 'logo-white' : 'logo'}.png`} alt="" />
+        <img src={`/src/assets/${light ? 'logo-white' : 'logo-black'}.png`} alt="" />
       </Link>
     </h1>
   );

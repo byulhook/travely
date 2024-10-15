@@ -1,6 +1,7 @@
 import { css, SerializedStyles } from '@emotion/react';
 
 import Main from '@/layouts/Main';
+import ScrollToTop from '@/utils/scrollToTop';
 
 interface ContainerLayoutProps {
   customStyle?: SerializedStyles;
@@ -9,9 +10,11 @@ interface ContainerLayoutProps {
 
 const ContainerLayout: React.FC = ({ customStyle, mainCustomStyle }: ContainerLayoutProps) => {
   return (
-    <div css={[containerStyle, customStyle]}>
-      <Main customStyle={mainCustomStyle} />
-    </div>
+    <ScrollToTop>
+      <div css={[containerStyle, customStyle]}>
+        <Main customStyle={mainCustomStyle} />
+      </div>
+    </ScrollToTop>
   );
 };
 

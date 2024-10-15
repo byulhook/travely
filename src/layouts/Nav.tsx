@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 
-const Nav = () => {
+const Nav: React.FC<{ light?: boolean }> = ({ light = false }) => {
   return (
-    <nav css={nav}>
+    <nav css={nav(light)}>
       <ul>
         <li>
           <Link to="/travel-list">함께 떠나요</Link>
@@ -18,7 +18,7 @@ const Nav = () => {
 
 export default Nav;
 
-const nav = css`
+const nav = (light: boolean) => css`
   ul {
     display: flex;
     gap: 40px;
@@ -26,6 +26,11 @@ const nav = css`
     li {
       font-size: 18px;
       font-weight: bold;
+      color: ${light ? '#fff' : '#666'};
+      &:hover {
+        color: ${!light && '#333'};
+        transition: color 0.2s ease-in-out;
+      }
     }
   }
 `;

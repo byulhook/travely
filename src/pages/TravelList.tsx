@@ -1,9 +1,11 @@
+import BorderBtn from '@/components/BorderBtn';
 import TagCardWrap from '@/components/TagCardWrap';
 import TravelCard from '@/components/TravelCard';
 import { tagDatas } from '@/data/tagDatas';
 import useHeaderWithVisual from '@/hooks/useHeaderWithVisual';
 import { TagType } from '@/types/tagType';
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 interface IDatas {
@@ -89,7 +91,9 @@ const TravelList = () => {
       <TagCardWrap />
       <div className="page-title">
         <h2>{pageTitle}</h2>
-        <button>여행 만들기 +</button>
+        <BorderBtn color="#4a95f2">
+          <Link to="/add-travel">여행 만들기 +</Link>
+        </BorderBtn>
       </div>
 
       <div className="card-wrap">

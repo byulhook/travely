@@ -43,6 +43,10 @@ const logined = (light: boolean) => css`
       position: relative;
       font-size: 16px;
       color: ${light ? '#fff' : '#666'};
+      transition: 0.2s ease-in-out;
+      &:hover {
+        font-weight: bold;
+      }
     }
   }
 

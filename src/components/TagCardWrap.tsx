@@ -41,12 +41,12 @@ function TagCardWrap({ shape = 'round' }: ITagCardWrap) {
         <ChevronRight
           className="custom-swiper-btn-next"
           size="50"
-          color={isEnd ? '#888' : '#333'}
+          color={isEnd ? '#abcefa' : '#4a95f2'}
         />
         <ChevronLeft
           className="custom-swiper-btn-prev"
           size="50"
-          color={isBeginning ? '#888' : '#333'}
+          color={isBeginning ? '#abcefa' : '#4a95f2'}
         />
         <Swiper
           spaceBetween={26}

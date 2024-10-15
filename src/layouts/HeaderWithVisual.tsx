@@ -12,7 +12,7 @@ const HeaderWithVisual = () => {
         <div className="header-inner">
           <div className="header-left">
             <Logo light={true} />
-            <Nav />
+            <Nav light={true} />
           </div>
           <Auth light={true} />
         </div>
