@@ -30,9 +30,9 @@ export default SideTravelTeam;
 const sideTravelTeamContainer = css`
   height: 100%;
   border-radius: 8px;
-  border: 1px solid #C1C1C1;
+  border: 1px solid #c1c1c1;
   padding: 20px;
-  
+
   h1 {
     font-size: 18px;
     font-weight: 600;

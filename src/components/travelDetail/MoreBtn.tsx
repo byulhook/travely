@@ -12,7 +12,7 @@ const moreBtn = css`
   background-color: #fff;
   color: #333;
   border-radius: 8px;
-  border: 1px solid #E2E2E2;
+  border: 1px solid #e2e2e2;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;

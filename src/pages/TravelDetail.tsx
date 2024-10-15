@@ -22,10 +22,10 @@ const TravelDetail = () => {
   ];
 
   const courses = [
-    "경복궁 관람 및 역사 해설",
-    "창덕궁과 비밀정원 탐방",
-    "점심 국밥 5그릇 싹 조질 예정",
-    "종묘 탐방과 제례 문화 이해"
+    '경복궁 관람 및 역사 해설',
+    '창덕궁과 비밀정원 탐방',
+    '점심 국밥 5그릇 싹 조질 예정',
+    '종묘 탐방과 제례 문화 이해',
   ];
 
   const reviewData = {
@@ -47,7 +47,7 @@ const TravelDetail = () => {
         imgSrcs: [reviewImageSrc, reviewImageSrc, reviewImageSrc, reviewImageSrc],
         createdAt: new Date('2024-10-25'),
         rating: 5,
-      }
+      },
     ],
   };
 
@@ -62,16 +62,12 @@ const TravelDetail = () => {
           <img src={image} alt="image" />
         </div>
         <div css={tagContainer}>
-          <p>
-            #food #travel #korea #culture #history
-          </p>
+          <p>#food #travel #korea #culture #history</p>
         </div>
         <div css={descriptionContainer}>
           <h2>여행 소개</h2>
           <div css={descriptionContent}>
-            <p>
-              한국의 고궁 투어 ( 너무 너무 재밌어요 )
-            </p>
+            <p>한국의 고궁 투어 ( 너무 너무 재밌어요 )</p>
             <MoreBtn />
           </div>
         </div>
@@ -101,8 +97,7 @@ const TravelDetail = () => {
         <div css={infoContainer}>
           <h2>이용 안내</h2>
           <h3>만나는 시간</h3>
-          <p>오전 9시30분
-          늦으실시 기다려드리는것이 불가능합니다. 시간을 엄수해주세요.</p>
+          <p>오전 9시30분 늦으실시 기다려드리는것이 불가능합니다. 시간을 엄수해주세요.</p>
           <div css={infoLocation}>
             <h3>만나는 장소</h3>
             <img src={Location} alt="location" />
@@ -122,11 +117,14 @@ const TravelDetail = () => {
                     <span css={userName}>{review.title}</span>
                     <div css={reviewMetadata}>
                       <span>
-                        {review.createdAt.toLocaleDateString('ko-KR', { 
-                          year: 'numeric', 
-                          month: '2-digit', 
-                          day: '2-digit' 
-                        }).replace(/\. /g, '. ').replace(/\.$/, '')}
+                        {review.createdAt
+                          .toLocaleDateString('ko-KR', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          })
+                          .replace(/\. /g, '. ')
+                          .replace(/\.$/, '')}
                       </span>
                       <Rating rating={review.rating.toFixed(1)} />
                     </div>
@@ -134,7 +132,12 @@ const TravelDetail = () => {
                 </div>
                 <div css={reviewImages}>
                   {review.imgSrcs.slice(0, 4).map((imgSrc, index) => (
-                    <img key={index} css={reviewImage} src={imgSrc} alt={`Review image ${index + 1}`} />
+                    <img
+                      key={index}
+                      css={reviewImage}
+                      src={imgSrc}
+                      alt={`Review image ${index + 1}`}
+                    />
                   ))}
                 </div>
                 <p css={reviewText}>{review.content}</p>
@@ -242,7 +245,7 @@ const descriptionContent = css`
   flex-direction: column;
   justify-content: space-between;
   padding: 14px;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   border-radius: 8px;
 
   p {
@@ -250,7 +253,6 @@ const descriptionContent = css`
     font-weight: 500;
     color: #444;
   }
-
 `;
 
 const courseContainer = css`
@@ -273,7 +275,7 @@ const courseContent = css`
   flex-direction: row;
   align-items: center;
   padding: 14px;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   border-radius: 8px;
   gap: 12px;
   p {
@@ -352,7 +354,6 @@ const infoLocation = css`
     border-radius: 4px;
   }
 `;
-
 
 const reviewContainer = css`
   display: flex;

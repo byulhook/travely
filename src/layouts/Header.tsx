@@ -1,4 +1,4 @@
-import Auth from '@/layouts/\bAuth';
+import Auth from '@/layouts/Auth';
 import Logo from '@/layouts/Logo';
 import Nav from '@/layouts/Nav';
 import { css } from '@emotion/react';

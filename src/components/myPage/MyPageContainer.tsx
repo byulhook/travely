@@ -1,8 +1,7 @@
 import MyPageSideMenu from '@/components/myPage/MyPageSideMenu';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 
 const MyPageContainerLayout = () => {
   const location = useLocation();
@@ -12,7 +11,7 @@ const MyPageContainerLayout = () => {
     if (location.pathname === '/my-page/') {
       navigate('/my-page/my-account');
     }
-  }, [location.pathname]);
+  }, [location.pathname, navigate]);
 
   return (
     <div css={myPageLayout}>

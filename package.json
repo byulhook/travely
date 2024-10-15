@@ -9,10 +9,9 @@
     "lint": "eslint . --fix",
     "format": "prettier . --write",
     "preview": "vite preview",
-    "type-check": "tsc --noEmit",
-    "deploy": "firebase init hosting:channel:deploy live --only hosting",
-    "server": "node server/server.js",
-    "prepare": "husky"
+    "type-check": "tsc --noEmit --skipLibCheck",
+    "prepare": "npx lefthook install",
+    "lefthook": "lefthook run pre-commit"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -66,8 +65,8 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
-    "husky": "^9.1.6",
     "import-order": "^0.0.7",
+    "lefthook": "^1.7.18",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "typescript": "5.5.4",
