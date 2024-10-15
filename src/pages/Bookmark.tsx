@@ -1,12 +1,6 @@
-import BorderBtn from '@/components/BorderBtn';
-import TagCardWrap from '@/components/TagCardWrap';
 import TravelCard from '@/components/TravelCard';
-import { tagDatas } from '@/data/tagDatas';
-import useHeaderWithVisual from '@/hooks/useHeaderWithVisual';
 import { TagType } from '@/types/tagType';
 import { css } from '@emotion/react';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 
 interface IDatas {
   imgSrc: string;
@@ -30,7 +24,7 @@ const datas: IDatas[] = [
     rating: '5.0',
     reviewCount: '23',
     people: '1',
-    bookMark: false,
+    bookMark: true,
   },
   {
     imgSrc: '/src/assets/thumb.png',
@@ -41,7 +35,7 @@ const datas: IDatas[] = [
     rating: '4.8',
     reviewCount: '18',
     people: '1',
-    bookMark: false,
+    bookMark: true,
   },
   {
     imgSrc: '/src/assets/thumb.png',
@@ -63,7 +57,7 @@ const datas: IDatas[] = [
     rating: '4.7',
     reviewCount: '12',
     people: '1',
-    bookMark: false,
+    bookMark: true,
   },
   {
     imgSrc: '/src/assets/thumb.png',
@@ -78,22 +72,11 @@ const datas: IDatas[] = [
   },
 ];
 
-const TravelList = () => {
-  const location = useLocation();
-  const path = location.pathname.split('/').filter((item) => item !== '')[1] || '전체';
-  const pageTitle = path === '전체' ? path : tagDatas.filter((data) => data.path === path)[0].name;
-  const isHeaderWithVisual = useHeaderWithVisual();
-
-  if (path !== '전체' && !isHeaderWithVisual) return null;
-
+const Bookmark = () => {
   return (
-    <div css={travelListWrap}>
-      <TagCardWrap />
+    <div css={bookmarkWrap}>
       <div className="page-title">
-        <h2>{pageTitle}</h2>
-        <BorderBtn color="#4a95f2">
-          <Link to="/add-travel">여행 만들기 +</Link>
-        </BorderBtn>
+        <h2>북마크</h2>
       </div>
 
       <div className="card-wrap">
@@ -116,14 +99,14 @@ const TravelList = () => {
   );
 };
 
-export default TravelList;
+export default Bookmark;
 
-const travelListWrap = css`
+const bookmarkWrap = css`
   .page-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 30px 0;
+    margin: 0 0 30px 0;
   }
   .card-wrap {
     display: grid;

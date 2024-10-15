@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { Star } from 'lucide-react';
 
 interface StarIconProps {
-  filled: boolean;
+  filled: string;
 }
 
 interface StarRatingProps {
@@ -20,7 +20,7 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, setRating, customStyle 
         <StarIcon
           key={index}
           size={24}
-          filled={index < rating}
+          filled={index < rating ? 'filled' : 'none'}
           onClick={() => {
             setRating(index + 1);
           }}
@@ -33,7 +33,7 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, setRating, customStyle 
 
 const StarIcon = styled(Star)<StarIconProps>`
   cursor: pointer;
-  fill: ${(props) => (props.filled ? '#FFD700' : 'none')};
+  fill: ${({ filled }) => (filled === 'filled' ? '#ffd700' : 'none')};
   stroke: #ffd700;
 `;
 

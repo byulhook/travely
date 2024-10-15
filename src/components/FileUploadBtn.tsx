@@ -2,17 +2,21 @@ import { css } from '@emotion/react';
 import { ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 
-import { Camera } from 'lucide-react';
-
-import { textEllipsis } from '@/styles/GlobalStyles';
+import { Camera, X } from 'lucide-react';
 
 export interface FileUploadProps {
   files: File[];
   handleFileUpload: (event: ChangeEvent<HTMLInputElement>) => void;
   setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  hideImage?: boolean;
 }
 
-const FileUpload = ({ files, handleFileUpload, setFiles }: FileUploadProps) => {
+const FileUploadBtn = ({
+  files,
+  handleFileUpload,
+  setFiles,
+  hideImage = false,
+}: FileUploadProps) => {
   return (
     <>
       <Button
@@ -48,6 +52,7 @@ const FileUpload = ({ files, handleFileUpload, setFiles }: FileUploadProps) => {
       <div
         css={css`
           display: flex;
+          flex-direction: column;
         `}
       >
         {files.map((file, index) => (
@@ -58,7 +63,7 @@ const FileUpload = ({ files, handleFileUpload, setFiles }: FileUploadProps) => {
               align-items: center;
               font-size: 13px;
               justify-content: flex-start;
-              padding: 0.5rem;
+              padding-top: 4px;
               width: 100px;
               color: #afafaf;
 
@@ -70,9 +75,23 @@ const FileUpload = ({ files, handleFileUpload, setFiles }: FileUploadProps) => {
               }
             `}
           >
-            <span css={textEllipsis(1)}>{file.name}</span>
+            {/* 이미지가 보여야함 */}
+
+            {!hideImage && (
+              <img
+                src={URL.createObjectURL(file)}
+                alt="file"
+                css={css`
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 0.25rem;
+                  margin-right: 0.5rem;
+                `}
+              />
+            )}
+            <span>{file.name}</span>
             <button type="button" onClick={() => setFiles(files.filter((_, i) => i !== index))}>
-              x
+              <X size={24} />
             </button>
           </div>
         ))}
@@ -88,4 +107,4 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default FileUpload;
+export default FileUploadBtn;

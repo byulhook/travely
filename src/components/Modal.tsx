@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import styled from '@emotion/styled';
@@ -25,12 +25,10 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, description, op
           {children}
           <Dialog.Close asChild>
             <CloseButton aria-label="Close">
-              <X size={20} />
+              <X size={27} />
             </CloseButton>
           </Dialog.Close>
-          <Dialog.Description>
-            <p css={visuallyHidden}>{description && ''}</p>
-          </Dialog.Description>
+          <Dialog.Description css={visuallyHidden}>{description && ''}</Dialog.Description>
         </Content>
       </Dialog.Portal>
     </Dialog.Root>
@@ -38,6 +36,19 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, description, op
 };
 
 export default Modal;
+
+const CloseButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+  (props, ref) => <StyledCloseButton ref={ref} {...props} />,
+);
+
+const StyledCloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+`;
 
 const Title = styled(Dialog.Title)`
   font-size: 24px;
@@ -60,14 +71,5 @@ const Content = styled(Dialog.Content)`
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 450px;
-  padding: 20px;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
+  padding: 30px;
 `;

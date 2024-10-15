@@ -2,6 +2,7 @@ import TagCardWrap from '@/components/TagCardWrap';
 import TravelCard from '@/components/TravelCard';
 import { TagType } from '@/types/tagType';
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 interface IDatas {
   imgSrc: string;
   title: string;
@@ -108,12 +109,12 @@ const datas: IDatas[] = [
 const Home = () => {
   return (
     <div css={home}>
-      <div>
-        <TagCardWrap shape="square" />
-      </div>
+      <TagCardWrap shape="square" />
 
       <div className="card-wrap">
-        <h3>🔥 함께 떠나요 NEW</h3>
+        <h3>
+          <Link to="/travel-list">🔥 함께 떠나요 NEW</Link>
+        </h3>
         <div className="grid">
           {datas.map((data, i) => (
             <TravelCard
@@ -152,6 +153,9 @@ const home = css`
       margin: 20px 0;
       font-size: 20px;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 `;
