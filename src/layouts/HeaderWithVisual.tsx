@@ -2,7 +2,7 @@ import Visual from '@/layouts/Visual';
 import Logo from '@/layouts/Logo';
 import { css } from '@emotion/react';
 import Nav from '@/layouts/Nav';
-import Auth from '@/layouts/\bAuth';
+import Auth from '@/layouts/Auth';
 
 const HeaderWithVisual = () => {
   return (
