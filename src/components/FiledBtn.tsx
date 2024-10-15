@@ -1,20 +1,25 @@
+import { forwardRef } from 'react';
 import { css, SerializedStyles } from '@emotion/react';
+
 interface FiledBtnProps {
   children: React.ReactNode;
   color: string;
   size?: string;
   onClick?: () => void;
   cutomStyle?: SerializedStyles;
-  type?: 'button' | 'submit' | 'reset';
 }
 
-const FiledBtn = ({ children, color, size, onClick, cutomStyle, type }: FiledBtnProps) => {
-  return (
-    <button css={[filedBtn(color, size), cutomStyle]} onClick={onClick} type={type}>
-      {children}
-    </button>
-  );
-};
+const FiledBtn = forwardRef<HTMLButtonElement, FiledBtnProps>(
+  ({ children, color, size, onClick, cutomStyle }, ref) => {
+    return (
+      <button ref={ref} css={[filedBtn(color, size), cutomStyle]} onClick={onClick}>
+        {children}
+      </button>
+    );
+  },
+);
+
+FiledBtn.displayName = 'FiledBtn';
 
 export default FiledBtn;
 

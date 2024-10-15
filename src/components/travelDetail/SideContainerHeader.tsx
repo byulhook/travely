@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import Rating from '../Rating';
-import basicprofile from '../../assets/basicprofile.png';
-import theme from '../../styles/theme';
+import Rating from '@/components/Rating';
+import basicprofile from '@/assets/basicProfile.png';
+import theme from '@/styles/theme';
 import { Bookmark } from 'lucide-react';
 
 interface SideContainerHeaderProps {
@@ -52,7 +52,7 @@ export default SideContainerHeader;
 const sideContainerHeader = css`
   height: 100%;
   border-radius: 8px;
-  border: 1px solid #C1C1C1;
+  border: 1px solid #c1c1c1;
 `;
 
 const priceContainer = css`
@@ -80,7 +80,7 @@ const dropdownContainer = css`
   select {
     width: 100%;
     height: 40px;
-    border: 1px solid #C1C1C1;
+    border: 1px solid #c1c1c1;
     border-radius: 8px;
     padding: 4px;
   }
@@ -106,7 +106,7 @@ const bookmarkBtn = css`
   font-weight: 500;
   color: #666;
   transition: all 0.2s ease;
-  
+
   &:hover {
     transform: scale(1.04);
   }
@@ -130,7 +130,7 @@ const applyBtn = css`
 const hr = css`
   width: 100%;
   height: 1px;
-  background: #C1C1C1;
+  background: #c1c1c1;
   margin: 20px 0;
 `;
 
