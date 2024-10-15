@@ -10,7 +10,8 @@ export const data: TravelData = {
     {
       travelStartDate: '25.01.25',
       travelEndDate: '25.01.28',
-      appliedUserId: [
+      personLimit: 7,
+      appliedUser: [
         {
           status: 'waiting',
           userName: '김수민',
@@ -18,6 +19,24 @@ export const data: TravelData = {
           mbti: 'ISTJ',
           phoneNumber: '010-1234-1234',
           userId: 'sumin@gmail.com',
+          appliedAt: '24.07.12',
+        },
+        {
+          status: 'refusal',
+          userName: '김동영',
+          userProfileImage: basicProfile,
+          mbti: 'ENTJ',
+          phoneNumber: '010-1234-1234',
+          userId: 'dongyoung@gmail.com',
+          appliedAt: '24.07.12',
+        },
+        {
+          status: 'approval',
+          userName: '손성오',
+          userProfileImage: basicProfile,
+          mbti: 'ISTP',
+          phoneNumber: '010-1234-1234',
+          userId: 'seong5@gmail.com',
           appliedAt: '24.07.12',
         },
         {
@@ -79,7 +98,8 @@ export const data: TravelData = {
     {
       travelStartDate: '25.02.02',
       travelEndDate: '25.02.05',
-      appliedUserId: [
+      personLimit: 7,
+      appliedUser: [
         {
           status: 'waiting',
           userName: '김수민',
@@ -148,7 +168,8 @@ export const data: TravelData = {
     {
       travelStartDate: '25.02.15',
       travelEndDate: '25.02.18',
-      appliedUserId: [
+      personLimit: 7,
+      appliedUser: [
         {
           status: 'waiting',
           userName: '김수민',
@@ -199,7 +220,8 @@ export const data: TravelData = {
     {
       travelStartDate: '25.02.25',
       travelEndDate: '25.02.28',
-      appliedUserId: [
+      personLimit: 7,
+      appliedUser: [
         {
           status: 'approval',
           userName: '김수민',
@@ -214,7 +236,8 @@ export const data: TravelData = {
     {
       travelStartDate: '24.09.12',
       travelEndDate: '24.09.18',
-      appliedUserId: [
+      personLimit: 5,
+      appliedUser: [
         {
           status: 'approval',
           userName: '김수민',

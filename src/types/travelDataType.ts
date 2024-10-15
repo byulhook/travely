@@ -8,7 +8,8 @@ export interface TravelData {
 export interface travelTeamData {
   travelStartDate: string;
   travelEndDate: string;
-  appliedUserId: ApplicationUserData[];
+  personLimit: number;
+  appliedUser: ApplicationUserData[];
 }
 export interface ApplicationUserData {
   status: string;

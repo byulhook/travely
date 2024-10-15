@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Rating from '@/components/Rating';
 import basicprofile from '@/assets/basicProfile.png';
-import theme from '@/styles/theme';
+import { theme } from '@/styles/theme';
 import { Bookmark } from 'lucide-react';
 
 interface SideContainerHeaderProps {

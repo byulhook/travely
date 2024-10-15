@@ -2,23 +2,23 @@ import { css } from '@emotion/react';
 import UserTable from '@/components/manageMyTravel/UserTable';
 import { travelTeamData } from '@/types/travelDataType';
 
-interface CompletedTripProps {
+interface CompletedTravelProps {
   data: travelTeamData[];
 }
-const CompletedTrip = ({ data }: CompletedTripProps) => {
+const CompletedTravel = ({ data }: CompletedTravelProps) => {
   return (
     <>
       {data.map((travelTeam) => (
         <div key={travelTeam.travelStartDate} css={teamWrappeer}>
           <p>{travelTeam.travelStartDate + ' ~ ' + travelTeam.travelEndDate}</p>
-          <UserTable data={travelTeam.appliedUserId} />
+          <UserTable data={travelTeam.appliedUser} />
         </div>
       ))}
     </>
   );
 };
 
-export default CompletedTrip;
+export default CompletedTravel;
 const teamWrappeer = css`
   margin-bottom: 20px;
   & p {

@@ -2,7 +2,7 @@ import reviewImage from '@/assets/reviewImg.png';
 
 import FiledBtn from '@/components/FiledBtn';
 import Modal from '@/components/Modal';
-import theme from '@/styles/theme';
+import { theme } from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useState, ChangeEvent, useEffect } from 'react';
 import BorderBtn from '@/components/BorderBtn';

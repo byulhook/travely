@@ -1,6 +1,8 @@
+import { createTheme } from '@mui/material/styles';
+
 const colors = {
   primary: '#4A95F2', // 주 색상
-  borderColor: '#e0e0e0', // 테두리 색상
+  borderColor: '#e0e0e0', // 테두리 색상styles/theme
 };
 
 const fontSizes = {};
@@ -54,4 +56,17 @@ const theme: Theme = {
   shadows,
 };
 
-export default theme;
+const muiTheme = createTheme({
+  palette: {
+    primary: {
+      main: colors.primary,
+    },
+  },
+  typography: {
+    body2: {
+      fontSize: '1rem',
+      fontWeight: 400,
+    },
+  },
+});
+export { theme, muiTheme };
