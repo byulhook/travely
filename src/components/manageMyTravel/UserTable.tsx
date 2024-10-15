@@ -6,13 +6,23 @@ import FiledBtn from '@/components/FiledBtn';
 interface UserTableProps {
   data: ApplicationUserData[];
 }
+const COUNT_PER_PAGE = 7;
 
 const UserTable = ({ data }: UserTableProps) => {
   const statusData = [
-    { state: 'waiting', data: data.filter((user) => user.state === 'waiting') },
-    { state: 'approval', data: data.filter((user) => user.state === 'approval') },
-    { state: 'refusal', data: data.filter((user) => user.state === 'refusal') },
+    data.filter((user) => user.status === 'waiting'),
+    data.filter((user) => user.status === 'approval'),
+    data.filter((user) => user.status === 'refusal'),
   ];
+  const currentPage = 1;
+  const newStatusData = statusData.reduce((prev, next) => {
+    return prev.concat(next);
+  });
+
+  const dataPerPage = newStatusData.slice(
+    COUNT_PER_PAGE * (currentPage - 1),
+    COUNT_PER_PAGE * (currentPage - 1) + COUNT_PER_PAGE,
+  );
 
   return (
     <table css={tableWrapper}>
@@ -27,39 +37,37 @@ const UserTable = ({ data }: UserTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {statusData.map(({ state, data }) =>
-          data.map((user, index) => (
-            <tr key={`${state}-${index}`}>
-              <td css={{ minWidth: '80px' }}>
+        {dataPerPage.map((user, index) => (
+          <tr key={index}>
+            <td css={{ minWidth: '80px' }}>
+              <div>
+                <Profile url={user.userProfileImage} size={'40px'} /> {user.userName}
+              </div>
+            </td>
+            <td>{user.mbti}</td>
+            <td>{user.phoneNumber}</td>
+            <td>{user.userId}</td>
+            <td>20{user.appliedAt}</td>
+            <td css={{ minWidth: '145px' }}>
+              {user.status === 'waiting' ? (
                 <div>
-                  <Profile url={user.profile} size={'40px'} /> {user.name}
-                </div>
-              </td>
-              <td>{user.mbti}</td>
-              <td>{user.phone}</td>
-              <td>{user.email}</td>
-              <td>20{user.applicationDate}</td>
-              <td css={{ minWidth: '145px' }}>
-                {state === 'waiting' ? (
-                  <div>
-                    <div css={{ marginRight: '5px' }}>
-                      <FiledBtn color={'#4A95F2'} size={'sm'}>
-                        승인
-                      </FiledBtn>
-                    </div>
-                    <FiledBtn color={'#d7d7d7'} size={'sm'}>
-                      거절
+                  <div css={{ marginRight: '5px' }}>
+                    <FiledBtn color={'#4A95F2'} size={'sm'}>
+                      승인
                     </FiledBtn>
                   </div>
-                ) : state === 'approval' ? (
-                  '승인'
-                ) : (
-                  '거절'
-                )}
-              </td>
-            </tr>
-          )),
-        )}
+                  <FiledBtn color={'#d7d7d7'} size={'sm'}>
+                    거절
+                  </FiledBtn>
+                </div>
+              ) : user.status === 'approval' ? (
+                '승인'
+              ) : (
+                '거절'
+              )}
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

@@ -1,20 +1,22 @@
 export interface TravelData {
   id: string;
-  title: string;
-  postedData: string;
-  lastUpdated: string;
-  schedules: ScheduleData[];
+  travelTitle: string;
+  createAt: string;
+  updateAt: string;
+  travelTeams: travelTeamData[];
 }
-export interface ScheduleData {
-  travelDate: string;
-  applicationUser: ApplicationUserData[];
+export interface travelTeamData {
+  travelStartDate: string;
+  travelEndDate: string;
+  personLimit: number;
+  appliedUser: ApplicationUserData[];
 }
 export interface ApplicationUserData {
-  state: string;
-  name: string;
-  profile: string;
+  status: string;
+  userName: string;
+  userProfileImage: string;
   mbti: string;
-  phone: string;
-  email: string;
-  applicationDate: string;
+  phoneNumber: string;
+  userId: string;
+  appliedAt: string;
 }

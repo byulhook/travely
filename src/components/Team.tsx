@@ -52,7 +52,8 @@ const teamWrap = css`
       }
     }
     p {
-      font-size: 8px;
+      font-size: 12px;
+      font-weight: 400;
     }
   }
 `;
