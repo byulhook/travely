@@ -5,11 +5,12 @@ interface BorderBtnProps {
   size?: string;
   onClick?: () => void;
   customStyle?: SerializedStyles;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const BorderBtn = ({ children, color, size, onClick, customStyle }: BorderBtnProps) => {
+const BorderBtn = ({ children, color, size, onClick, customStyle, type }: BorderBtnProps) => {
   return (
-    <button css={[borderBtn(color, size), customStyle]} onClick={onClick}>
+    <button css={[borderBtn(color, size), customStyle]} onClick={onClick} type={type}>
       {children}
     </button>
   );
