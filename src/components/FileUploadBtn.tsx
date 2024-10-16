@@ -89,8 +89,14 @@ const FileUploadBtn = ({
               />
             )}
             <span>{file.name}</span>
-            <button type="button" onClick={() => setFiles(files.filter((_, i) => i !== index))}>
-              <X size={24} />
+            <button
+              type="button"
+              css={css`
+                padding-top: 7px;
+              `}
+              onClick={() => setFiles(files.filter((_, i) => i !== index))}
+            >
+              <X size={20} />
             </button>
           </div>
         ))}
