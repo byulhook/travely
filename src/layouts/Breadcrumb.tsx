@@ -18,11 +18,12 @@ const breadcrumbsMap: { [key: string]: string } = {
   bookmark: '북마크',
   'my-page': '마이페이지',
   'my-reviews': '작성한 후기',
-  'my-travel-list': '내 여행',
+  'my-travel-list': '참여한 여행',
   'my-account': '계정',
+  'my-created-travel': '내가 만든 여행',
+  'my-travel': '내 여행',
+  'travel-detail': '여행 상세',
 };
-// 홈, 마이페이지, 내여행, 참여한 여행 (/my-page/my-travel-list)
-// 홈, 마이페이지, 내여행, 내가 만든 여행(/my-page/my-travel-list)
 // 홈, 가이드 찾아요
 
 const BreadCrumb = () => {
@@ -31,8 +32,11 @@ const BreadCrumb = () => {
   if (paths.length === 0) return null;
   let link = '/';
   paths.forEach((path, _, arr) => {
-    if (path === 'add-travel') {
+    if (path === 'add-travel' || path === 'travel-detail') {
       arr.unshift('travel-list');
+    }
+    if (path === 'my-travel-list' || path === 'my-created-travel') {
+      arr.splice(1, 0, 'my-travel');
     }
   });
 
@@ -48,6 +52,16 @@ const BreadCrumb = () => {
         if (path === 'add-travel') {
           link = '/add-travel';
         }
+        if (path === 'my-travel') {
+          link = '/my-page/my-travel-list';
+        }
+        if (path === 'my-travel-list') {
+          link = '/my-page/my-travel-list';
+        }
+        if (path === 'my-created-travel') {
+          link = '/my-page/my-created-travel';
+        }
+
         return (
           <li key={i + 1}>
             <Link to={link}>{breadcrumbsMap[path]}</Link>
