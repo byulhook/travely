@@ -14,6 +14,9 @@ const TravelList = () => {
   const path = location.pathname.split('/').filter((item) => item !== '')[1] || '전체';
   const pageTitle = path === '전체' ? path : tagDatas.filter((data) => data.path === path)[0].name;
   const [myData, setMyData] = useState<null | CardData[]>(null);
+  const { ref, inView } = useInView({
+    threshold: 1,
+  });
 
   const fetchCardData = async (pageParam: number, pageSize: number = 8) => {
     const CARDDATAS = cardDatas;
@@ -35,10 +38,6 @@ const TravelList = () => {
     initialPageParam: 1,
   });
 
-  const { ref, inView } = useInView({
-    threshold: 1,
-  });
-
   useEffect(() => {
     if (data) {
       const newItems = data.pages.flatMap((page) => page.items);
@@ -49,7 +48,6 @@ const TravelList = () => {
   useEffect(() => {
     if (inView) {
       if (hasNextPage && !isFetchingNextPage) {
-        console.log('데이터 호출!');
         fetchNextPage();
       }
     }
