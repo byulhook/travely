@@ -35,6 +35,7 @@
     "openai-memory": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-intersection-observer": "^9.13.1",
     "react-quill-new": "^3.3.3",
     "react-router-dom": "^6.26.2",
     "swiper": "^11.1.14",

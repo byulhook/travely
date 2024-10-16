@@ -2,88 +2,60 @@ import BorderBtn from '@/components/BorderBtn';
 import TagCardWrap from '@/components/TagCardWrap';
 import TravelCard from '@/components/TravelCard';
 import { tagDatas } from '@/data/tagDatas';
-import useHeaderWithVisual from '@/hooks/useHeaderWithVisual';
-import { TagType } from '@/types/tagType';
 import { css } from '@emotion/react';
 import { Link, useLocation } from 'react-router-dom';
-
-interface IDatas {
-  imgSrc: string;
-  title: string;
-  userName: string;
-  tags: TagType[];
-  price: string;
-  rating: string;
-  reviewCount: string;
-  people: string;
-  bookMark: boolean;
-}
-
-const datas: IDatas[] = [
-  {
-    imgSrc: '/src/assets/thumb.png',
-    title: '대한민국 국밥 TOP 30',
-    userName: '하루얌',
-    tags: ['Food', 'Culture'],
-    price: '49000',
-    rating: '5.0',
-    reviewCount: '23',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: '/src/assets/thumb.png',
-    title: '서울 최고의 김치찌개 맛집',
-    userName: '맛집탐방러',
-    tags: ['Food', 'Festival'],
-    price: '42000',
-    rating: '4.8',
-    reviewCount: '18',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: '/src/assets/thumb.png',
-    title: '강릉 해변에서 즐기는 바비큐',
-    userName: '여행러버',
-    tags: ['Nature', 'Food'],
-    price: '60000',
-    rating: '4.9',
-    reviewCount: '35',
-    people: '1',
-    bookMark: true,
-  },
-  {
-    imgSrc: '/src/assets/thumb.png',
-    title: '부산의 밤을 즐기는 방법',
-    userName: '밤하늘',
-    tags: ['Culture', 'K-POP'],
-    price: '55000',
-    rating: '4.7',
-    reviewCount: '12',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: '/src/assets/thumb.png',
-    title: '전주 한옥마을 힐링 투어',
-    userName: '힐링러버',
-    tags: ['Culture', 'Healing'],
-    price: '50000',
-    rating: '5.0',
-    reviewCount: '27',
-    people: '1',
-    bookMark: true,
-  },
-];
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import cardDatas, { CardData } from '@/api/cardData';
 
 const TravelList = () => {
   const location = useLocation();
   const path = location.pathname.split('/').filter((item) => item !== '')[1] || '전체';
   const pageTitle = path === '전체' ? path : tagDatas.filter((data) => data.path === path)[0].name;
-  const isHeaderWithVisual = useHeaderWithVisual();
+  const [myData, setMyData] = useState<null | CardData[]>(null);
+  const { ref, inView } = useInView({
+    threshold: 1,
+  });
 
-  if (path !== '전체' && !isHeaderWithVisual) return null;
+  const fetchCardData = async (pageParam: number, pageSize: number = 8) => {
+    const CARDDATAS = cardDatas;
+    const startIndex = (pageParam - 1) * pageSize;
+    const endIndex = pageSize * pageParam;
+    const hasMore = endIndex < cardDatas.length;
+    const nextCursor = hasMore ? pageParam + 1 : null;
+    const items = CARDDATAS.slice(startIndex, endIndex);
+    return {
+      items,
+      nextCursor,
+    };
+  };
+
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+    queryKey: ['my-data'],
+    queryFn: ({ pageParam = 1 }) => fetchCardData(pageParam, 8),
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    initialPageParam: 1,
+  });
+
+  useEffect(() => {
+    if (data) {
+      const newItems = data.pages.flatMap((page) => page.items);
+      setMyData(newItems);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (inView) {
+      if (hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    }
+  }, [inView]);
+
+  if (isFetchingNextPage || !myData) {
+    return <p>loaidng</p>;
+  }
 
   return (
     <div css={travelListWrap}>
@@ -96,7 +68,7 @@ const TravelList = () => {
       </div>
 
       <div className="card-wrap">
-        {datas.map((data, i) => (
+        {myData.map((data, i) => (
           <TravelCard
             key={i}
             imgSrc={data.imgSrc}
@@ -110,6 +82,7 @@ const TravelList = () => {
             bookMark={data.bookMark}
           />
         ))}
+        <p ref={ref}>target</p>
       </div>
     </div>
   );
@@ -123,6 +96,12 @@ const travelListWrap = css`
     align-items: center;
     justify-content: space-between;
     margin: 30px 0;
+
+    p {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+    }
   }
   .card-wrap {
     display: grid;
