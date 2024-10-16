@@ -2,7 +2,7 @@ import reviewImage from '@/assets/reviewImg.png';
 
 import FiledBtn from '@/components/FiledBtn';
 import Modal from '@/components/Modal';
-import theme from '@/styles/theme';
+import { theme } from '@/styles/theme';
 import { css } from '@emotion/react';
 import { useState, ChangeEvent, useEffect } from 'react';
 import BorderBtn from '@/components/BorderBtn';
@@ -28,6 +28,8 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
   const [travelRating, setTravelRating] = useState(0);
   const [userRating, setUserRating] = useState(0);
   const [files, setFiles] = useState<File[]>([]);
+  console.log(userName);
+
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       if (!isValideFile(event.target.files[0])) {
@@ -47,7 +49,8 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
     setOpen(false);
   };
 
-  const onSumitReview = () => {
+  const onSumitReview = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setFiles([]);
     setOpen(false);
   };
@@ -90,14 +93,8 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
               </div>
             </div>
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setOpen(false);
-              }}
-            >
+            <form onSubmit={(e) => onSumitReview(e)}>
               <div css={textAreaContiner}>
-                <p className="userName">{userName}</p>
                 <textarea placeholder="리뷰를 작성해주세요" />
               </div>
               <FileUploadBtn
@@ -110,29 +107,28 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
                 <div className="guideInfo">
                   <UserProfile name={guideName} userEmailId="sonjeongwo" hideRating hideUserId />
                   <StarRating rating={userRating} setRating={setUserRating} />
-                  {/* <UserProfile name="손정오" userEmailId="sonjeongwo" rating="5.0" /> */}
                 </div>
               </div>
+              <div css={buttonContainer}>
+                <FiledBtn
+                  children="작성"
+                  color={theme.colors.primary}
+                  cutomStyle={css`
+                    width: 120px;
+                  `}
+                  type="submit"
+                />
+                <BorderBtn
+                  children="닫기"
+                  color="#b8bbbe"
+                  customStyle={css`
+                    width: 120px;
+                  `}
+                  onClick={() => onCloseModal()}
+                  type="button"
+                />
+              </div>
             </form>
-
-            <div css={buttonContainer}>
-              <FiledBtn
-                children="작성"
-                color={theme.colors.primary}
-                cutomStyle={css`
-                  width: 120px;
-                `}
-                onClick={() => onSumitReview()}
-              />
-              <BorderBtn
-                children="닫기"
-                color="#b8bbbe"
-                customStyle={css`
-                  width: 120px;
-                `}
-                onClick={() => onCloseModal()}
-              />
-            </div>
           </div>
         }
       />
@@ -176,10 +172,10 @@ const ReviewWriteModalStyle = css`
 `;
 
 const textAreaContiner = css`
-  border: 2px solid #e4e4e4;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-top: 10px;
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  height: 170px;
+  overflow: hidden;
 
   .userName {
     font-size: 16px;
@@ -190,7 +186,10 @@ const textAreaContiner = css`
 
   textarea {
     width: 100%;
-    margin-bottom: 0.5rem;
+    height: 100%;
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #333;
 
     &::placeholder {
       color: #b7bcc2;
