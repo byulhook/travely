@@ -64,7 +64,6 @@ const FileUploadBtn = ({
               font-size: 13px;
               justify-content: flex-start;
               padding-top: 4px;
-              width: 100px;
               color: #afafaf;
 
               button {
