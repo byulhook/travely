@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Check if .env file exists and byulBash is set to true
+#! if .env file exists and byulBash is set to true, bylBash format on
 if [ -f .env ]; then
     byul_bash=$(grep '^byulBash=' .env | cut -d '=' -f2)
     if [ "$byul_bash" != "true" ]; then
@@ -86,7 +86,6 @@ format_commit_message() {
 COMMIT_MSG_FILE="$1"
 COMMIT_SOURCE="$2"
 
-# Check if the commit is a merge, squash, or amend
 if [ "$COMMIT_SOURCE" = "merge" ] || [ "$COMMIT_SOURCE" = "squash" ] || [ "$COMMIT_SOURCE" = "commit" ]; then
     print_color "$BLUE" "Merge, squash, or amend commit detected. Skipping formatting."
     exit 0
@@ -96,5 +95,5 @@ if format_commit_message "$COMMIT_MSG_FILE"; then
     exit 0
 else
     print_color "$RED" "❌ Failed to format commit message."
-    exit 1
+    exit 0
 fi

@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({ trigger, title, children, description, op
       <Dialog.Portal>
         <Overlay />
         <Content>
-          <Title>{title}</Title>
+          <Title css={visuallyHidden}>{title}</Title>
           {children}
           <Dialog.Close asChild>
             <CloseButton aria-label="Close">

@@ -1,4 +1,4 @@
-import { useTabStore } from '@/stores/usetabStore';
+import { useTabStore } from '@/stores/useTabStore';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
