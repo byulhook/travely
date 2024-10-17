@@ -30,7 +30,7 @@ const MyCreatedContent = () => {
     <GridContainer>
       {filteredTeams.length > 0 ? (
         filteredTeams.map((team, index) => {
-          const appliedUsers = team.appliedUser.filter((user) => user.status === 'approval');
+          const appliedUsers = team.appliedUser.filter((user) => user.status === 'approved');
           const currentUser = team.appliedUser.find(
             (user) => user.userName === userName && user.userId === userId,
           ); // 현재 유저 데이터

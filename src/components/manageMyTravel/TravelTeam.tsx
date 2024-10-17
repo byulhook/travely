@@ -11,7 +11,7 @@ interface TravelTeamProps {
 const TravelTeam = ({ data }: TravelTeamProps) => {
   const userMBTIList: string[][] = [];
   data.forEach((d) => {
-    const approvalUserMBTIList = d.appliedUser.filter((u) => u.status === 'approval');
+    const approvalUserMBTIList = d.appliedUser.filter((u) => u.status === 'approved');
     userMBTIList.push([...approvalUserMBTIList.map((u) => u.mbti)]);
   });
 

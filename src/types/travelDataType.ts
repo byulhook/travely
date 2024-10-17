@@ -1,9 +1,11 @@
+type Status = 'waiting' | 'approved' | 'rejected';
 export interface TravelData {
   id: string;
   travelTitle: string;
   createAt: string;
   updateAt: string;
   travelTeams: travelTeamData[];
+  travelActive: boolean;
 }
 export interface travelTeamData {
   travelStartDate: string;
@@ -12,7 +14,7 @@ export interface travelTeamData {
   appliedUser: ApplicationUserData[];
 }
 export interface ApplicationUserData {
-  status: string;
+  status: Status;
   userName: string;
   userProfileImage: string;
   mbti: string;
