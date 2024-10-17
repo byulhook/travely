@@ -1,69 +1,63 @@
 import UserInfo from '@/components/myTravel/UserInfo';
 import Team from '@/components/Team';
 import styled from '@emotion/styled';
-import { data } from '@/data/travelMockData';
+import { travelMyJoinedData } from '@/data/travelMyJoinedMockData';
+
 // 남은 일수 계산 함수
 const calculateDaysRemaining = (endDateString: string) => {
   const today = new Date();
-
-  // '25.01.28' 형식을 '2025-01-28' 형식으로 변환
-  const formattedEndDateString = `20${endDateString.split('.').join('-')}`; // '25.01.28' -> '2025-01-28'
-  const endDate = new Date(formattedEndDateString);
-
-  // 날짜 차이를 밀리초 단위로 계산한 후 일 단위로 변환
+  const endDate = new Date(endDateString);
   const timeDiff = endDate.getTime() - today.getTime();
-  const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24)); // 하루 단위로 계산
-
+  const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
   return daysRemaining;
 };
 
 const MyCreatedContent = () => {
-  const userName = '손성오';
-  const userId = 'seong5@gmail.com';
-
-  // userName과 userId가 모두 일치하는 여행 필터링
-  const filteredTeams = data.travelTeams.filter((team) =>
-    team.appliedUser.some((user) => user.userName === userName && user.userId === userId),
-  );
-
   return (
     <GridContainer>
-      {filteredTeams.length > 0 ? (
-        filteredTeams.map((team, index) => {
-          const appliedUsers = team.appliedUser.filter((user) => user.status === 'approval');
-          const currentUser = team.appliedUser.find(
-            (user) => user.userName === userName && user.userId === userId,
-          ); // 현재 유저 데이터
+      {travelMyJoinedData.map((travelData, index) => {
+        const currentUser = travelData.currentUserStatus; // 현재 사용자 정보
+        const guide = travelData.guideInfo; // 가이드 정보
+        const daysRemaining = calculateDaysRemaining(travelData.travelTeam.travelEndDate); // 남은 일수 계산
 
-          // 여행 종료일로부터 남은 일 계산
-          const daysRemaining = calculateDaysRemaining(team.travelEndDate);
+        return (
+          <TripCardContainer key={index}>
+            <Header>
+              <Title>{travelData.travelTitle}</Title>
+              <DaysRemaining>{`D-${daysRemaining}`}</DaysRemaining> {/* 남은 일수 표시 */}
+            </Header>
 
-          return (
-            <TripCardContainer key={index}>
-              <Header>
-                <Title>{data.travelTitle}</Title>
-                <DaysRemaining>{`D-${daysRemaining}`}</DaysRemaining> {/* 남은 일수 표시 */}
-              </Header>
-              {currentUser && (
-                <>
-                  <UserInfoContainer>
-                    <UserInfo
-                      name={currentUser.userName}
-                      contact={`kakao: ${currentUser.userId}`}
-                      profileImage={currentUser.userProfileImage}
-                    />
-                  </UserInfoContainer>
-                  <DateInfo>{`${team.travelStartDate} ~ ${team.travelEndDate}`}</DateInfo>
-                  <Team max={team.personLimit} mbtiList={appliedUsers.map((user) => user.mbti)} />
-                </>
-              )}
-              <Confirmation>예약확정</Confirmation>
-            </TripCardContainer>
-          );
-        })
-      ) : (
-        <p>손성오님이 참여한 여행이 없습니다.</p>
-      )}
+            <UserInfoContainer>
+              <UserInfo
+                name={guide.userName}
+                contact={guide.userEmail}
+                profileImage={guide.userProfileImg}
+              />
+            </UserInfoContainer>
+
+            <DateInfo>
+              {`${travelData.travelTeam.travelStartDate} ~ ${travelData.travelTeam.travelEndDate}`}
+            </DateInfo>
+
+            <Team
+              max={travelData.travelTeam.personLimit}
+              mbtiList={travelData.travelTeam.approvedMembersMbti.mbti}
+            />
+
+            <CurrentUserStatus>
+              {currentUser.status === 'approved' && <p>승인됨</p>}
+              {currentUser.status === 'waiting' && <p>대기 중</p>}
+              {currentUser.status === 'refused' && <p>거절됨</p>}
+            </CurrentUserStatus>
+
+            <ReviewWritten reviewWritten={travelData.reviewWritten}>
+              {travelData.reviewWritten ? '리뷰 작성 완료' : '리뷰 미작성'}
+            </ReviewWritten>
+
+            <Confirmation>예약확정</Confirmation>
+          </TripCardContainer>
+        );
+      })}
     </GridContainer>
   );
 };
@@ -114,6 +108,23 @@ const DateInfo = styled.div`
   font-weight: bold;
   color: #555555;
   margin-bottom: 10px;
+`;
+
+const CurrentUserStatus = styled.div`
+  margin-top: 20px;
+  font-size: 14px;
+  color: #444;
+`;
+
+interface ReviewWrittenProps {
+  reviewWritten: boolean;
+}
+
+const ReviewWritten = styled.div<ReviewWrittenProps>`
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: ${(props) => (props.reviewWritten ? '#4CAF50' : '#FF5252')};
 `;
 
 const Confirmation = styled.div`
