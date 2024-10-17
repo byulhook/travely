@@ -11,7 +11,7 @@ export interface CardData {
   people: string; // 참여 인원 수 (문자열로 관리)
   bookMark: boolean; // 북마크 여부
 }
-const cardDatas: CardData[] = [
+const tarvelCardMockData: CardData[] = [
   {
     imgSrc: '/src/assets/thumb.png',
     title: '대한민국 국밥 TOP 30',
@@ -234,4 +234,4 @@ const cardDatas: CardData[] = [
   },
 ];
 
-export default cardDatas;
+export default tarvelCardMockData;

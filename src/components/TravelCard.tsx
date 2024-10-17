@@ -17,7 +17,7 @@ interface ICardProps {
   bookMark: boolean;
 }
 
-function TravelCard({
+const TravelCard: React.FC<ICardProps> = ({
   imgSrc,
   title,
   userName,
@@ -27,7 +27,7 @@ function TravelCard({
   reviewCount,
   people,
   bookMark,
-}: ICardProps) {
+}) => {
   return (
     <div css={card}>
       <div className="card-img">
@@ -35,9 +35,14 @@ function TravelCard({
       </div>
       <div className="card-content">
         <p className="title">{title}</p>
+
         <div>
           <p className="user-name">{userName}</p>
-          <Price price={price} people={people} />
+
+          <div className="price">
+            <Price price={price} people={people} />
+          </div>
+
           <div className="rating-tags">
             <Rating rating={rating} reviewCount={reviewCount} />
             <Tags items={tags} textAlign="right" />
@@ -54,7 +59,7 @@ function TravelCard({
       </p>
     </div>
   );
-}
+};
 
 export default TravelCard;
 
@@ -91,6 +96,7 @@ const card = () => css`
     border-radius: 0 0 4px 4px;
     border-top: 0;
     box-sizing: border-box;
+
     .title {
       font-size: 15px;
       font-weight: bold;
@@ -100,6 +106,10 @@ const card = () => css`
       margin-bottom: 6px;
       font-size: 12px;
       color: #666;
+    }
+
+    .price {
+      margin-bottom: 6px;
     }
 
     .rating-tags {
