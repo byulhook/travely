@@ -10,6 +10,7 @@ import 'swiper/css/scrollbar';
 import FiledBtn from '@/components/FiledBtn';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
+import scrollToTop from '@/utils/scrollToTop';
 
 interface ITagCardWrap {
   shape?: 'round' | 'square';
@@ -24,7 +25,7 @@ function TagCardWrap({ shape = 'round' }: ITagCardWrap) {
     return (
       <ul css={tagCardWrap}>
         {tags.map((tag, i) => (
-          <li key={i}>
+          <li key={i} onClick={() => scrollToTop()}>
             <Link to={`/travel-list/${tag.path}`}>
               <div className="tag-img">
                 <img src={tag.imgSrc} alt={tag.name} />

@@ -7,22 +7,34 @@ import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import cardDatas, { CardData } from '@/api/cardData';
+import tarvelCardMockData, { CardData } from '@/data/travelCardMockData';
+import SkeletonTravelCard from '@/components/SkeletonTravelCard';
+import scrollToTop from '@/utils/scrollToTop';
 
 const TravelList = () => {
   const location = useLocation();
   const path = location.pathname.split('/').filter((item) => item !== '')[1] || '전체';
   const pageTitle = path === '전체' ? path : tagDatas.filter((data) => data.path === path)[0].name;
   const [myData, setMyData] = useState<null | CardData[]>(null);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+    queryKey: ['my-data'],
+    queryFn: ({ pageParam = 1 }) => fetchCardData(pageParam, 8),
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    initialPageParam: 1,
+  });
   const { ref, inView } = useInView({
     threshold: 1,
+    skip: !hasNextPage,
   });
 
   const fetchCardData = async (pageParam: number, pageSize: number = 8) => {
-    const CARDDATAS = cardDatas;
+    const CARDDATAS = tarvelCardMockData;
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const startIndex = (pageParam - 1) * pageSize;
     const endIndex = pageSize * pageParam;
-    const hasMore = endIndex < cardDatas.length;
+    const hasMore = endIndex < CARDDATAS.length;
     const nextCursor = hasMore ? pageParam + 1 : null;
     const items = CARDDATAS.slice(startIndex, endIndex);
     return {
@@ -30,13 +42,6 @@ const TravelList = () => {
       nextCursor,
     };
   };
-
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['my-data'],
-    queryFn: ({ pageParam = 1 }) => fetchCardData(pageParam, 8),
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
-    initialPageParam: 1,
-  });
 
   useEffect(() => {
     if (data) {
@@ -46,14 +51,12 @@ const TravelList = () => {
   }, [data]);
 
   useEffect(() => {
-    if (inView) {
-      if (hasNextPage && !isFetchingNextPage) {
-        fetchNextPage();
-      }
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
     }
   }, [inView]);
 
-  if (isFetchingNextPage || !myData) {
+  if (!myData) {
     return <p>loaidng</p>;
   }
 
@@ -82,8 +85,21 @@ const TravelList = () => {
             bookMark={data.bookMark}
           />
         ))}
-        <p ref={ref}>target</p>
+        {isFetchingNextPage && <SkeletonTravelCard />}
       </div>
+
+      {!hasNextPage && (
+        <BorderBtn
+          className="scroll-top"
+          color="#4a95f2"
+          size="full"
+          hover="filled"
+          onClick={() => scrollToTop()}
+        >
+          처음으로
+        </BorderBtn>
+      )}
+      <div className="inView-target" ref={ref}></div>
     </div>
   );
 };
@@ -108,5 +124,11 @@ const travelListWrap = css`
     grid-template-columns: repeat(4, 250px);
     justify-content: space-between;
     gap: 20px 0;
+  }
+  .inView-target {
+    height: 1px;
+  }
+  .scroll-top {
+    margin-top: 30px;
   }
 `;
