@@ -4,11 +4,11 @@ import { travelTeamData } from '@/types/travelDataType';
 import Team from '@/components/Team';
 import MultiPagination from '@/components/manageMyTravel/MultiPagination';
 
-interface OngoingTravelProps {
+interface TravelTeamProps {
   data: travelTeamData[];
 }
 
-const OngoingTravel = ({ data }: OngoingTravelProps) => {
+const TravelTeam = ({ data }: TravelTeamProps) => {
   const userMBTIList: string[][] = [];
   data.forEach((d) => {
     const approvalUserMBTIList = d.appliedUser.filter((u) => u.status === 'approval');
@@ -21,15 +21,15 @@ const OngoingTravel = ({ data }: OngoingTravelProps) => {
         <div key={travelTeam.travelStartDate} css={teamWrappeer}>
           <p>{travelTeam.travelStartDate + ' ~ ' + travelTeam.travelEndDate}</p>
           <Team max={travelTeam.personLimit} mbtiList={userMBTIList[i]} />
-          <UserTable data={travelTeam.appliedUser} />
-          <MultiPagination travelTeam={travelTeam} />
+          <UserTable data={travelTeam.appliedUser} id={i} />
+          <MultiPagination travelTeam={travelTeam} id={i} />
         </div>
       ))}
     </>
   );
 };
 
-export default OngoingTravel;
+export default TravelTeam;
 
 const teamWrappeer = css`
   margin-bottom: 20px;

@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { data } from '@/data/travelMockData';
 import { useEffect, useState } from 'react';
-import OngoingTravel from '@/components/manageMyTravel/OngoingTravel';
-import CompletedTravel from '@/components/manageMyTravel/CompletedTravel';
+import TravelTeam from '@/components/manageMyTravel/TravelTeam';
 import TravelManageHeader from '@/components/manageMyTravel/TravelManageHeader';
 import teamDataFilter from '@/utils/teamDataFilter';
 import usePageStore from '@/stores/usePageStore';
@@ -19,9 +19,9 @@ const ManageMyTravel = () => {
     <section css={{ color: '#333' }}>
       <TravelManageHeader travelData={data} tab={tab} setTab={setTab} />
       {tab ? (
-        <OngoingTravel data={teamDataFilter(data, 'ongoing')} />
+        <TravelTeam data={teamDataFilter(data, 'ongoing')} />
       ) : (
-        <CompletedTravel data={teamDataFilter(data, 'completed')} />
+        <TravelTeam data={teamDataFilter(data, 'completed')} />
       )}
     </section>
   );
