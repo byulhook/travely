@@ -66,6 +66,7 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
   return (
     <>
       <Modal
+        title="후기 작성"
         trigger={
           <FiledBtn
             color={theme.colors.primary}
@@ -140,7 +141,7 @@ const ReviewWriteModalStyle = css`
   h2 {
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 20px;
   }
 
   .imgSection {
