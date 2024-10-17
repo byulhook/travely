@@ -1,6 +1,6 @@
 import MyTravelContent from '@/components/myTravel/MyTravelContent';
 import MyTravelTab from '@/components/myTravel/MyTravelTab';
-import { useTabStore } from '@/stores/usetabStore';
+import { useTabStore } from '@/stores/useTabStore';
 
 const MyCreatedTravel = () => {
   const { selectedTab } = useTabStore();
