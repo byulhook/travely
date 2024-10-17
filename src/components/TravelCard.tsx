@@ -4,6 +4,7 @@ import Tags from '@/components/Tags';
 import { TagType } from '@/types/tagType';
 import { css } from '@emotion/react';
 import { Bookmark } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface ICardProps {
   imgSrc: string;
@@ -17,7 +18,7 @@ interface ICardProps {
   bookMark: boolean;
 }
 
-function TravelCard({
+const TravelCard: React.FC<ICardProps> = ({
   imgSrc,
   title,
   userName,
@@ -27,34 +28,38 @@ function TravelCard({
   reviewCount,
   people,
   bookMark,
-}: ICardProps) {
+}) => {
   return (
-    <div css={card}>
-      <div className="card-img">
-        <img src={imgSrc} alt="" />
-      </div>
-      <div className="card-content">
-        <p className="title">{title}</p>
-        <div>
-          <p className="user-name">{userName}</p>
-          <Price price={price} people={people} />
-          <div className="rating-tags">
-            <Rating rating={rating} reviewCount={reviewCount} />
-            <Tags items={tags} textAlign="right" />
+    <Link to="/travel-detail">
+      <div css={card}>
+        <div className="card-img">
+          <img src={imgSrc} alt="" />
+        </div>
+        <div className="card-content">
+          <p className="title">{title}</p>
+          <div>
+            <p className="user-name">{userName}</p>
+            <div className="price">
+              <Price price={price} people={people} />
+            </div>
+            <div className="rating-tags">
+              <Rating rating={rating} reviewCount={reviewCount} />
+              <Tags items={tags} textAlign="right" />
+            </div>
           </div>
         </div>
+        <p className="book-mark">
+          <Bookmark
+            size="23"
+            stroke={bookMark ? '#4a95f2' : '#fff'}
+            strokeWidth="1.5"
+            fill={bookMark ? '#4a95f2' : 'none'}
+          />
+        </p>
       </div>
-      <p className="book-mark">
-        <Bookmark
-          size="23"
-          stroke={bookMark ? '#4a95f2' : '#fff'}
-          strokeWidth="1.5"
-          fill={bookMark ? '#4a95f2' : 'none'}
-        />
-      </p>
-    </div>
+    </Link>
   );
-}
+};
 
 export default TravelCard;
 
@@ -91,6 +96,7 @@ const card = () => css`
     border-radius: 0 0 4px 4px;
     border-top: 0;
     box-sizing: border-box;
+
     .title {
       font-size: 15px;
       font-weight: bold;
@@ -100,6 +106,10 @@ const card = () => css`
       margin-bottom: 6px;
       font-size: 12px;
       color: #666;
+    }
+
+    .price {
+      margin-bottom: 6px;
     }
 
     .rating-tags {
