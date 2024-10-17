@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Skeleton } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 
 interface ISkeletonTravelCardProps {
   cnt?: number;
