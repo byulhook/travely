@@ -2,19 +2,25 @@ import { css } from '@emotion/react';
 import { ApplicationUserData } from '@/types/travelDataType';
 import Profile from '@/components/Profile';
 import FiledBtn from '@/components/FiledBtn';
+import usePageStore from '@/stores/usePageStore';
 
 interface UserTableProps {
   data: ApplicationUserData[];
+  id: number;
 }
 const COUNT_PER_PAGE = 7;
 
-const UserTable = ({ data }: UserTableProps) => {
+const UserTable = ({ data, id }: UserTableProps) => {
+  const pageContainer = usePageStore((state) => state.pageContainer);
+  const matchPageId = pageContainer.filter((p) => p.paginationId === id);
+  const currentPage = matchPageId[0]?.currentPage || 1;
+
   const statusData = [
     data.filter((user) => user.status === 'waiting'),
     data.filter((user) => user.status === 'approval'),
     data.filter((user) => user.status === 'refusal'),
   ];
-  const currentPage = 1;
+
   const newStatusData = statusData.reduce((prev, next) => {
     return prev.concat(next);
   });
