@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+// import mongoose from 'mongoose';
 
 // 여행 테이블
 export interface ITravel {
@@ -66,5 +66,3 @@ export interface IUser {
   myReviews: string[];
   myBookmark: mongoose.Types.ObjectId[];
 }
-
-
