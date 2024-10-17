@@ -13,12 +13,16 @@ const MultiPagination = ({ travelTeam, id }: MultiPaginationProps) => {
   const setCurrentPage = usePageStore((state) => state.setCurrentPage);
   const matchPageId = pageContainer.filter((p) => p.paginationId === id);
 
+  const handleCurrentPage = (_event: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(id, page);
+  };
+
   return (
     <div css={paginationWrapper}>
       <Pagination
         count={Math.ceil(travelTeam.appliedUser.length / 7)}
         page={matchPageId[0]?.currentPage || 1}
-        onClick={(e) => setCurrentPage(id, Number((e.target as HTMLButtonElement).innerText))}
+        onChange={handleCurrentPage}
         color="primary"
         showFirstButton
         showLastButton

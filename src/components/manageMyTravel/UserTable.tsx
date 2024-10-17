@@ -17,8 +17,8 @@ const UserTable = ({ data, id }: UserTableProps) => {
 
   const statusData = [
     data.filter((user) => user.status === 'waiting'),
-    data.filter((user) => user.status === 'approval'),
-    data.filter((user) => user.status === 'refusal'),
+    data.filter((user) => user.status === 'approved'),
+    data.filter((user) => user.status === 'rejected'),
   ];
 
   const newStatusData = statusData.reduce((prev, next) => {
@@ -66,7 +66,7 @@ const UserTable = ({ data, id }: UserTableProps) => {
                     거절
                   </FiledBtn>
                 </div>
-              ) : user.status === 'approval' ? (
+              ) : user.status === 'approved' ? (
                 '승인'
               ) : (
                 '거절'
