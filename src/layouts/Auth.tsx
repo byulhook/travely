@@ -1,12 +1,48 @@
 import AlarmBadge from '@/components/AlarmBadge';
 import FiledBtn from '@/components/FiledBtn';
 import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-const isLogin = true;
+import { User as FirebaseUser, signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '@/firebase';
 
 const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
+  const [user, setUser] = useState<FirebaseUser | null>(null);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const login = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      setUser(result.user);
+    } catch (error) {
+      console.error('구글 계정 로그인에 실패했습니다.', error);
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [user]);
+
   if (isLogin) {
+    if (!user) return;
+    const userThumbnail = user.photoURL;
+
     return (
       <div css={logined(light)}>
         <ul>
@@ -20,13 +56,13 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
         </ul>
         <div className="user-profile">
           <Link to="/my-page/my-account">
-            <img src="/src/assets/basicProfile.png" alt="" />
+            <img src={userThumbnail || '/src/assets/basicProfile.png'} alt="" />
           </Link>
         </div>
       </div>
     );
   } else {
-    return <FiledBtn children="로그인" color="#4a95f2" />;
+    return <FiledBtn children="로그인" color="#4a95f2" onClick={login} />;
   }
 };
 
@@ -52,5 +88,8 @@ const logined = (light: boolean) => css`
 
   .user-profile {
     width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    overflow: hidden;
   }
 `;
