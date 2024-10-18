@@ -1,7 +1,7 @@
 import UserInfo from '@/components/myTravel/UserInfo';
 import Team from '@/components/Team';
-import styled from '@emotion/styled';
 import { travelMyJoinedData } from '@/data/travelMyJoinedMockData';
+import styled from '@emotion/styled';
 
 // 남은 일수 계산 함수
 const calculateDaysRemaining = (endDateString: string) => {
@@ -9,7 +9,9 @@ const calculateDaysRemaining = (endDateString: string) => {
   const endDate = new Date(endDateString);
   const timeDiff = endDate.getTime() - today.getTime();
   const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  return daysRemaining;
+
+  // 날짜가 D-0이거나 그 이전이면 'D-DAY'로 처리
+  return daysRemaining <= 0 ? 'D-day' : `D-${daysRemaining}`;
 };
 
 const MyCreatedContent = () => {
@@ -19,12 +21,19 @@ const MyCreatedContent = () => {
         const currentUser = travelData.currentUserStatus; // 현재 사용자 정보
         const guide = travelData.guideInfo; // 가이드 정보
         const daysRemaining = calculateDaysRemaining(travelData.travelTeam.travelEndDate); // 남은 일수 계산
+        const isPast = daysRemaining === 'D-day'; // D-0이 지났는지 확인
+        const reviewWritten = travelData.reviewWritten;
 
         return (
-          <TripCardContainer key={index}>
+          <TripCardContainer key={index} isPast={isPast && reviewWritten}>
             <Header>
               <Title>{travelData.travelTitle}</Title>
-              <DaysRemaining>{`D-${daysRemaining}`}</DaysRemaining> {/* 남은 일수 표시 */}
+              {/* 예약이 거절된 상태면 "취소됨"을 표시, 아닌 경우 D-DAY 표시 */}
+              {currentUser.status === 'refused' ? (
+                <StatusCanceled>취소됨</StatusCanceled>
+              ) : (
+                <DaysRemaining>{daysRemaining}</DaysRemaining>
+              )}
             </Header>
 
             <UserInfoContainer>
@@ -44,17 +53,25 @@ const MyCreatedContent = () => {
               mbtiList={travelData.travelTeam.approvedMembersMbti.mbti}
             />
 
+            {/* 상태 표시 */}
             <CurrentUserStatus>
-              {currentUser.status === 'approved' && <p>승인됨</p>}
-              {currentUser.status === 'waiting' && <p>대기 중</p>}
-              {currentUser.status === 'refused' && <p>거절됨</p>}
+              {/* D-DAY이면서 승인 상태고 후기가 작성되지 않은 경우 후기 작성 버튼 */}
+              {isPast && currentUser.status === 'approved' && !reviewWritten && (
+                <ReviewButton>후기 작성</ReviewButton>
+              )}
+
+              {/* D-DAY이면서 후기가 작성된 경우 여행 완료 메시지 */}
+              {isPast && reviewWritten && <CompletionMessage>여행 완료</CompletionMessage>}
+              {isPast && currentUser.status === 'refused' && <p>예약 취소</p>}
+              {/* 아직 D-DAY가 지나지 않은 경우 예약 상태 표시 */}
+              {!isPast && (
+                <>
+                  {currentUser.status === 'approved' && <p>예약 완료</p>}
+                  {currentUser.status === 'waiting' && <p>예약 대기</p>}
+                  {currentUser.status === 'refused' && <p>예약 취소</p>}
+                </>
+              )}
             </CurrentUserStatus>
-
-            <ReviewWritten reviewWritten={travelData.reviewWritten}>
-              {travelData.reviewWritten ? '리뷰 작성 완료' : '리뷰 미작성'}
-            </ReviewWritten>
-
-            <Confirmation>예약확정</Confirmation>
           </TripCardContainer>
         );
       })}
@@ -71,14 +88,15 @@ const GridContainer = styled.div`
   gap: 40px;
 `;
 
-const TripCardContainer = styled.div`
+const TripCardContainer = styled.div<{ isPast: boolean }>`
   position: relative;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 18px;
   background-color: #fff;
   width: 344px;
-  height: 233px;
+  height: 250px;
+  opacity: ${(props) => (props.isPast ? 0.5 : 1)}; // D-DAY이면 흐리게 처리
 `;
 
 const Header = styled.div`
@@ -99,6 +117,12 @@ const DaysRemaining = styled.span`
   color: #888;
 `;
 
+const StatusCanceled = styled.span`
+  font-size: 14px;
+  color: #ff5252;
+  font-weight: bold;
+`;
+
 const UserInfoContainer = styled.div`
   margin-bottom: 18px;
 `;
@@ -111,26 +135,26 @@ const DateInfo = styled.div`
 `;
 
 const CurrentUserStatus = styled.div`
-  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
   font-size: 14px;
+  font-weight: bold;
   color: #444;
 `;
 
-interface ReviewWrittenProps {
-  reviewWritten: boolean;
-}
-
-const ReviewWritten = styled.div<ReviewWrittenProps>`
-  margin-top: 10px;
+const ReviewButton = styled.button`
+  background-color: #4a95f2;
+  width: 100%;
+  color: white;
+  padding: 4px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   font-size: 14px;
-  font-weight: bold;
-  color: ${(props) => (props.reviewWritten ? '#4CAF50' : '#FF5252')};
 `;
 
-const Confirmation = styled.div`
+const CompletionMessage = styled.div`
   font-size: 14px;
-  font-weight: 500;
-  color: #333333;
-  text-align: right;
-  padding-top: 4px;
+  font-weight: bold;
 `;
