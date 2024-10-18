@@ -56,6 +56,7 @@ const TripCard: React.FC<ITripCardProps> = ({
   );
 };
 
+// 스타일 정의
 const TripCardContainer = styled.div`
   position: relative;
   border: 1px solid #ddd;
@@ -69,7 +70,6 @@ const TripCardContainer = styled.div`
 const TripInfo = styled.div<{ isDisabled: boolean }>`
   display: flex;
   flex-direction: column;
-
   pointer-events: ${(props) => (props.isDisabled ? 'none' : 'auto')};
 `;
 
