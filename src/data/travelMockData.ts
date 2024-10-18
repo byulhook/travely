@@ -6,6 +6,7 @@ export const data: TravelData = {
   travelTitle: '대한민국 고궁 투어',
   createAt: '24.05.13',
   updateAt: '24.10.13',
+  travelActive: true,
   travelTeams: [
     {
       travelStartDate: '25.01.25',
@@ -22,7 +23,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'refusal',
+          status: 'rejected',
           userName: '김동영',
           userProfileImage: basicProfile,
           mbti: 'ENTJ',
@@ -31,7 +32,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '손성오',
           userProfileImage: basicProfile,
           mbti: 'ISTP',
@@ -40,7 +41,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'refusal',
+          status: 'rejected',
           userName: '김동영',
           userProfileImage: basicProfile,
           mbti: 'ENTJ',
@@ -49,7 +50,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '손성오',
           userProfileImage: basicProfile,
           mbti: 'ISTP',
@@ -67,7 +68,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '고낙연',
           userProfileImage: basicProfile,
           mbti: 'INFJ',
@@ -76,7 +77,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'refusal',
+          status: 'rejected',
           userName: '강동원',
           userProfileImage: basicProfile,
           mbti: 'ENFP',
@@ -110,7 +111,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'refusal',
+          status: 'rejected',
           userName: '김동영',
           userProfileImage: basicProfile,
           mbti: 'ENTJ',
@@ -119,7 +120,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '손성오',
           userProfileImage: basicProfile,
           mbti: 'ISTP',
@@ -137,7 +138,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '고낙연',
           userProfileImage: basicProfile,
           mbti: 'INFJ',
@@ -146,7 +147,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'refusal',
+          status: 'rejected',
           userName: '강동원',
           userProfileImage: basicProfile,
           mbti: 'ENFP',
@@ -180,7 +181,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'refusal',
+          status: 'rejected',
           userName: '김동영',
           userProfileImage: basicProfile,
           mbti: 'ENTJ',
@@ -189,7 +190,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '손성오',
           userProfileImage: basicProfile,
           mbti: 'ISTP',
@@ -207,7 +208,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '고낙연',
           userProfileImage: basicProfile,
           mbti: 'INFJ',
@@ -223,7 +224,7 @@ export const data: TravelData = {
       personLimit: 7,
       appliedUser: [
         {
-          status: 'approval',
+          status: 'approved',
           userName: '김수민',
           userProfileImage: basicProfile,
           mbti: 'ISTJ',
@@ -239,7 +240,7 @@ export const data: TravelData = {
       personLimit: 5,
       appliedUser: [
         {
-          status: 'approval',
+          status: 'approved',
           userName: '김수민',
           userProfileImage: basicProfile,
           mbti: 'ISTJ',
@@ -248,7 +249,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '김동영',
           userProfileImage: basicProfile,
           mbti: 'ENTJ',
@@ -257,7 +258,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'refusal',
+          status: 'rejected',
           userName: '손성오',
           userProfileImage: basicProfile,
           mbti: 'ISTP',
@@ -266,7 +267,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'refusal',
+          status: 'rejected',
           userName: '배하은',
           userProfileImage: basicProfile,
           mbti: 'ISTP',
@@ -275,7 +276,7 @@ export const data: TravelData = {
           appliedAt: '24.07.12',
         },
         {
-          status: 'approval',
+          status: 'approved',
           userName: '고낙연',
           userProfileImage: basicProfile,
           mbti: 'INFJ',
