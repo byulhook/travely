@@ -12,6 +12,7 @@ import MyCreatedTravel from '@/pages/MyCreatedTravel'; // 내가 만든 여행 �
 
 import TravelDetail from '@/pages/TravelDetail';
 import Bookmark from '@/pages/Bookmark';
+import MyAccount from '@/pages/MyAccount';
 
 const PATH = {
   HOME: '/',
@@ -52,11 +53,7 @@ const router = createBrowserRouter([
               {
                 index: true,
                 path: 'my-account',
-                element: (
-                  <div>
-                    <h1>마이페이지-계정</h1>
-                  </div>
-                ),
+                element: <MyAccount />,
               },
               {
                 path: 'my-travel-list',
