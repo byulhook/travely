@@ -2,7 +2,11 @@ import styled from '@emotion/styled';
 import { CircleMinus, CirclePlus } from 'lucide-react';
 import { useState } from 'react';
 
-export const FloatingMenu = () => {
+interface FloatingMenu {
+  onClick: () => void;
+}
+
+export const FloatingMenu = ({ onClick }: FloatingMenu) => {
   const [openSections, setOpenSections] = useState<string[]>([]);
 
   const toggleSection = (section: string) => {
@@ -75,7 +79,7 @@ export const FloatingMenu = () => {
 
       <BottomButtons>
         <TempSaveButton>임시저장</TempSaveButton>
-        <CompleteButton>작성완료</CompleteButton>
+        <CompleteButton onClick={onClick}>작성완료</CompleteButton>
       </BottomButtons>
     </MenuContainer>
   );
