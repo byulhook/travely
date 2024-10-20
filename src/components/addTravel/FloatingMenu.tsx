@@ -5,9 +5,10 @@ import { CircleMinus, CirclePlus } from 'lucide-react';
 interface FloatingMenuProps {
   openSections: string[];
   toggleSection: (section: string) => void;
+  onClick: () => void;
 }
 
-export const FloatingMenu = ({ openSections, toggleSection }: FloatingMenuProps) => {
+export const FloatingMenu = ({ openSections, toggleSection, onClick }: FloatingMenuProps) => {
   return (
     <MenuContainer>
       <MenuItem>
@@ -72,7 +73,7 @@ export const FloatingMenu = ({ openSections, toggleSection }: FloatingMenuProps)
 
       <BottomButtons>
         <TempSaveButton>임시저장</TempSaveButton>
-        <CompleteButton>작성완료</CompleteButton>
+        <CompleteButton onClick={onClick}>작성완료</CompleteButton>
       </BottomButtons>
     </MenuContainer>
   );

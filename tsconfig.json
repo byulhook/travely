@@ -29,6 +29,6 @@
     "noFallthroughCasesInSwitch": true,
     "allowJs": true
   },
-  "include": ["src", ".tmp/MyTravel"],
+  "include": ["src", ".tmp/MyTravel", "src/firebase.ts"],
   "exclude": ["node_modules", "node_modules/@types/react-router-dom", "server", ".tmp"]
 }
