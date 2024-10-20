@@ -1,7 +1,6 @@
 import GrayBack from '@/components/GrayBack';
 import useImageStore from '@/stores/useImageStore';
 import { css } from '@emotion/react';
-import axios from 'axios';
 import { ImagePlus } from 'lucide-react';
 import { ChangeEvent } from 'react';
 
@@ -17,34 +16,6 @@ const Thumbnail = () => {
       reader.onloadend = async () => {
         const imageData = reader.result as string;
         setThumbnail(imageData);
-
-        //
-        const [mimePart, base64Data] = imageData.split(',');
-        const byteString = atob(base64Data);
-
-        const arrayBuffer = new Uint8Array(byteString.length);
-        for (let i = 0; i < byteString.length; i++) {
-          arrayBuffer[i] = byteString.charCodeAt(i);
-        }
-
-        const blobFile = new Blob([arrayBuffer], { type: mimePart.split(':')[1].split(';')[0] });
-        const formData = new FormData();
-        formData.append('images', blobFile);
-
-        try {
-          const response = await axios.post(
-            'http://3.37.101.147:3000/api/images/upload',
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            },
-          );
-          console.log('업로드 성공:', response.data.imageUrls[0]);
-        } catch (error) {
-          console.error('업로드 오류:', error);
-        }
       };
       reader.readAsDataURL(file);
     }
