@@ -8,19 +8,12 @@ interface FiledBtnProps {
   onClick?: () => void;
   cutomStyle?: SerializedStyles;
   type?: 'button' | 'submit' | 'reset';
-  className?: string;
 }
 
 const FiledBtn = forwardRef<HTMLButtonElement, FiledBtnProps>(
-  ({ children, color, size, onClick, cutomStyle, type, className }, ref) => {
+  ({ children, color, size, onClick, cutomStyle, type }, ref) => {
     return (
-      <button
-        ref={ref}
-        css={[filedBtn(color, size), cutomStyle]}
-        onClick={onClick}
-        type={type}
-        className={className}
-      >
+      <button ref={ref} css={[filedBtn(color, size), cutomStyle]} onClick={onClick} type={type}>
         {children}
       </button>
     );
