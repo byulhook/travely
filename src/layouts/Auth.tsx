@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User as FirebaseUser, signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '@/firebase';
+import useLoginStore from '@/stores/useLoginStore';
 
 const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
   const [user, setUser] = useState<FirebaseUser | null>(null);
-  const [isLogin, setIsLogin] = useState(false);
+  const { isLogin, setIsLogin } = useLoginStore((state) => state);
+  const [isLoading, setIsLoading] = useState(true);
 
   const login = async () => {
     try {
@@ -26,6 +28,7 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
       } else {
         setUser(null);
       }
+      setIsLoading(false);
     });
 
     return () => unsubscribe();
@@ -62,7 +65,7 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
       </div>
     );
   } else {
-    return <FiledBtn children="로그인" color="#4a95f2" onClick={login} />;
+    return !isLoading && <FiledBtn children="로그인" color="#4a95f2" onClick={login} />;
   }
 };
 
