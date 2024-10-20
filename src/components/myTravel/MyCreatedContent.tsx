@@ -1,69 +1,80 @@
 import UserInfo from '@/components/myTravel/UserInfo';
 import Team from '@/components/Team';
+import { travelMyJoinedData } from '@/data/travelMyJoinedMockData';
 import styled from '@emotion/styled';
-import { data } from '@/data/travelMockData';
+
 // 남은 일수 계산 함수
 const calculateDaysRemaining = (endDateString: string) => {
   const today = new Date();
-
-  // '25.01.28' 형식을 '2025-01-28' 형식으로 변환
-  const formattedEndDateString = `20${endDateString.split('.').join('-')}`; // '25.01.28' -> '2025-01-28'
-  const endDate = new Date(formattedEndDateString);
-
-  // 날짜 차이를 밀리초 단위로 계산한 후 일 단위로 변환
+  const endDate = new Date(endDateString);
   const timeDiff = endDate.getTime() - today.getTime();
-  const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24)); // 하루 단위로 계산
+  const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-  return daysRemaining;
+  // 날짜가 D-0이거나 그 이전이면 'D-DAY'로 처리
+  return daysRemaining <= 0 ? 'D-day' : `D-${daysRemaining}`;
 };
 
 const MyCreatedContent = () => {
-  const userName = '손성오';
-  const userId = 'seong5@gmail.com';
-
-  // userName과 userId가 모두 일치하는 여행 필터링
-  const filteredTeams = data.travelTeams.filter((team) =>
-    team.appliedUser.some((user) => user.userName === userName && user.userId === userId),
-  );
-
   return (
     <GridContainer>
-      {filteredTeams.length > 0 ? (
-        filteredTeams.map((team, index) => {
-          const appliedUsers = team.appliedUser.filter((user) => user.status === 'approved');
-          const currentUser = team.appliedUser.find(
-            (user) => user.userName === userName && user.userId === userId,
-          ); // 현재 유저 데이터
+      {travelMyJoinedData.map((travelData, index) => {
+        const currentUser = travelData.currentUserStatus; // 현재 사용자 정보
+        const guide = travelData.guideInfo; // 가이드 정보
+        const daysRemaining = calculateDaysRemaining(travelData.travelTeam.travelEndDate); // 남은 일수 계산
+        const isPast = daysRemaining === 'D-day'; // D-0이 지났는지 확인
+        const reviewWritten = travelData.reviewWritten;
 
-          // 여행 종료일로부터 남은 일 계산
-          const daysRemaining = calculateDaysRemaining(team.travelEndDate);
+        return (
+          <TripCardContainer key={index} isPast={isPast && reviewWritten}>
+            <Header>
+              <Title>{travelData.travelTitle}</Title>
+              {/* 예약이 거절된 상태면 "취소됨"을 표시, 아닌 경우 D-DAY 표시 */}
+              {currentUser.status === 'refused' ? (
+                <StatusCanceled>취소됨</StatusCanceled>
+              ) : (
+                <DaysRemaining>{daysRemaining}</DaysRemaining>
+              )}
+            </Header>
 
-          return (
-            <TripCardContainer key={index}>
-              <Header>
-                <Title>{data.travelTitle}</Title>
-                <DaysRemaining>{`D-${daysRemaining}`}</DaysRemaining> {/* 남은 일수 표시 */}
-              </Header>
-              {currentUser && (
+            <UserInfoContainer>
+              <UserInfo
+                name={guide.userName}
+                contact={guide.userEmail}
+                profileImage={guide.userProfileImg}
+              />
+            </UserInfoContainer>
+
+            <DateInfo>
+              {`${travelData.travelTeam.travelStartDate} ~ ${travelData.travelTeam.travelEndDate}`}
+            </DateInfo>
+
+            <Team
+              max={travelData.travelTeam.personLimit}
+              mbtiList={travelData.travelTeam.approvedMembersMbti.mbti}
+            />
+
+            {/* 상태 표시 */}
+            <CurrentUserStatus>
+              {/* D-DAY이면서 승인 상태고 후기가 작성되지 않은 경우 후기 작성 버튼 */}
+              {isPast && currentUser.status === 'approved' && !reviewWritten && (
+                <ReviewButton>후기 작성</ReviewButton>
+              )}
+
+              {/* D-DAY이면서 후기가 작성된 경우 여행 완료 메시지 */}
+              {isPast && reviewWritten && <CompletionMessage>여행 완료</CompletionMessage>}
+              {isPast && currentUser.status === 'refused' && <p>예약 취소</p>}
+              {/* 아직 D-DAY가 지나지 않은 경우 예약 상태 표시 */}
+              {!isPast && (
                 <>
-                  <UserInfoContainer>
-                    <UserInfo
-                      name={currentUser.userName}
-                      contact={`kakao: ${currentUser.userId}`}
-                      profileImage={currentUser.userProfileImage}
-                    />
-                  </UserInfoContainer>
-                  <DateInfo>{`${team.travelStartDate} ~ ${team.travelEndDate}`}</DateInfo>
-                  <Team max={team.personLimit} mbtiList={appliedUsers.map((user) => user.mbti)} />
+                  {currentUser.status === 'approved' && <p>예약 완료</p>}
+                  {currentUser.status === 'waiting' && <p>예약 대기</p>}
+                  {currentUser.status === 'refused' && <p>예약 취소</p>}
                 </>
               )}
-              <Confirmation>예약확정</Confirmation>
-            </TripCardContainer>
-          );
-        })
-      ) : (
-        <p>손성오님이 참여한 여행이 없습니다.</p>
-      )}
+            </CurrentUserStatus>
+          </TripCardContainer>
+        );
+      })}
     </GridContainer>
   );
 };
@@ -77,14 +88,15 @@ const GridContainer = styled.div`
   gap: 40px;
 `;
 
-const TripCardContainer = styled.div`
+const TripCardContainer = styled.div<{ isPast: boolean }>`
   position: relative;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 18px;
   background-color: #fff;
   width: 344px;
-  height: 233px;
+  height: 250px;
+  opacity: ${(props) => (props.isPast ? 0.5 : 1)}; // D-DAY이면 흐리게 처리
 `;
 
 const Header = styled.div`
@@ -105,6 +117,12 @@ const DaysRemaining = styled.span`
   color: #888;
 `;
 
+const StatusCanceled = styled.span`
+  font-size: 14px;
+  color: #ff5252;
+  font-weight: bold;
+`;
+
 const UserInfoContainer = styled.div`
   margin-bottom: 18px;
 `;
@@ -116,10 +134,27 @@ const DateInfo = styled.div`
   margin-bottom: 10px;
 `;
 
-const Confirmation = styled.div`
+const CurrentUserStatus = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
   font-size: 14px;
-  font-weight: 500;
-  color: #333333;
-  text-align: right;
-  padding-top: 4px;
+  font-weight: bold;
+  color: #444;
+`;
+
+const ReviewButton = styled.button`
+  background-color: #4a95f2;
+  width: 100%;
+  color: white;
+  padding: 4px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+`;
+
+const CompletionMessage = styled.div`
+  font-size: 14px;
+  font-weight: bold;
 `;
