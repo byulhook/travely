@@ -1,20 +1,33 @@
 import BorderBtn from '@/components/BorderBtn';
 import { auth } from '@/firebase';
 import useLoginStore from '@/stores/useLoginStore';
+import useModalStore from '@/stores/useModalStore';
 import { css } from '@emotion/react';
 import { signOut } from 'firebase/auth';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MyAccount = () => {
+  const navigate = useNavigate();
   const { isLogin, setIsLogin } = useLoginStore((state) => state);
+  const setModalName = useModalStore((state) => state.setModalName);
+
   const logout = async () => {
     try {
       await signOut(auth);
       setIsLogin(false);
-      alert('로그아웃!');
     } catch (error) {
       console.error('로그아웃에 실패했습니다 :', error);
     }
   };
+
+  useEffect(() => {
+    if (!isLogin) {
+      setModalName(null);
+      navigate('/');
+    }
+  }, [isLogin]);
+
   return (
     <div css={myAccountWrap}>
       <h2>내 계정</h2>
