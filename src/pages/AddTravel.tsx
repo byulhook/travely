@@ -2,16 +2,24 @@ import ChoiceTags from '@/components/addTravel/ChoiceTags';
 import Course from '@/components/addTravel/Course';
 import ScheduleTeam from '@/components/addTravel/ScheduleTeam';
 import Details from '@/components/addTravel/Details';
-import { FloatingMenu } from '@/components/addTravel/FloatingMenu';
-import Introduction from '@/components/addTravel/Introduction';
 import Thumbnail from '@/components/addTravel/Thumbnail';
 import GrayBack from '@/components/GrayBack';
 import { css } from '@emotion/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import FloatingMenu from '@/components/addTravel/FloatingMenu';
+import Introduction from '@/components/addTravel/Introduction';
 
 const AddTravel = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
+
+  const [openSections, setOpenSections] = useState<string[]>([]);
+
+  const toggleSection = (section: string) => {
+    setOpenSections((prev) =>
+      prev.includes(section) ? prev.filter((item) => item !== section) : [...prev, section],
+    );
+  };
 
   return (
     <div css={pageLayoutWrapper}>
@@ -35,18 +43,21 @@ const AddTravel = () => {
           <span css={{ marginRight: '5px' }}>원</span>
           <span css={{ fontSize: '14px' }}>/ 1인</span>
         </GrayBack>
-        <Details title={'포함내용'} />
-        <Details title={'미포함내용'} />
-        <Details title={'이용안내'} />
-        <Details title={'FAQ'} />
+
+        {openSections.includes('포함내용') && <Details title={'포함내용'} />}
+        {openSections.includes('미포함내용') && <Details title={'미포함내용'} />}
+        {openSections.includes('이용안내') && <Details title={'이용안내'} />}
+        {openSections.includes('FAQ') && <Details title={'FAQ'} />}
       </div>
-      <FloatingMenu />
+
+      <FloatingMenu openSections={openSections} toggleSection={toggleSection} />
     </div>
   );
 };
 
 export default AddTravel;
 
+// 스타일 정의
 const addTravelWrapper = css`
   position: relative;
   width: 680px;

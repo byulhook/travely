@@ -1,16 +1,13 @@
+// FloatingMenu.tsx
 import styled from '@emotion/styled';
 import { CircleMinus, CirclePlus } from 'lucide-react';
-import { useState } from 'react';
 
-export const FloatingMenu = () => {
-  const [openSections, setOpenSections] = useState<string[]>([]);
+interface FloatingMenuProps {
+  openSections: string[];
+  toggleSection: (section: string) => void;
+}
 
-  const toggleSection = (section: string) => {
-    setOpenSections((prev) =>
-      prev.includes(section) ? prev.filter((item) => item !== section) : [...prev, section],
-    );
-  };
-
+export const FloatingMenu = ({ openSections, toggleSection }: FloatingMenuProps) => {
   return (
     <MenuContainer>
       <MenuItem>
@@ -80,6 +77,8 @@ export const FloatingMenu = () => {
     </MenuContainer>
   );
 };
+
+export default FloatingMenu;
 
 // 스타일 정의
 const MenuContainer = styled.div`
