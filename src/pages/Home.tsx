@@ -17,7 +17,7 @@ interface IDatas {
 
 const datas: IDatas[] = [
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: 'https://d25zqr3uop6qu8.cloudfront.net/b7d509dc-0002-4a39-a515-038aa2d62561.png',
     title: '대한민국 국밥 TOP 30',
     userName: '하루얌',
     tags: ['Food', 'Culture'],
@@ -28,7 +28,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: 'https://d25zqr3uop6qu8.cloudfront.net/b7d509dc-0002-4a39-a515-038aa2d62561.png',
     title: '서울 최고의 김치찌개 맛집',
     userName: '맛집탐방러',
     tags: ['Food', 'Festival'],
@@ -39,7 +39,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: 'https://d25zqr3uop6qu8.cloudfront.net/b7d509dc-0002-4a39-a515-038aa2d62561.png',
     title: '강릉 해변에서 즐기는 바비큐',
     userName: '여행러버',
     tags: ['Nature', 'Food'],
@@ -50,7 +50,7 @@ const datas: IDatas[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: 'https://d25zqr3uop6qu8.cloudfront.net/b7d509dc-0002-4a39-a515-038aa2d62561.png',
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -61,7 +61,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: 'https://d25zqr3uop6qu8.cloudfront.net/b7d509dc-0002-4a39-a515-038aa2d62561.png',
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -72,7 +72,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: 'https://d25zqr3uop6qu8.cloudfront.net/b7d509dc-0002-4a39-a515-038aa2d62561.png',
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -83,7 +83,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: 'https://d25zqr3uop6qu8.cloudfront.net/b7d509dc-0002-4a39-a515-038aa2d62561.png',
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -94,7 +94,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: 'https://d25zqr3uop6qu8.cloudfront.net/b7d509dc-0002-4a39-a515-038aa2d62561.png',
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
