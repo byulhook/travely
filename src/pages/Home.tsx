@@ -2,6 +2,9 @@ import TagCardWrap from '@/components/TagCardWrap';
 import TravelCard from '@/components/TravelCard';
 import { TagType } from '@/types/tagType';
 import { css } from '@emotion/react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 interface IDatas {
   imgSrc: string;
@@ -107,6 +110,34 @@ const datas: IDatas[] = [
 ];
 
 const Home = () => {
+  const userId = 'user001';
+  const [cardDatas, setCardDatas] = useState(null);
+  const { data, isLoading } = useQuery({
+    queryKey: ['home-travl-list'],
+    queryFn: () => fetchHomeTravelList(userId),
+  });
+  const fetchHomeTravelList = async (userId: string) => {
+    try {
+      const res = await axios.post('http://3.37.101.147:3000/api/v1/travels/home-travel-list', {
+        userId,
+      });
+      return res.data.data.travels;
+    } catch (error) {
+      console.error('여행 목록을 조회하는데 실패했습니다: ' + error);
+      return null;
+    }
+  };
+  useEffect(() => {
+    if (data) {
+      setCardDatas(data);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return <p>loading...</p>;
+  }
+
+  console.log(cardDatas);
   return (
     <div css={home}>
       <TagCardWrap shape="square" />
