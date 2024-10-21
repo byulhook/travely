@@ -13,17 +13,17 @@ import useImageUpload from '@/hooks/useImageUpload';
 
 const AddTravel = () => {
   const [enabled, setEnabled] = useState(false);
+  const [openSections, setOpenSections] = useState<string[]>([]);
+
   const titleRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
-
-  const [openSections, setOpenSections] = useState<string[]>([]);
+  const images = useImageStore((state) => state.images);
 
   const toggleSection = (section: string) => {
     setOpenSections((prev) =>
       prev.includes(section) ? prev.filter((item) => item !== section) : [...prev, section],
     );
   };
-  const images = useImageStore((state) => state.images);
   const formData = new FormData();
   const { data: uploadedImages } = useImageUpload({ formData, enabled });
 
