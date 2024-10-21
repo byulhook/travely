@@ -2,7 +2,8 @@ export const travelMyJoinedData = [
   {
     travelTitle: '대한민국 고궁 투어',
     guideInfo: {
-      userProfileImg: 'https://example.com/guideProfile.jpg',
+      userProfileImg:
+        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
       userName: '가이드 손성오',
       userEmail: 'guide@example.com',
     },
@@ -23,7 +24,8 @@ export const travelMyJoinedData = [
   {
     travelTitle: '부산 국밥 투어',
     guideInfo: {
-      userProfileImg: 'https://example.com/guideProfile2.jpg',
+      userProfileImg:
+        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
       userName: '가이드 박철수',
       userEmail: 'guide2@example.com',
     },
@@ -44,7 +46,8 @@ export const travelMyJoinedData = [
   {
     travelTitle: '제주 올레길 트레킹',
     guideInfo: {
-      userProfileImg: 'https://example.com/guideProfile3.jpg',
+      userProfileImg:
+        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
       userName: '가이드 김영희',
       userEmail: 'guide3@example.com',
     },
@@ -65,7 +68,8 @@ export const travelMyJoinedData = [
   {
     travelTitle: '몰도바 여행',
     guideInfo: {
-      userProfileImg: 'https://example.com/guideProfile3.jpg',
+      userProfileImg:
+        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
       userName: '가이드 손성오',
       userEmail: 'guide4@example.com',
     },
@@ -86,7 +90,8 @@ export const travelMyJoinedData = [
   {
     travelTitle: '몰도바 여행',
     guideInfo: {
-      userProfileImg: 'https://example.com/guideProfile3.jpg',
+      userProfileImg:
+        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
       userName: '가이드 손성오',
       userEmail: 'guide4@example.com',
     },
@@ -107,7 +112,8 @@ export const travelMyJoinedData = [
   {
     travelTitle: '몰도바 여행',
     guideInfo: {
-      userProfileImg: 'https://example.com/guideProfile3.jpg',
+      userProfileImg:
+        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
       userName: '가이드 손성오',
       userEmail: 'guide4@example.com',
     },

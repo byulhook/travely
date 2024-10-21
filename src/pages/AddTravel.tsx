@@ -6,10 +6,10 @@ import Thumbnail from '@/components/addTravel/Thumbnail';
 import GrayBack from '@/components/GrayBack';
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
-import FloatingMenu from '@/components/addTravel/FloatingMenu';
 import Introduction from '@/components/addTravel/Introduction';
 import useImageStore from '@/stores/useImageStore';
 import useImageUpload from '@/hooks/useImageUpload';
+import FloatingMenu from '@/components/addTravel/FloatingMenu';
 
 const AddTravel = () => {
   const [enabled, setEnabled] = useState(false);
