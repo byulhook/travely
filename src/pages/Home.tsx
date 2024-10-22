@@ -3,6 +3,8 @@ import TravelCard from '@/components/TravelCard';
 import { TagType } from '@/types/tagType';
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
+import thumbnail from '@/assets/thumb.png';
+
 interface IDatas {
   imgSrc: string;
   title: string;
@@ -17,7 +19,7 @@ interface IDatas {
 
 const datas: IDatas[] = [
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbnail,
     title: '대한민국 국밥 TOP 30',
     userName: '하루얌',
     tags: ['Food', 'Culture'],
@@ -28,7 +30,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbnail,
     title: '서울 최고의 김치찌개 맛집',
     userName: '맛집탐방러',
     tags: ['Food', 'Festival'],
@@ -39,7 +41,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbnail,
     title: '강릉 해변에서 즐기는 바비큐',
     userName: '여행러버',
     tags: ['Nature', 'Food'],
@@ -50,7 +52,7 @@ const datas: IDatas[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbnail,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -61,7 +63,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbnail,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -72,7 +74,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbnail,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -83,7 +85,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbnail,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -94,7 +96,7 @@ const datas: IDatas[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbnail,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
