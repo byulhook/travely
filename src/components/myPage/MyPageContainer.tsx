@@ -23,13 +23,9 @@ const MyPageContainerLayout = () => {
 };
 
 const myPageLayout = (managePage: boolean) => css`
-  display: flex;
+  display: ${managePage ? 'block' : 'flex'};
   gap: 60px;
   position: relative;
-  ${managePage &&
-  `
-    display: block;
-  `}
 `;
 
 export default MyPageContainerLayout;
