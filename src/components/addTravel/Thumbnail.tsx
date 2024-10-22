@@ -4,9 +4,14 @@ import { css } from '@emotion/react';
 import { ImagePlus } from 'lucide-react';
 import { ChangeEvent } from 'react';
 
-const Thumbnail = () => {
+interface ThumnailProps {
+  thumbnailComponent: boolean;
+}
+
+const Thumbnail = ({ thumbnailComponent }: ThumnailProps) => {
   const thumbnail = useImageStore((state) => state.images.thumbnail);
   const setThumbnail = useImageStore((state) => state.setThumbnail);
+  const setMeetingSpace = useImageStore((state) => state.setMeetingSpace);
 
   const handleThumbnailChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -15,14 +20,18 @@ const Thumbnail = () => {
 
       reader.onloadend = async () => {
         const imageData = reader.result as string;
-        setThumbnail(imageData);
+        if (thumbnailComponent) {
+          setThumbnail(imageData);
+        } else {
+          setMeetingSpace(imageData);
+        }
       };
       reader.readAsDataURL(file);
     }
   };
 
   return (
-    <GrayBack title={'대표 이미지'}>
+    <GrayBack title={thumbnailComponent ? '대표 이미지' : '만나는장소'}>
       <div css={thumnailSize(thumbnail)}>
         <button onClick={() => document.getElementById('thumbnailUpload')?.click()}>
           <ImagePlus size={100} css={{ color: '#fff' }} />

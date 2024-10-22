@@ -60,7 +60,7 @@ const AddTravel = () => {
             placeholder="30자 내외로 작성해주세요."
           />
         </GrayBack>
-        <Thumbnail />
+        <Thumbnail thumbnailComponent={true} />
         <Introduction />
         <Course />
         <ChoiceTags />
