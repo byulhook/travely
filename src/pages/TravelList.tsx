@@ -7,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import tarvelCardMockData, { CardData } from '@/data/travelCardMockData';
+import travelCardMockData, { CardData } from '@/data/travelCardMockData';
 import SkeletonTravelCard from '@/components/SkeletonTravelCard';
 import scrollToTop from '@/utils/scrollToTop';
 
@@ -28,8 +28,7 @@ const TravelList = () => {
   });
 
   const fetchCardData = async (pageParam: number, pageSize: number = 8) => {
-    const CARDDATAS = tarvelCardMockData;
-
+    const CARDDATAS = travelCardMockData;
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const startIndex = (pageParam - 1) * pageSize;
@@ -54,7 +53,7 @@ const TravelList = () => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   if (!myData) {
     return <p>loaidng</p>;

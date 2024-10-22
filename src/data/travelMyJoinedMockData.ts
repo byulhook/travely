@@ -1,9 +1,10 @@
+import guideImg from '@/assets/guide.jpg';
+
 export const travelMyJoinedData = [
   {
     travelTitle: '대한민국 고궁 투어',
     guideInfo: {
-      userProfileImg:
-        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
+      userProfileImg: guideImg,
       userName: '가이드 손성오',
       userEmail: 'guide@example.com',
     },
@@ -17,15 +18,14 @@ export const travelMyJoinedData = [
     },
     currentUserStatus: {
       userId: 'seong5@gmail.com',
-      status: 'approved', // 현재 사용자의 상태
+      status: 'approved',
     },
-    reviewWritten: true, // 리뷰 작성 여부
+    reviewWritten: true,
   },
   {
     travelTitle: '부산 국밥 투어',
     guideInfo: {
-      userProfileImg:
-        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
+      userProfileImg: guideImg,
       userName: '가이드 박철수',
       userEmail: 'guide2@example.com',
     },
@@ -39,15 +39,14 @@ export const travelMyJoinedData = [
     },
     currentUserStatus: {
       userId: 'seong5@gmail.com',
-      status: 'waiting', // 현재 사용자의 상태
+      status: 'waiting',
     },
-    reviewWritten: false, // 리뷰 작성 여부
+    reviewWritten: false,
   },
   {
     travelTitle: '제주 올레길 트레킹',
     guideInfo: {
-      userProfileImg:
-        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
+      userProfileImg: guideImg,
       userName: '가이드 김영희',
       userEmail: 'guide3@example.com',
     },
@@ -61,15 +60,14 @@ export const travelMyJoinedData = [
     },
     currentUserStatus: {
       userId: 'seong5@gmail.com',
-      status: 'refused', // 현재 사용자의 상태
+      status: 'refused',
     },
-    reviewWritten: false, // 리뷰 작성 여부
+    reviewWritten: false,
   },
   {
     travelTitle: '몰도바 여행',
     guideInfo: {
-      userProfileImg:
-        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
+      userProfileImg: guideImg,
       userName: '가이드 손성오',
       userEmail: 'guide4@example.com',
     },
@@ -83,15 +81,14 @@ export const travelMyJoinedData = [
     },
     currentUserStatus: {
       userId: 'seong5@gmail.com',
-      status: 'refused', // 현재 사용자의 상태
+      status: 'refused',
     },
-    reviewWritten: false, // 리뷰 작성 여부
+    reviewWritten: false,
   },
   {
     travelTitle: '몰도바 여행',
     guideInfo: {
-      userProfileImg:
-        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
+      userProfileImg: guideImg,
       userName: '가이드 손성오',
       userEmail: 'guide4@example.com',
     },
@@ -105,15 +102,14 @@ export const travelMyJoinedData = [
     },
     currentUserStatus: {
       userId: 'seong5@gmail.com',
-      status: 'approved', // 현재 사용자의 상태
+      status: 'approved',
     },
-    reviewWritten: true, // 리뷰 작성 여부
+    reviewWritten: true,
   },
   {
     travelTitle: '몰도바 여행',
     guideInfo: {
-      userProfileImg:
-        'https://d25zqr3uop6qu8.cloudfront.net/7af6198c-0f09-4001-87e4-adeb77f753bd.jpg',
+      userProfileImg: guideImg,
       userName: '가이드 손성오',
       userEmail: 'guide4@example.com',
     },
@@ -127,8 +123,8 @@ export const travelMyJoinedData = [
     },
     currentUserStatus: {
       userId: 'seong5@gmail.com',
-      status: 'approved', // 현재 사용자의 상태
+      status: 'approved',
     },
-    reviewWritten: false, // 리뷰 작성 여부
+    reviewWritten: false,
   },
 ];
