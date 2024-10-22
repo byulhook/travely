@@ -54,7 +54,7 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
     } else {
       setIsLogin(false);
     }
-  }, [user]);
+  }, [user, setIsLogin]);
 
   if (isLogin) {
     if (!user) return;

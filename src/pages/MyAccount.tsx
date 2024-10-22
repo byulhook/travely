@@ -26,7 +26,7 @@ const MyAccount = () => {
       setModalName(null);
       navigate('/');
     }
-  }, [isLogin]);
+  }, [isLogin, navigate, setModalName]);
 
   return (
     <div css={myAccountWrap}>

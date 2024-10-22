@@ -1,19 +1,21 @@
 import { TagType } from '@/types/tagType';
+import thumbImg from '@/assets/thumb.png';
 
 export interface CardData {
-  imgSrc: string; // 이미지 경로
-  title: string; // 카드의 제목
-  userName: string; // 작성자 이름
-  tags: TagType[]; // 태그 목록
-  price: string; // 가격 (문자열로 관리)
-  rating: string; // 평점 (문자열로 관리)
-  reviewCount: string; // 리뷰 개수 (문자열로 관리)
-  people: string; // 참여 인원 수 (문자열로 관리)
-  bookMark: boolean; // 북마크 여부
+  imgSrc: string;
+  title: string;
+  userName: string;
+  tags: TagType[];
+  price: string;
+  rating: string;
+  reviewCount: string;
+  people: string;
+  bookMark: boolean;
 }
-const tarvelCardMockData: CardData[] = [
+
+const travelCardMockData: CardData[] = [
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '대한민국 국밥 TOP 30',
     userName: '하루얌',
     tags: ['Food', 'Culture'],
@@ -24,7 +26,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '서울 최고의 김치찌개 맛집',
     userName: '맛집탐방러',
     tags: ['Food', 'Festival'],
@@ -35,7 +37,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '강릉 해변에서 즐기는 바비큐',
     userName: '여행러버',
     tags: ['Nature', 'Food'],
@@ -46,7 +48,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -57,7 +59,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '전주 한옥마을 힐링 투어',
     userName: '힐링러버',
     tags: ['Culture', 'Healing'],
@@ -68,7 +70,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '대한민국 국밥 TOP 30',
     userName: '하루얌',
     tags: ['Food', 'Culture'],
@@ -79,7 +81,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '서울 최고의 김치찌개 맛집',
     userName: '맛집탐방러',
     tags: ['Food', 'Festival'],
@@ -90,7 +92,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '강릉 해변에서 즐기는 바비큐',
     userName: '여행러버',
     tags: ['Nature', 'Food'],
@@ -101,7 +103,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -112,7 +114,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '전주 한옥마을 힐링 투어',
     userName: '힐링러버',
     tags: ['Culture', 'Healing'],
@@ -123,7 +125,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '대한민국 국밥 TOP 30',
     userName: '하루얌',
     tags: ['Food', 'Culture'],
@@ -134,7 +136,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '서울 최고의 김치찌개 맛집',
     userName: '맛집탐방러',
     tags: ['Food', 'Festival'],
@@ -145,7 +147,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '강릉 해변에서 즐기는 바비큐',
     userName: '여행러버',
     tags: ['Nature', 'Food'],
@@ -156,7 +158,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -167,7 +169,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '전주 한옥마을 힐링 투어',
     userName: '힐링러버',
     tags: ['Culture', 'Healing'],
@@ -178,7 +180,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '대한민국 국밥 TOP 30',
     userName: '하루얌',
     tags: ['Food', 'Culture'],
@@ -189,7 +191,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '서울 최고의 김치찌개 맛집',
     userName: '맛집탐방러',
     tags: ['Food', 'Festival'],
@@ -200,7 +202,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '강릉 해변에서 즐기는 바비큐',
     userName: '여행러버',
     tags: ['Nature', 'Food'],
@@ -211,7 +213,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: true,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '부산의 밤을 즐기는 방법',
     userName: '밤하늘',
     tags: ['Culture', 'K-POP'],
@@ -222,7 +224,7 @@ const tarvelCardMockData: CardData[] = [
     bookMark: false,
   },
   {
-    imgSrc: '/src/assets/thumb.png',
+    imgSrc: thumbImg,
     title: '전주 한옥마을 힐링 투어',
     userName: '힐링러버',
     tags: ['Culture', 'Healing'],
@@ -234,4 +236,4 @@ const tarvelCardMockData: CardData[] = [
   },
 ];
 
-export default tarvelCardMockData;
+export default travelCardMockData;

@@ -1,5 +1,5 @@
-import UserInfo from '@/components/myTravel/UserInfo';
 import Team from '@/components/Team';
+import UserProfile from '@/components/UserProfile';
 import { travelMyJoinedData } from '@/data/travelMyJoinedMockData';
 import styled from '@emotion/styled';
 
@@ -35,12 +35,13 @@ const MyCreatedContent = () => {
                 <DaysRemaining>{daysRemaining}</DaysRemaining>
               )}
             </Header>
-
             <UserInfoContainer>
-              <UserInfo
+              <UserProfile
                 name={guide.userName}
-                contact={guide.userEmail}
-                profileImage={guide.userProfileImg}
+                userEmailId={guide.userEmail}
+                imgURL={guide.userProfileImg}
+                hideRating={true}
+                hideUserId={false}
               />
             </UserInfoContainer>
 
