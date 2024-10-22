@@ -6,6 +6,7 @@ import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 const MyPageContainerLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const managePage = location.pathname.startsWith('/my-page/my-created-travel/manage-my-travel/');
 
   useEffect(() => {
     if (location.pathname === '/my-page/') {
@@ -14,19 +15,21 @@ const MyPageContainerLayout = () => {
   }, [location.pathname, navigate]);
 
   return (
-    <div css={myPageLayout}>
-      <MyPageSideMenu />
-      <section>
-        <Outlet />
-      </section>
+    <div css={myPageLayout(managePage)}>
+      {managePage ? null : <MyPageSideMenu />}
+      <Outlet />
     </div>
   );
 };
 
-const myPageLayout = css`
+const myPageLayout = (managePage: boolean) => css`
   display: flex;
   gap: 60px;
   position: relative;
+  ${managePage &&
+  `
+    display: block;
+  `}
 `;
 
 export default MyPageContainerLayout;
