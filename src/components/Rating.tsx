@@ -2,8 +2,8 @@ import { css, SerializedStyles } from '@emotion/react';
 import { Star } from 'lucide-react';
 
 interface IRatingProps {
-  rating: number;
-  reviewCount?: number;
+  rating: string;
+  reviewCount?: string;
   customStyle?: SerializedStyles;
 }
 
