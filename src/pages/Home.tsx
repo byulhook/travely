@@ -12,8 +12,8 @@ const mockDatas = travelCardMockData;
 const Home = () => {
   const userId = 'user001';
   const [cardDatas, setCardDatas] = useState(null);
-  const { data, isLoading } = useQuery({
-    queryKey: ['home-travl-list'],
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['home-travel-list'],
     queryFn: () => fetchHomeTravelList(userId),
   });
   const fetchHomeTravelList = async (userId: string) => {
@@ -24,7 +24,7 @@ const Home = () => {
       return res.data.data.travels;
     } catch (error) {
       console.error('여행 목록을 조회하는데 실패했습니다: ' + error);
-      return null;
+      throw error;
     }
   };
   useEffect(() => {
@@ -35,6 +35,10 @@ const Home = () => {
 
   if (isLoading) {
     return <p>loading...</p>;
+  }
+
+  if (isError) {
+    return null;
   }
 
   console.log(cardDatas);

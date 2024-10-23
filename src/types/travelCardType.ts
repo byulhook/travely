@@ -1,19 +1,19 @@
 import { TagType } from '@/types/tagType';
 
 export interface ITravelCard {
-  thumbnail: string; // 이미지 경로
-  travelTitle: string; // 카드의 제목
-  createdBy: {
+  readonly thumbnail: string; // 이미지 경로
+  readonly travelTitle: string; // 카드의 제목
+  readonly createdBy: {
     // 작성자
-    userId: string;
-    userName: string;
+    readonly userId: string;
+    readonly userName: string;
   };
-  travelPrice: number; //가격
-  review: {
+  readonly travelPrice: number; //가격
+  readonly review: {
     //리뷰
-    travelScore: number;
-    reviewCnt: number;
+    readonly travelScore: number;
+    readonly reviewCnt: number;
   };
-  tag: TagType[]; // 태그 목록
-  bookmark: boolean; // 북마크 여부
+  readonly tag: TagType[]; // 태그 목록
+  readonly bookmark: boolean; // 북마크 여부
 }

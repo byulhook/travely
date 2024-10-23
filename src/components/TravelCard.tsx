@@ -23,10 +23,10 @@ const TravelCard: React.FC<ICardDataProps> = ({ cardData }) => {
           <div>
             <p className="user-name">{createdBy.userName}</p>
             <div className="price">
-              <Price price={`${travelPrice}`} />
+              <Price price={travelPrice} />
             </div>
             <div className="rating-tags">
-              <Rating rating={`${review.travelScore}`} reviewCount={`${review.reviewCnt}`} />
+              <Rating rating={review.travelScore} reviewCount={review.reviewCnt} />
               <Tags items={tag} textAlign="right" />
             </div>
           </div>

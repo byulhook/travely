@@ -2,7 +2,7 @@ import formatCurrency from '@/utils/formatCurrency';
 import { css } from '@emotion/react';
 
 interface IPriceProps {
-  price: string;
+  price: number;
 }
 const Price: React.FC<IPriceProps> = ({ price }) => {
   return (
