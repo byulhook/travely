@@ -1,59 +1,42 @@
 import Price from '@/components/Price';
 import Rating from '@/components/Rating';
 import Tags from '@/components/Tags';
-import { TagType } from '@/types/tagType';
+import { ITravelCard } from '@/types/travelCardType';
 import { css } from '@emotion/react';
 import { Bookmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-interface ICardProps {
-  imgSrc: string;
-  title: string;
-  userName: string;
-  tags: TagType[];
-  price: string;
-  rating: string;
-  reviewCount: string;
-  people: string;
-  bookMark: boolean;
+interface ICardDataProps {
+  cardData: ITravelCard;
 }
 
-const TravelCard: React.FC<ICardProps> = ({
-  imgSrc,
-  title,
-  userName,
-  tags,
-  price,
-  rating,
-  reviewCount,
-  people,
-  bookMark,
-}) => {
+const TravelCard: React.FC<ICardDataProps> = ({ cardData }) => {
+  const { thumbnail, travelTitle, createdBy, travelPrice, review, tag, bookmark } = cardData;
   return (
     <Link to="/travel-detail">
       <div css={card}>
         <div className="card-img">
-          <img src={imgSrc} alt="" />
+          <img src={thumbnail} alt="" />
         </div>
         <div className="card-content">
-          <p className="title">{title}</p>
+          <p className="title">{travelTitle}</p>
           <div>
-            <p className="user-name">{userName}</p>
+            <p className="user-name">{createdBy.userName}</p>
             <div className="price">
-              <Price price={price} people={people} />
+              <Price price={`${travelPrice}`} />
             </div>
             <div className="rating-tags">
-              <Rating rating={rating} reviewCount={reviewCount} />
-              <Tags items={tags} textAlign="right" />
+              <Rating rating={`${review.travelScore}`} reviewCount={`${review.reviewCnt}`} />
+              <Tags items={tag} textAlign="right" />
             </div>
           </div>
         </div>
         <p className="book-mark">
           <Bookmark
             size="23"
-            stroke={bookMark ? '#4a95f2' : '#fff'}
+            stroke={bookmark ? '#4a95f2' : '#fff'}
             strokeWidth="1.5"
-            fill={bookMark ? '#4a95f2' : 'none'}
+            fill={bookmark ? '#4a95f2' : 'none'}
           />
         </p>
       </div>

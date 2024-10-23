@@ -7,15 +7,16 @@ import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import tarvelCardMockData, { CardData } from '@/data/travelCardMockData';
+import tarvelCardMockData from '@/data/travelCardMockData';
 import SkeletonTravelCard from '@/components/SkeletonTravelCard';
 import scrollToTop from '@/utils/scrollToTop';
+import { ITravelCard } from '@/types/travelCardType';
 
 const TravelList = () => {
   const location = useLocation();
   const path = location.pathname.split('/').filter((item) => item !== '')[1] || '전체';
   const pageTitle = path === '전체' ? path : tagDatas.filter((data) => data.path === path)[0].name;
-  const [myData, setMyData] = useState<null | CardData[]>(null);
+  const [myData, setMyData] = useState<null | ITravelCard[]>(null);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['my-data'],
     queryFn: ({ pageParam = 1 }) => fetchCardData(pageParam, 8),
@@ -30,7 +31,7 @@ const TravelList = () => {
   const fetchCardData = async (pageParam: number, pageSize: number = 8) => {
     const CARDDATAS = tarvelCardMockData;
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const startIndex = (pageParam - 1) * pageSize;
     const endIndex = pageSize * pageParam;
@@ -72,18 +73,7 @@ const TravelList = () => {
 
       <div className="card-wrap">
         {myData.map((data, i) => (
-          <TravelCard
-            key={i}
-            imgSrc={data.imgSrc}
-            title={data.title}
-            userName={data.userName}
-            tags={data.tags}
-            price={data.price}
-            rating={data.rating}
-            reviewCount={data.reviewCount}
-            people={data.people}
-            bookMark={data.bookMark}
-          />
+          <TravelCard cardData={data} key={i} />
         ))}
         {isFetchingNextPage && <SkeletonTravelCard />}
       </div>

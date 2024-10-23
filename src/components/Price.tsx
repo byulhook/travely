@@ -3,12 +3,11 @@ import { css } from '@emotion/react';
 
 interface IPriceProps {
   price: string;
-  people: string;
 }
-const Price: React.FC<IPriceProps> = ({ price, people }) => {
+const Price: React.FC<IPriceProps> = ({ price }) => {
   return (
     <p css={priceWrap}>
-      {formatCurrency(price)} <span>/ {people}인</span>
+      {formatCurrency(price)} <span>/ 1인</span>
     </p>
   );
 };
