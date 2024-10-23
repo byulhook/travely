@@ -107,7 +107,13 @@ const ReviewWriteModal = ({ reviewTitle, userName, guideName, imgURL }: ReviewWr
                 <div className="advice">함께한 가이드가 훌륭했다면 별점을 남겨주세요</div>
                 <div className="guideInfo">
                   <UserProfile name={guideName} userEmailId="sonjeongwo" hideRating hideUserId />
-                  <StarRating rating={userRating} setRating={setUserRating} />
+                  <div
+                    css={css`
+                      transform: translateY(2px);
+                    `}
+                  >
+                    <StarRating rating={userRating} setRating={setUserRating} />
+                  </div>
                 </div>
               </div>
               <div css={buttonContainer}>

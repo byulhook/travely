@@ -1,13 +1,13 @@
 import TagCardWrap from '@/components/TagCardWrap';
 import TravelCard from '@/components/TravelCard';
-import tarvelCardMockData from '@/data/travelCardMockData';
+import travelCardMockData from '@/data/travelCardMockData';
 import { css } from '@emotion/react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const mockDatas = tarvelCardMockData;
+const mockDatas = travelCardMockData;
 
 const Home = () => {
   const userId = 'user001';

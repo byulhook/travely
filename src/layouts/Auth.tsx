@@ -9,6 +9,10 @@ import useLoginStore from '@/stores/useLoginStore';
 import * as Dialog from '@radix-ui/react-dialog';
 import useModalStore from '@/stores/useModalStore';
 import { X } from 'lucide-react';
+import logo from '/src/assets/logo-black.png';
+import googleLogo from '/src/assets/google-icon.svg';
+import kakaoLogo from '/src/assets/kakao-icon.svg';
+import basicProfile from '/src/assets/basicProfile.png';
 
 const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
   const [user, setUser] = useState<FirebaseUser | null>(null);
@@ -54,7 +58,7 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
     } else {
       setIsLogin(false);
     }
-  }, [user]);
+  }, [user, setIsLogin]);
 
   if (isLogin) {
     if (!user) return;
@@ -73,7 +77,7 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
         </ul>
         <div className="user-profile">
           <Link to="/my-page/my-account">
-            <img src={userThumbnail || '/src/assets/basicProfile.png'} alt="" />
+            <img src={userThumbnail || basicProfile} alt="" />
           </Link>
         </div>
       </div>
@@ -102,17 +106,17 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
                 <Dialog.Overlay className="modal-overlay" />
                 <Dialog.Content className="modal-content">
                   <Dialog.Title className="modal-title">
-                    <img src="/src/assets/logo-black.png" alt="" />
+                    <img src={logo} alt="" />
                     <p>모두가 가이드가 될 수 있는 곳</p>
                   </Dialog.Title>
                   <div className="btn-wrap">
                     <FiledBtn color="#f3f3f3" onClick={() => handleLogin('google')}>
-                      <img src="/src/assets/google-icon.svg" alt="" />
+                      <img src={googleLogo} alt="" />
                       구글로 계속하기
                     </FiledBtn>
 
                     <FiledBtn color="#FFE600" onClick={() => handleLogin('kakao')}>
-                      <img src="/src/assets/kakao-icon.svg" alt="" />
+                      <img src={kakaoLogo} alt="" />
                       카카오로 계속하기
                     </FiledBtn>
                   </div>

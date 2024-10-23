@@ -8,7 +8,7 @@ interface FloatingMenuProps {
   onClick: () => void;
 }
 
-export const FloatingMenu = ({ openSections, toggleSection, onClick }: FloatingMenuProps) => {
+const FloatingMenu = ({ openSections, toggleSection, onClick }: FloatingMenuProps) => {
   return (
     <MenuContainer>
       <MenuItem>

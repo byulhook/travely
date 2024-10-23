@@ -1,8 +1,8 @@
 import TravelCard from '@/components/TravelCard';
-import tarvelCardMockData from '@/data/travelCardMockData';
 import { css } from '@emotion/react';
+import travelCardMockData from '@/data/travelCardMockData';
 
-const bookmarkMockDatas = tarvelCardMockData;
+const bookmarkMockDatas = travelCardMockData;
 
 const Bookmark = () => {
   return (

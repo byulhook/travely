@@ -70,6 +70,12 @@ const router = createBrowserRouter([
                     <MyCreatedTravel />
                   </div>
                 ),
+                children: [
+                  {
+                    path: 'manage-my-travel/:travelId',
+                    element: <ManageMyTravel />,
+                  },
+                ],
               },
               {
                 path: 'my-reviews',
@@ -92,10 +98,6 @@ const router = createBrowserRouter([
                 ),
               },
             ],
-          },
-          {
-            path: 'manage-my-travel',
-            element: <ManageMyTravel />,
           },
           {
             path: 'add-travel',

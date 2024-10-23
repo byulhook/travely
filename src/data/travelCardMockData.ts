@@ -1,6 +1,6 @@
 import { ITravelCard } from '@/types/travelCardType';
 
-const tarvelCardMockData: ITravelCard[] = [
+const travelCardMockData: ITravelCard[] = [
   {
     thumbnail: '/src/assets/thumb.png',
     travelTitle: '대한민국 국밥 TOP 30',
@@ -153,4 +153,4 @@ const tarvelCardMockData: ITravelCard[] = [
   },
 ];
 
-export default tarvelCardMockData;
+export default travelCardMockData;

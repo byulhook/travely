@@ -7,10 +7,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import tarvelCardMockData from '@/data/travelCardMockData';
 import SkeletonTravelCard from '@/components/SkeletonTravelCard';
 import scrollToTop from '@/utils/scrollToTop';
 import { ITravelCard } from '@/types/travelCardType';
+import travelCardMockData from '@/data/travelCardMockData';
 
 const TravelList = () => {
   const location = useLocation();
@@ -29,7 +29,7 @@ const TravelList = () => {
   });
 
   const fetchCardData = async (pageParam: number, pageSize: number = 8) => {
-    const CARDDATAS = tarvelCardMockData;
+    const CARDDATAS = travelCardMockData;
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -55,7 +55,7 @@ const TravelList = () => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   if (!myData) {
     return <p>loaidng</p>;
