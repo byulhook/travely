@@ -71,7 +71,7 @@ const Details = ({ title }: DetailsProps) => {
               <CirclePlus size={24} />
             </button>
           </div>
-          <Thumbnail thumbnailComponent={false} />
+          <Thumbnail type="meetingSpace" />
         </>
       ) : (
         <>

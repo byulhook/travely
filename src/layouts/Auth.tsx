@@ -9,10 +9,10 @@ import useLoginStore from '@/stores/useLoginStore';
 import * as Dialog from '@radix-ui/react-dialog';
 import useModalStore from '@/stores/useModalStore';
 import { X } from 'lucide-react';
-import logo from 'src/assets/logo-black.png';
-import googleLogo from '/src/assets/google-icon.svg';
-import kakaoLogo from '/src/assets/kakao-icon.svg';
-import basicProfile from '/src/assets/basicProfile.png';
+import logo from '@/assets/logo-black.png';
+import googleLogo from '@/assets/google-icon.svg';
+import kakaoLogo from '@/assets/kakao-icon.svg';
+import basicProfile from '@/assets/basicProfile.png';
 
 const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
   const [user, setUser] = useState<FirebaseUser | null>(null);

@@ -4,11 +4,11 @@ import { css } from '@emotion/react';
 import { ImagePlus } from 'lucide-react';
 import { ChangeEvent } from 'react';
 
-interface ThumnailProps {
-  thumbnailComponent: boolean;
+interface ThumbnailProps {
+  type: 'thumbnail' | 'meetingSpace';
 }
 
-const Thumbnail = ({ thumbnailComponent }: ThumnailProps) => {
+const Thumbnail = ({ type }: ThumbnailProps) => {
   const thumbnail = useImageStore((state) => state.images.thumbnail);
   const setThumbnail = useImageStore((state) => state.setThumbnail);
   const setMeetingSpace = useImageStore((state) => state.setMeetingSpace);
@@ -20,7 +20,7 @@ const Thumbnail = ({ thumbnailComponent }: ThumnailProps) => {
 
       reader.onloadend = async () => {
         const imageData = reader.result as string;
-        if (thumbnailComponent) {
+        if (type === 'thumbnail') {
           setThumbnail(imageData);
         } else {
           setMeetingSpace(imageData);
@@ -31,8 +31,8 @@ const Thumbnail = ({ thumbnailComponent }: ThumnailProps) => {
   };
 
   return (
-    <GrayBack title={thumbnailComponent ? '대표 이미지' : '만나는장소'}>
-      <div css={thumnailSize(thumbnail)}>
+    <GrayBack title={type === 'thumbnail' ? '대표 이미지' : '만나는장소'}>
+      <div css={thumbnailSize(thumbnail)}>
         <button onClick={() => document.getElementById('thumbnailUpload')?.click()}>
           <ImagePlus size={100} css={{ color: '#fff' }} />
         </button>
@@ -44,7 +44,7 @@ const Thumbnail = ({ thumbnailComponent }: ThumnailProps) => {
 
 export default Thumbnail;
 
-const thumnailSize = (thumbnail: string) => css`
+const thumbnailSize = (thumbnail: string) => css`
   width: 100%;
   height: 400px;
   background-image: url(${thumbnail});
