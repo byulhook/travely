@@ -13,6 +13,7 @@ const breadcrumbsMap: { [key: string]: string } = {
   'my-travel-list': '참여한 여행',
   'my-account': '계정',
   'my-created-travel': '내가 만든 여행',
+  'manage-my-travel': '내 여행 관리',
   'my-travel': '내 여행',
   'travel-detail': '여행 상세',
 };
