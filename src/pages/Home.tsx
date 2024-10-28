@@ -1,114 +1,47 @@
 import TagCardWrap from '@/components/TagCardWrap';
 import TravelCard from '@/components/TravelCard';
-import { TagType } from '@/types/tagType';
+import travelCardMockData from '@/data/travelCardMockData';
 import { css } from '@emotion/react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import thumbnail from '@/assets/thumb.png';
 
-interface IDatas {
-  imgSrc: string;
-  title: string;
-  userName: string;
-  tags: TagType[];
-  price: string;
-  rating: string;
-  reviewCount: string;
-  people: string;
-  bookMark: boolean;
-}
-
-const datas: IDatas[] = [
-  {
-    imgSrc: thumbnail,
-    title: '대한민국 국밥 TOP 30',
-    userName: '하루얌',
-    tags: ['Food', 'Culture'],
-    price: '49000',
-    rating: '5.0',
-    reviewCount: '23',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: thumbnail,
-    title: '서울 최고의 김치찌개 맛집',
-    userName: '맛집탐방러',
-    tags: ['Food', 'Festival'],
-    price: '42000',
-    rating: '4.8',
-    reviewCount: '18',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: thumbnail,
-    title: '강릉 해변에서 즐기는 바비큐',
-    userName: '여행러버',
-    tags: ['Nature', 'Food'],
-    price: '60000',
-    rating: '4.9',
-    reviewCount: '35',
-    people: '1',
-    bookMark: true,
-  },
-  {
-    imgSrc: thumbnail,
-    title: '부산의 밤을 즐기는 방법',
-    userName: '밤하늘',
-    tags: ['Culture', 'K-POP'],
-    price: '55000',
-    rating: '4.7',
-    reviewCount: '12',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: thumbnail,
-    title: '부산의 밤을 즐기는 방법',
-    userName: '밤하늘',
-    tags: ['Culture', 'K-POP'],
-    price: '55000',
-    rating: '4.7',
-    reviewCount: '12',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: thumbnail,
-    title: '부산의 밤을 즐기는 방법',
-    userName: '밤하늘',
-    tags: ['Culture', 'K-POP'],
-    price: '55000',
-    rating: '4.7',
-    reviewCount: '12',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: thumbnail,
-    title: '부산의 밤을 즐기는 방법',
-    userName: '밤하늘',
-    tags: ['Culture', 'K-POP'],
-    price: '55000',
-    rating: '4.7',
-    reviewCount: '12',
-    people: '1',
-    bookMark: false,
-  },
-  {
-    imgSrc: thumbnail,
-    title: '부산의 밤을 즐기는 방법',
-    userName: '밤하늘',
-    tags: ['Culture', 'K-POP'],
-    price: '55000',
-    rating: '4.7',
-    reviewCount: '12',
-    people: '1',
-    bookMark: false,
-  },
-];
+const mockDatas = travelCardMockData;
 
 const Home = () => {
+  const userId = 'user001';
+  const [cardDatas, setCardDatas] = useState(null);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['home-travel-list'],
+    queryFn: () => fetchHomeTravelList(userId),
+  });
+  const fetchHomeTravelList = async (userId: string) => {
+    try {
+      const res = await axios.post('http://3.37.101.147:3000/api/v1/travels/home-travel-list', {
+        userId,
+      });
+      return res.data.data.travels;
+    } catch (error) {
+      console.error('여행 목록을 조회하는데 실패했습니다: ' + error);
+      throw error;
+    }
+  };
+  useEffect(() => {
+    if (data) {
+      setCardDatas(data);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return <p>loading...</p>;
+  }
+
+  if (isError) {
+    return null;
+  }
+
+  console.log(cardDatas);
   return (
     <div css={home}>
       <TagCardWrap shape="square" />
@@ -118,19 +51,8 @@ const Home = () => {
           <Link to="/travel-list">🔥 함께 떠나요 NEW</Link>
         </h3>
         <div className="grid">
-          {datas.map((data, i) => (
-            <TravelCard
-              key={i}
-              imgSrc={data.imgSrc}
-              title={data.title}
-              userName={data.userName}
-              tags={data.tags}
-              price={data.price}
-              rating={data.rating}
-              reviewCount={data.reviewCount}
-              people={data.people}
-              bookMark={data.bookMark}
-            />
+          {mockDatas.map((data, i) => (
+            <TravelCard cardData={data} key={i} />
           ))}
         </div>
       </div>
