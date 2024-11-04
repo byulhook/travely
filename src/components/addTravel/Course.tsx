@@ -13,8 +13,10 @@ const Course = () => {
 
   const handleAddCourse = () => {
     if (courseRef.current) {
-      addField('courseList', courseRef.current.value);
-      courseRef.current.value = '';
+      if (courseRef.current.value.trim() !== '') {
+        addField('courseList', courseRef.current.value);
+        courseRef.current.value = '';
+      }
     }
   };
 
@@ -49,7 +51,7 @@ const Course = () => {
           onKeyDown={(e) => handleKeyDown(e)}
           onCompositionStart={() => setIsComposing(true)}
           onCompositionEnd={() => setIsComposing(false)}
-          placeholder="40자 내외로 여행 코스를 작성해주세요."
+          placeholder="40자 내외로 여행 코스를 추가해주세요."
         />
         <button css={plusBtn} onClick={handleAddCourse}>
           <CirclePlus size={24} />

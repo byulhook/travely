@@ -88,6 +88,9 @@ const list = css`
       transform: scale(1.2);
     }
   }
+  & * {
+    display: block;
+  }
 `;
 
 const faqlist = css`
@@ -108,6 +111,9 @@ const faqlist = css`
     & p {
       font-weight: 700;
     }
+  }
+  & * {
+    display: block;
   }
 `;
 

@@ -6,7 +6,7 @@ interface UseImageUploadPM {
   enabled: boolean;
 }
 
-const useImageUpload = ({ formData, enabled }: UseImageUploadPM) => {
+const useGetImageUrls = ({ formData, enabled }: UseImageUploadPM) => {
   return useQuery({
     queryKey: ['imageUpload', formData],
     queryFn: async () => {
@@ -24,4 +24,4 @@ const useImageUpload = ({ formData, enabled }: UseImageUploadPM) => {
     enabled,
   });
 };
-export default useImageUpload;
+export default useGetImageUrls;

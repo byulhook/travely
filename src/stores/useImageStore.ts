@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface ImageStore {
+export interface ImageStore {
   thumbnail: string;
   meetingSpace: string;
   introSrcs: string[];

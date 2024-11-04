@@ -3,6 +3,7 @@ import useFieldStore, { Schedule } from '@/stores/useFieldStore';
 import { CirclePlus, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import Team from '@/components/Team';
+import { useLocation } from 'react-router-dom';
 
 const ScheduleTeam = () => {
   const [isComposing, setIsComposing] = useState(false);
@@ -12,6 +13,7 @@ const ScheduleTeam = () => {
   const startDateRef = useRef<HTMLInputElement>(null);
   const endDateRef = useRef<HTMLInputElement>(null);
   const membersRef = useRef<HTMLSelectElement>(null);
+  const location = useLocation();
 
   const handleAddSchedule = () => {
     if (fields.scheduleList.length >= 4) {
@@ -19,14 +21,20 @@ const ScheduleTeam = () => {
       return;
     }
     if (startDateRef.current && endDateRef.current && membersRef.current) {
-      const newSchedule: Schedule = {
-        date: `${startDateRef.current.value} ~ ${endDateRef.current.value}`,
-        members: membersRef.current.value,
-      };
-      addField('scheduleList', newSchedule);
-      startDateRef.current.value = '';
-      endDateRef.current.value = '';
-      membersRef.current.value = '';
+      if (
+        startDateRef.current.value.trim() !== '' &&
+        endDateRef.current.value.trim() !== '' &&
+        membersRef.current.value.trim() !== ''
+      ) {
+        const newSchedule: Schedule = {
+          date: `${startDateRef.current.value} ~ ${endDateRef.current.value}`,
+          members: membersRef.current.value,
+        };
+        addField('scheduleList', newSchedule);
+        startDateRef.current.value = '';
+        endDateRef.current.value = '';
+        membersRef.current.value = '';
+      }
     }
   };
 
@@ -54,54 +62,56 @@ const ScheduleTeam = () => {
           </li>
         ))}
       </ul>
-      <div css={scheduleAddWrapper}>
-        <div css={inputRowWrapper}>
-          <label css={labelStyle}>일정</label>
-          <input
-            css={smallTextBox}
-            ref={startDateRef}
-            type="date"
-            placeholder="시작 날짜"
-            onKeyDown={(e) => handleKeyDown(e)}
-            onCompositionStart={() => setIsComposing(true)}
-            onCompositionEnd={() => setIsComposing(false)}
-          />
-          <span css={tilde}>~</span>
-          <input
-            css={smallTextBox}
-            ref={endDateRef}
-            type="date"
-            placeholder="종료 날짜"
-            onKeyDown={(e) => handleKeyDown(e)}
-            onCompositionStart={() => setIsComposing(true)}
-            onCompositionEnd={() => setIsComposing(false)}
-          />
-        </div>
-        <div css={inputRowWithButtonWrapper}>
+      {location.pathname === '/add-for-find-guide' && fields.scheduleList.length < 1 && (
+        <div css={scheduleAddWrapper}>
           <div css={inputRowWrapper}>
-            <label css={labelStyle}>모집인원</label>
-            <select
+            <label css={labelStyle}>일정</label>
+            <input
               css={smallTextBox}
-              ref={membersRef}
-              defaultValue=""
+              ref={startDateRef}
+              type="date"
+              placeholder="시작 날짜"
+              onKeyDown={(e) => handleKeyDown(e)}
               onCompositionStart={() => setIsComposing(true)}
               onCompositionEnd={() => setIsComposing(false)}
-            >
-              <option value="" disabled>
-                본인제외
-              </option>
-              {[1, 2, 3, 4, 5, 6, 7].map((num) => (
-                <option key={num} value={num}>
-                  {num}명
-                </option>
-              ))}
-            </select>
+            />
+            <span css={tilde}>~</span>
+            <input
+              css={smallTextBox}
+              ref={endDateRef}
+              type="date"
+              placeholder="종료 날짜"
+              onKeyDown={(e) => handleKeyDown(e)}
+              onCompositionStart={() => setIsComposing(true)}
+              onCompositionEnd={() => setIsComposing(false)}
+            />
           </div>
-          <button css={plusBtn} onClick={handleAddSchedule}>
-            <CirclePlus size={24} />
-          </button>
+          <div css={inputRowWithButtonWrapper}>
+            <div css={inputRowWrapper}>
+              <label css={labelStyle}>모집인원</label>
+              <select
+                css={smallTextBox}
+                ref={membersRef}
+                defaultValue=""
+                onCompositionStart={() => setIsComposing(true)}
+                onCompositionEnd={() => setIsComposing(false)}
+              >
+                <option value="" disabled>
+                  본인제외
+                </option>
+                {[1, 2, 3, 4, 5, 6, 7].map((num) => (
+                  <option key={num} value={num}>
+                    {num}명
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button css={plusBtn} onClick={handleAddSchedule}>
+              <CirclePlus size={24} />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -125,7 +135,7 @@ const scheduleList = css`
   border-radius: 8px;
   background-color: #f8f8f8;
   margin-bottom: 10px;
-  padding: 10px 20px;
+  padding: 20px;
   & button {
     color: #888;
     margin-left: 10px;
@@ -133,6 +143,14 @@ const scheduleList = css`
     :hover {
       transform: scale(1.2);
     }
+    * {
+      display: block;
+    }
+  }
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
