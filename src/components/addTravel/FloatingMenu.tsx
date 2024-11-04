@@ -11,8 +11,11 @@ const FloatingMenu = ({ onClick }: FloatingMenuProps) => {
   const sections = useSectionsStore((state) => state.sections);
   const setOpenSection = useSectionsStore((state) => state.setOpenSection);
   const location = useLocation();
+
+  const menuHeight = location.pathname === '/add-for-find-guide' ? '260px' : '520px';
+
   return (
-    <MenuContainer location={location.pathname}>
+    <MenuContainer menuHeight={menuHeight}>
       {location.pathname === '/add-for-find-guide' ? (
         <>
           <MenuItem>
@@ -112,11 +115,11 @@ const FloatingMenu = ({ onClick }: FloatingMenuProps) => {
 
 export default FloatingMenu;
 
-const MenuContainer = styled.div<{ location: string }>`
+const MenuContainer = styled.div<{ menuHeight: string }>`
   position: sticky;
   top: 20px;
   min-width: 240px;
-  height: ${({ location }) => (location === '/add-for-find-guide' ? '260px' : '520px')};
+  height: ${({ menuHeight }) => menuHeight};
   padding: 16px;
   border: 1px solid #d2d2d2;
   border-radius: 8px;

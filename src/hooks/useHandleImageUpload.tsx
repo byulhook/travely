@@ -1,21 +1,30 @@
 import useGetImageUrls from '@/hooks/useGetImageUrls';
 import { ImageStore } from '@/stores/useImageStore';
 import prepareImageUpload from '@/utils/prepareImageUpload';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useHandleImageUpload = (images: ImageStore) => {
   const [enabled, setEnabled] = useState(false);
   const formData = new FormData();
   const { data: uploadedImages } = useGetImageUrls({ formData, enabled });
 
+  useEffect(() => {
+    return () => {
+      setEnabled(false);
+    };
+  }, []);
+
   const uploadImages = () => {
     if (images.thumbnail === '') return;
-
-    setEnabled(true);
-    prepareImageUpload(images, formData);
-    if (uploadedImages) {
-      setEnabled(false);
-      console.log(uploadedImages);
+    try {
+      setEnabled(true);
+      prepareImageUpload(images, formData);
+      if (uploadedImages) {
+        setEnabled(false);
+        console.log(uploadedImages);
+      }
+    } catch (error) {
+      console.warn(error);
     }
   };
 
