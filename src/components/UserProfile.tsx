@@ -39,12 +39,11 @@ const userProfileStyles = css`
   .profile-container {
     display: flex;
     align-items: center;
-    padding: 10px;
   }
 
   img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 12px;
   }
@@ -59,7 +58,7 @@ const userProfileStyles = css`
     }
 
     .name {
-      font-weight: bold;
+      font-weight: 500;
       margin-right: 8px;
       font-size: 15px;
     }

@@ -1,16 +1,14 @@
+// FloatingMenu.tsx
 import styled from '@emotion/styled';
 import { CircleMinus, CirclePlus } from 'lucide-react';
-import { useState } from 'react';
 
-export const FloatingMenu = () => {
-  const [openSections, setOpenSections] = useState<string[]>([]);
+interface FloatingMenuProps {
+  openSections: string[];
+  toggleSection: (section: string) => void;
+  onClick: () => void;
+}
 
-  const toggleSection = (section: string) => {
-    setOpenSections((prev) =>
-      prev.includes(section) ? prev.filter((item) => item !== section) : [...prev, section],
-    );
-  };
-
+const FloatingMenu = ({ openSections, toggleSection, onClick }: FloatingMenuProps) => {
   return (
     <MenuContainer>
       <MenuItem>
@@ -75,11 +73,13 @@ export const FloatingMenu = () => {
 
       <BottomButtons>
         <TempSaveButton>임시저장</TempSaveButton>
-        <CompleteButton>작성완료</CompleteButton>
+        <CompleteButton onClick={onClick}>작성완료</CompleteButton>
       </BottomButtons>
     </MenuContainer>
   );
 };
+
+export default FloatingMenu;
 
 // 스타일 정의
 const MenuContainer = styled.div`

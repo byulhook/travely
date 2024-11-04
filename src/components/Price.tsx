@@ -2,13 +2,12 @@ import formatCurrency from '@/utils/formatCurrency';
 import { css } from '@emotion/react';
 
 interface IPriceProps {
-  price: string;
-  people: string;
+  price: number;
 }
-const Price: React.FC<IPriceProps> = ({ price, people }) => {
+const Price: React.FC<IPriceProps> = ({ price }) => {
   return (
     <p css={priceWrap}>
-      {formatCurrency(price)} <span>/ {people}인</span>
+      {formatCurrency(price)} <span>/ 1인</span>
     </p>
   );
 };

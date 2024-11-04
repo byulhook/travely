@@ -1,4 +1,14 @@
 import { TagPath, TagType } from '@/types/tagType';
+import tagFoodImg from '@/assets/tag-food.webp';
+import tagCultureImg from '@/assets/tag-culture.webp';
+import tagHealingImg from '@/assets/tag-healing.webp';
+import tagNatureImg from '@/assets/tag-nature.webp';
+import tagSportsImg from '@/assets/tag-sports.webp';
+import tagFestivalImg from '@/assets/tag-festival.webp';
+import tagKpopImg from '@/assets/tag-kpop.webp';
+import tagKdramaImg from '@/assets/tag-kdrama.webp';
+import tagJejuImg from '@/assets/tag-jeju.webp';
+import tagEtcImg from '@/assets/tag-etc.webp';
 
 interface ITagData {
   name: TagType;
@@ -7,14 +17,14 @@ interface ITagData {
 }
 
 export const tagDatas: ITagData[] = [
-  { name: 'Food', imgSrc: '/src/assets/tag-food.webp', path: 'food' },
-  { name: 'Culture', imgSrc: '/src/assets/tag-culture.webp', path: 'culture' },
-  { name: 'Healing', imgSrc: '/src/assets/tag-healing.webp', path: 'healing' },
-  { name: 'Nature', imgSrc: '/src/assets/tag-nature.webp', path: 'nature' },
-  { name: 'Sports', imgSrc: '/src/assets/tag-sports.webp', path: 'sports' },
-  { name: 'Festival', imgSrc: '/src/assets/tag-festival.webp', path: 'festival' },
-  { name: 'K-POP', imgSrc: '/src/assets/tag-kpop.webp', path: 'kpop' },
-  { name: 'K-DRAMA', imgSrc: '/src/assets/tag-kdrama.webp', path: 'kdrama' },
-  { name: 'JEJU', imgSrc: '/src/assets/tag-jeju.webp', path: 'jeju' },
-  { name: 'etc.', imgSrc: '/src/assets/tag-etc.webp', path: 'etc' },
+  { name: 'Food', imgSrc: tagFoodImg, path: 'food' },
+  { name: 'Culture', imgSrc: tagCultureImg, path: 'culture' },
+  { name: 'Healing', imgSrc: tagHealingImg, path: 'healing' },
+  { name: 'Nature', imgSrc: tagNatureImg, path: 'nature' },
+  { name: 'Sports', imgSrc: tagSportsImg, path: 'sports' },
+  { name: 'Festival', imgSrc: tagFestivalImg, path: 'festival' },
+  { name: 'K-POP', imgSrc: tagKpopImg, path: 'kpop' },
+  { name: 'K-DRAMA', imgSrc: tagKdramaImg, path: 'kdrama' },
+  { name: 'JEJU', imgSrc: tagJejuImg, path: 'jeju' },
+  { name: 'etc.', imgSrc: tagEtcImg, path: 'etc' },
 ];

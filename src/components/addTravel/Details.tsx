@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import useFieldStore, { Options } from '@/stores/useFieldStore';
 import { useRef, useState } from 'react';
 import DetailsList from '@/components/addTravel/DetailsList';
+import Thumbnail from '@/components/addTravel/Thumbnail';
 
 interface DetailsProps {
   title: string;
@@ -70,6 +71,7 @@ const Details = ({ title }: DetailsProps) => {
               <CirclePlus size={24} />
             </button>
           </div>
+          <Thumbnail type="meetingSpace" />
         </>
       ) : (
         <>

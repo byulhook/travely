@@ -4,6 +4,7 @@ import useLoginStore from '@/stores/useLoginStore';
 import useModalStore from '@/stores/useModalStore';
 import { css } from '@emotion/react';
 import { signOut } from 'firebase/auth';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const MyAccount = () => {
@@ -21,6 +22,13 @@ const MyAccount = () => {
       console.error('로그아웃에 실패했습니다 :', error);
     }
   };
+
+  useEffect(() => {
+    if (!isLogin) {
+      setModalName(null);
+      navigate('/');
+    }
+  }, [isLogin, navigate, setModalName]);
 
   return (
     <div css={myAccountWrap}>
