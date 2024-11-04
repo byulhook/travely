@@ -6,11 +6,11 @@ import { css } from '@emotion/react';
 import { Bookmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-interface ICardDataProps {
+interface ITravelCardDataProps {
   cardData: ITravelCard;
 }
 
-const TravelCard: React.FC<ICardDataProps> = ({ cardData }) => {
+const TravelCard: React.FC<ITravelCardDataProps> = ({ cardData }) => {
   const { thumbnail, travelTitle, createdBy, travelPrice, review, tag, bookmark } = cardData;
   return (
     <Link to="/travel-detail">
