@@ -14,6 +14,7 @@ import TravelDetail from '@/pages/TravelDetail';
 import Bookmark from '@/pages/Bookmark';
 import MyAccount from '@/pages/MyAccount';
 import AddForFindGuide from '@/pages/AddForFindGuide';
+import MyFindGuide from '@/pages/MyFindGuide';
 
 const PATH = {
   HOME: '/',
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
               {
                 path: 'my-reviews',
                 element: <MyReviews />,
+              },
+              {
+                path: 'my-find-guide',
+                element: <MyFindGuide />,
               },
               {
                 path: 'my-inquiries',
