@@ -2,23 +2,29 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 interface UseImageUploadPM {
-  formData: FormData;
+  preparedImageData: FormData | null;
   enabled: boolean;
 }
 
-const useGetImageUrls = ({ formData, enabled }: UseImageUploadPM) => {
+const useGetImageUrls = ({ preparedImageData, enabled }: UseImageUploadPM) => {
   return useQuery({
-    queryKey: ['imageUpload', formData],
+    queryKey: ['imageUpload', preparedImageData],
     queryFn: async () => {
-      try {
-        const response = await axios.post('http://3.37.101.147:3000/api/images/upload', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        return response.data.imageUrls;
-      } catch (error) {
-        console.error('업로드 오류:', error);
+      if (preparedImageData) {
+        try {
+          const response = await axios.post(
+            `${import.meta.env.VITE_S3_URL}/api/images/upload`,
+            preparedImageData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          );
+          return response.data.imageUrls;
+        } catch (error) {
+          console.error('업로드 오류:', error);
+        }
       }
     },
     enabled,
