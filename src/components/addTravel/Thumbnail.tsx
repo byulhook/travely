@@ -24,8 +24,11 @@ const Thumbnail = ({ type }: ThumbnailProps) => {
         }, 3000);
         return;
       }
-      if (!file.type.startsWith('image/')) {
-        setErrMessage('이미지 파일만 업로드 가능합니다.');
+      if (
+        !file.type.startsWith('image/') ||
+        !['image/jpeg', 'image/png', 'image/jpg'].includes(file.type)
+      ) {
+        setErrMessage('jpeg, png, jpg 형식의 이미지 파일만 업로드 가능합니다.');
         setTimeout(() => {
           setErrMessage('');
         }, 3000);

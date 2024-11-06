@@ -4,10 +4,6 @@ const addImageToFormData = (formData: FormData, type: string, base64String: stri
   base64String = base64String || '';
   if (!base64String) return;
 
-  if (!/^data:image\/(jpeg|png|gif);base64,/.test(base64String)) {
-    throw new Error('유효하지 않은 이미지 형식입니다.');
-  }
-
   const [mimeString, base64Data] = base64String.split(',');
   const byteString = atob(base64Data);
   const ab = new Uint8Array(byteString.length);
@@ -17,7 +13,10 @@ const addImageToFormData = (formData: FormData, type: string, base64String: stri
   }
 
   const file = new Blob([ab], { type: mimeString.split(':')[1].split(';')[0] });
-  formData.append(type, file, `${type}-${Math.random()}.jpg`);
+  const mimeType = mimeString.split(':')[1].split(';')[0];
+  const extension = mimeType.split('/')[1];
+  const timestamp = new Date().getTime();
+  formData.append(type, file, `${type}-${timestamp}.${extension}`);
 };
 
 const prepareImageUpload = (images: ImageStore) => {
