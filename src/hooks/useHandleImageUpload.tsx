@@ -7,7 +7,7 @@ const useHandleImageUpload = (images: ImageStore) => {
   const preparedImageData = useRef<FormData | null>(null);
   const { data: uploadedImageUrls } = useGetImageUrls({
     preparedImageData: preparedImageData.current,
-    enabled: !!preparedImageData,
+    enabled: !!preparedImageData.current,
   });
 
   const uploadImages = () => {
@@ -20,6 +20,7 @@ const useHandleImageUpload = (images: ImageStore) => {
         return uploadedImageUrls;
       }
     } catch (error) {
+      preparedImageData.current = null;
       console.warn(error);
     }
   };
