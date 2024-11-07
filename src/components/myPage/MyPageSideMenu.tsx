@@ -15,6 +15,10 @@ const sideMeunItems = [
     name: '작성 후기',
     to: 'my-reviews',
   },
+  {
+    name: '가이드 찾아요',
+    to: 'my-find-guide',
+  },
 ];
 
 const MyPageSideMenu = () => {

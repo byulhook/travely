@@ -30,7 +30,7 @@ const Details = ({ title }: DetailsProps) => {
   const addFieldPmCheck = () => {
     if (option === 'faqs') {
       if (newFieldRef.current && answer.current) {
-        if (newFieldRef.current.value !== '' && answer.current.value !== '') {
+        if (newFieldRef.current.value.trim() !== '' && answer.current.value.trim() !== '') {
           addField(option, newFieldRef.current.value, answer.current.value);
           newFieldRef.current.value = '';
           answer.current.value = '';
@@ -38,8 +38,10 @@ const Details = ({ title }: DetailsProps) => {
       }
     } else {
       if (newFieldRef.current) {
-        addField(option, newFieldRef.current.value);
-        newFieldRef.current.value = '';
+        if (newFieldRef.current.value.trim() !== '') {
+          addField(option, newFieldRef.current.value);
+          newFieldRef.current.value = '';
+        }
       }
     }
   };
