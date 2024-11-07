@@ -66,7 +66,7 @@ const BreadCrumb = () => {
           link = '/my-page/my-created-travel';
         }
         if (path === 'manage-my-travel') {
-          link = window.location.pathname;
+          link = location.pathname;
         }
         return (
           <li key={i + 1}>
