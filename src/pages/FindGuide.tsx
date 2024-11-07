@@ -12,7 +12,7 @@ const FindGuide = () => {
       <div className="page-title">
         <h2>가이드 찾아요</h2>
         <BorderBtn color="#4a95f2">
-          <Link to="">가이드 찾아요 +</Link>
+          <Link to="/add-for-find-guide">가이드 찾아요 +</Link>
         </BorderBtn>
       </div>
 
