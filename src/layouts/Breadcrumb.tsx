@@ -25,9 +25,8 @@ const BreadCrumb = () => {
   const location = useLocation();
   const paths = location.pathname.split('/').filter((item) => item !== '');
   if (paths.length === 0) return null;
-  console.log(paths);
+
   paths.forEach((path, _, arr) => {
-    console.log(path);
     if (path === 'add-travel' || path === 'travel-detail') {
       arr.unshift('travel-list');
     }

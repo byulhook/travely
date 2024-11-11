@@ -13,13 +13,32 @@ import logo from '@/assets/logo-black.png';
 import googleLogo from '@/assets/google-icon.svg';
 import kakaoLogo from '@/assets/kakao-icon.svg';
 import basicProfile from '@/assets/basicProfile.png';
+import axios from 'axios';
+import useUserStore from '@/stores/useUserStore';
 
 const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
-  const [user, setUser] = useState<FirebaseUser | null>(null);
+  const { user, setUser } = useUserStore((state) => state);
   const { isLogin, setIsLogin } = useLoginStore((state) => state);
   const [isLoading, setIsLoading] = useState(true);
   const { modalName, setModalName } = useModalStore((state) => state);
   const isOpen = 'modal-login' === modalName;
+
+  const postLogin = async (userInfo: FirebaseUser) => {
+    const user = {
+      socialName: userInfo.displayName,
+      userEmail: userInfo.email,
+      userProfileImage: userInfo.photoURL,
+    };
+    try {
+      const result = await axios.post(`${import.meta.env.VITE_S3_URL}/api/v1/users/login`, {
+        ...user,
+      });
+      const { userProfileImage, socialName, userEmail, isVerifiedUser } = result.data.data;
+      setUser({ userProfileImage, socialName, userEmail, isVerifiedUser });
+    } catch (error) {
+      console.error('로그인 처리에 오류가 발생했습니다.:', error);
+    }
+  };
 
   const handleLogin = (Oauth: 'google' | 'kakao') => {
     if (Oauth === 'google') {
@@ -32,8 +51,8 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
 
   const loginGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
+      const userDataFromGoogle = await signInWithPopup(auth, provider);
+      postLogin(userDataFromGoogle.user);
     } catch (error) {
       console.error('구글 계정 로그인에 실패했습니다.', error);
     }
@@ -41,10 +60,8 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
+      if (!user) {
+        setUser(null); //로그아웃 api?
       }
       setIsLoading(false);
     });
@@ -62,7 +79,7 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
 
   if (isLogin) {
     if (!user) return;
-    const userThumbnail = user.photoURL;
+    const userThumbnail = user.userProfileImage;
 
     return (
       <div css={logined(light)}>
