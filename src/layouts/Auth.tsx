@@ -1,11 +1,9 @@
 import AlarmBadge from '@/components/AlarmBadge';
 import FiledBtn from '@/components/FiledBtn';
 import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User as FirebaseUser, signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '@/firebase';
-import useLoginStore from '@/stores/useLoginStore';
 import * as Dialog from '@radix-ui/react-dialog';
 import useModalStore from '@/stores/useModalStore';
 import { X } from 'lucide-react';
@@ -18,8 +16,6 @@ import useUserStore from '@/stores/useUserStore';
 
 const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
   const { user, setUser } = useUserStore((state) => state);
-  const { isLogin, setIsLogin } = useLoginStore((state) => state);
-  const [isLoading, setIsLoading] = useState(true);
   const { modalName, setModalName } = useModalStore((state) => state);
   const isOpen = 'modal-login' === modalName;
 
@@ -58,27 +54,9 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (!user) {
-        setUser(null); //로그아웃 api?
-      }
-      setIsLoading(false);
-    });
+  console.log(user);
 
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [user, setIsLogin]);
-
-  if (isLogin) {
-    if (!user) return;
+  if (user) {
     const userThumbnail = user.userProfileImage;
 
     return (
@@ -100,53 +78,51 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
       </div>
     );
   } else {
-    if (!isLoading) {
-      return (
-        <>
-          <Dialog.Root
-            open={isOpen}
-            onOpenChange={(open) => {
-              if (!open) {
-                setModalName(null);
-              }
-            }}
-          >
-            <Dialog.Trigger asChild>
-              <FiledBtn
-                children="로그인"
-                color="#4a95f2"
-                onClick={() => setModalName('modal-login')}
-              />
-            </Dialog.Trigger>
-            <Dialog.Portal>
-              <div css={loginModalWrap}>
-                <Dialog.Overlay className="modal-overlay" />
-                <Dialog.Content className="modal-content">
-                  <Dialog.Title className="modal-title">
-                    <img src={logo} alt="" />
-                    <p>모두가 가이드가 될 수 있는 곳</p>
-                  </Dialog.Title>
-                  <div className="btn-wrap">
-                    <FiledBtn color="#f3f3f3" onClick={() => handleLogin('google')}>
-                      <img src={googleLogo} alt="" />
-                      구글로 계속하기
-                    </FiledBtn>
+    return (
+      <>
+        <Dialog.Root
+          open={isOpen}
+          onOpenChange={(open) => {
+            if (!open) {
+              setModalName(null);
+            }
+          }}
+        >
+          <Dialog.Trigger asChild>
+            <FiledBtn
+              children="로그인"
+              color="#4a95f2"
+              onClick={() => setModalName('modal-login')}
+            />
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <div css={loginModalWrap}>
+              <Dialog.Overlay className="modal-overlay" />
+              <Dialog.Content className="modal-content">
+                <Dialog.Title className="modal-title">
+                  <img src={logo} alt="" />
+                  <p>모두가 가이드가 될 수 있는 곳</p>
+                </Dialog.Title>
+                <div className="btn-wrap">
+                  <FiledBtn color="#f3f3f3" onClick={() => handleLogin('google')}>
+                    <img src={googleLogo} alt="" />
+                    구글로 계속하기
+                  </FiledBtn>
 
-                    <FiledBtn color="#FFE600" onClick={() => handleLogin('kakao')}>
-                      <img src={kakaoLogo} alt="" />
-                      카카오로 계속하기
-                    </FiledBtn>
-                  </div>
-                  <Dialog.Close className="modal-close">
-                    <X size="25px" />
-                  </Dialog.Close>
-                </Dialog.Content>
-              </div>
-            </Dialog.Portal>
-          </Dialog.Root>
-        </>
-      );
-    }
+                  <FiledBtn color="#FFE600" onClick={() => handleLogin('kakao')}>
+                    <img src={kakaoLogo} alt="" />
+                    카카오로 계속하기
+                  </FiledBtn>
+                </div>
+                <Dialog.Close className="modal-close">
+                  <X size="25px" />
+                </Dialog.Close>
+              </Dialog.Content>
+            </div>
+          </Dialog.Portal>
+        </Dialog.Root>
+      </>
+    );
   }
 };
 
