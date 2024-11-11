@@ -5,48 +5,20 @@ import Details from '@/components/addTravel/Details';
 import Thumbnail from '@/components/addTravel/Thumbnail';
 import GrayBack from '@/components/GrayBack';
 import { css } from '@emotion/react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Introduction from '@/components/addTravel/Introduction';
 import useImageStore from '@/stores/useImageStore';
-import useImageUpload from '@/hooks/useImageUpload';
 import FloatingMenu from '@/components/addTravel/FloatingMenu';
+import useSectionsStore from '@/stores/useSectionsStore';
+import useHandleImageUpload from '@/hooks/useHandleImageUpload';
 
 const AddTravel = () => {
-  const [enabled, setEnabled] = useState(false);
-  const [openSections, setOpenSections] = useState<string[]>([]);
-
+  const sections = useSectionsStore((state) => state.sections);
+  const images = useImageStore((state) => state.images);
   const titleRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
-  const images = useImageStore((state) => state.images);
 
-  const toggleSection = (section: string) => {
-    setOpenSections((prev) =>
-      prev.includes(section) ? prev.filter((item) => item !== section) : [...prev, section],
-    );
-  };
-  const formData = new FormData();
-  const { data: uploadedImages } = useImageUpload({ formData, enabled });
-
-  const handleUpload = () => {
-    if (images.thumbnail === '') return;
-    setEnabled(true);
-    const uploadSrc = [images.thumbnail].concat(images.introSrcs); // 0번째는 무조건 썸네일url입니다
-    uploadSrc.forEach((src) => {
-      const [mimeString, base64Data] = src.split(',');
-      const byteString = atob(base64Data);
-      const ab = new Uint8Array(byteString.length);
-      for (let i = 0; i < byteString.length; i++) {
-        ab[i] = byteString.charCodeAt(i);
-      }
-      const file = new Blob([ab], { type: mimeString.split(':')[1].split(';')[0] });
-      formData.append('images', file, `image-${Math.random()}.jpg`);
-    });
-    if (uploadedImages) {
-      // uploadedImages 이미지 배포된 링크들 (0번째 썸네일, 1번째부터는 intro에 삽입한 이미지)
-      setEnabled(false);
-      console.log(uploadedImages);
-    }
-  };
+  const { uploadImages } = useHandleImageUpload(images);
 
   return (
     <div css={pageLayoutWrapper}>
@@ -71,25 +43,20 @@ const AddTravel = () => {
           <span css={{ fontSize: '14px' }}>/ 1인</span>
         </GrayBack>
 
-        {openSections.includes('포함내용') && <Details title={'포함내용'} />}
-        {openSections.includes('미포함내용') && <Details title={'미포함내용'} />}
-        {openSections.includes('이용안내') && <Details title={'이용안내'} />}
-        {openSections.includes('FAQ') && <Details title={'FAQ'} />}
+        {sections.includes('포함내용') && <Details title={'포함내용'} />}
+        {sections.includes('미포함내용') && <Details title={'미포함내용'} />}
+        {sections.includes('이용안내') && <Details title={'이용안내'} />}
+        {sections.includes('FAQ') && <Details title={'FAQ'} />}
       </div>
 
-      <FloatingMenu
-        openSections={openSections}
-        toggleSection={toggleSection}
-        onClick={handleUpload}
-      />
+      <FloatingMenu onClick={uploadImages} />
     </div>
   );
 };
 
 export default AddTravel;
 
-// 스타일 정의
-const addTravelWrapper = css`
+export const addTravelWrapper = css`
   position: relative;
   width: 680px;
   margin-right: 200px;
@@ -109,7 +76,7 @@ export const noneStyleInput = css`
   }
 `;
 
-const pageLayoutWrapper = css`
+export const pageLayoutWrapper = css`
   display: flex;
   position: relative;
 `;

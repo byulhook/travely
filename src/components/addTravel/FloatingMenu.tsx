@@ -1,75 +1,109 @@
-// FloatingMenu.tsx
+import useSectionsStore from '@/stores/useSectionsStore';
 import styled from '@emotion/styled';
 import { CircleMinus, CirclePlus } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 interface FloatingMenuProps {
-  openSections: string[];
-  toggleSection: (section: string) => void;
   onClick: () => void;
 }
 
-const FloatingMenu = ({ openSections, toggleSection, onClick }: FloatingMenuProps) => {
-  return (
-    <MenuContainer>
-      <MenuItem>
-        <span>제목</span>
-      </MenuItem>
-      <MenuItem>
-        <span>대표 이미지</span>
-      </MenuItem>
-      <MenuItem>
-        <span>상품소개</span>
-      </MenuItem>
-      <MenuItem>
-        <span>코스</span>
-      </MenuItem>
-      <MenuItem>
-        <span>태그</span>
-      </MenuItem>
-      <MenuItem>
-        <span>예약 생성</span>
-      </MenuItem>
-      <MenuItem>
-        <span>가격</span>
-      </MenuItem>
+const FloatingMenu = ({ onClick }: FloatingMenuProps) => {
+  const sections = useSectionsStore((state) => state.sections);
+  const setOpenSection = useSectionsStore((state) => state.setOpenSection);
+  const location = useLocation();
 
-      <MenuItem isOpen={openSections.includes('포함내용')}>
-        <span>포함내용</span>
-        <ToggleIcon
-          onClick={() => toggleSection('포함내용')}
-          isOpen={openSections.includes('포함내용')}
-        >
-          {openSections.includes('포함내용') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
-        </ToggleIcon>
-      </MenuItem>
-      <MenuItem isOpen={openSections.includes('미포함내용')}>
-        <span>미포함내용</span>
-        <ToggleIcon
-          onClick={() => toggleSection('미포함내용')}
-          isOpen={openSections.includes('미포함내용')}
-        >
-          {openSections.includes('미포함내용') ? (
-            <CircleMinus size={22} />
-          ) : (
-            <CirclePlus size={22} />
-          )}
-        </ToggleIcon>
-      </MenuItem>
-      <MenuItem isOpen={openSections.includes('이용안내')}>
-        <span>이용안내</span>
-        <ToggleIcon
-          onClick={() => toggleSection('이용안내')}
-          isOpen={openSections.includes('이용안내')}
-        >
-          {openSections.includes('이용안내') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
-        </ToggleIcon>
-      </MenuItem>
-      <MenuItem isOpen={openSections.includes('FAQ')}>
-        <span>FAQ</span>
-        <ToggleIcon onClick={() => toggleSection('FAQ')} isOpen={openSections.includes('FAQ')}>
-          {openSections.includes('FAQ') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
-        </ToggleIcon>
-      </MenuItem>
+  const menuHeight = location.pathname === '/add-for-find-guide' ? '260px' : '520px';
+
+  return (
+    <MenuContainer menuHeight={menuHeight}>
+      {location.pathname === '/add-for-find-guide' ? (
+        <>
+          <MenuItem>
+            <span>제목</span>
+          </MenuItem>
+          <MenuItem isOpen={sections.includes('대표이미지')}>
+            <span>대표 이미지</span>
+            <ToggleIcon
+              onClick={() => setOpenSection('대표이미지')}
+              isOpen={sections.includes('대표이미지')}
+            >
+              {sections.includes('대표이미지') ? (
+                <CircleMinus size={22} />
+              ) : (
+                <CirclePlus size={22} />
+              )}
+            </ToggleIcon>
+          </MenuItem>
+          <MenuItem>
+            <span>상품 소개</span>
+          </MenuItem>
+          <MenuItem>
+            <span>일정 및 팀 추가</span>
+          </MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem>
+            <span>제목</span>
+          </MenuItem>
+          <MenuItem>
+            <span>대표 이미지</span>
+          </MenuItem>
+          <MenuItem>
+            <span>상품소개</span>
+          </MenuItem>
+          <MenuItem>
+            <span>코스</span>
+          </MenuItem>
+          <MenuItem>
+            <span>태그</span>
+          </MenuItem>
+          <MenuItem>
+            <span>예약 생성</span>
+          </MenuItem>
+          <MenuItem>
+            <span>가격</span>
+          </MenuItem>
+
+          <MenuItem isOpen={sections.includes('포함내용')}>
+            <span>포함내용</span>
+            <ToggleIcon
+              onClick={() => setOpenSection('포함내용')}
+              isOpen={sections.includes('포함내용')}
+            >
+              {sections.includes('포함내용') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
+            </ToggleIcon>
+          </MenuItem>
+          <MenuItem isOpen={sections.includes('미포함내용')}>
+            <span>미포함내용</span>
+            <ToggleIcon
+              onClick={() => setOpenSection('미포함내용')}
+              isOpen={sections.includes('미포함내용')}
+            >
+              {sections.includes('미포함내용') ? (
+                <CircleMinus size={22} />
+              ) : (
+                <CirclePlus size={22} />
+              )}
+            </ToggleIcon>
+          </MenuItem>
+          <MenuItem isOpen={sections.includes('이용안내')}>
+            <span>이용안내</span>
+            <ToggleIcon
+              onClick={() => setOpenSection('이용안내')}
+              isOpen={sections.includes('이용안내')}
+            >
+              {sections.includes('이용안내') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
+            </ToggleIcon>
+          </MenuItem>
+          <MenuItem isOpen={sections.includes('FAQ')}>
+            <span>FAQ</span>
+            <ToggleIcon onClick={() => setOpenSection('FAQ')} isOpen={sections.includes('FAQ')}>
+              {sections.includes('FAQ') ? <CircleMinus size={22} /> : <CirclePlus size={22} />}
+            </ToggleIcon>
+          </MenuItem>
+        </>
+      )}
 
       <BottomButtons>
         <TempSaveButton>임시저장</TempSaveButton>
@@ -81,12 +115,11 @@ const FloatingMenu = ({ openSections, toggleSection, onClick }: FloatingMenuProp
 
 export default FloatingMenu;
 
-// 스타일 정의
-const MenuContainer = styled.div`
+const MenuContainer = styled.div<{ menuHeight: string }>`
   position: sticky;
   top: 20px;
   min-width: 240px;
-  height: 520px;
+  height: ${({ menuHeight }) => menuHeight};
   padding: 16px;
   border: 1px solid #d2d2d2;
   border-radius: 8px;

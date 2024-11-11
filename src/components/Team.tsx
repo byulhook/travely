@@ -4,9 +4,10 @@ import { Smile } from 'lucide-react';
 interface ITeamProps {
   max?: number;
   mbtiList?: string[];
+  size?: 'sm' | 'md';
 }
 
-const Team = ({ max = 1, mbtiList = [] }: ITeamProps) => {
+const Team = ({ max = 1, mbtiList = [], size = 'md' }: ITeamProps) => {
   const items = Array(max)
     .fill(0)
     .map((_, i) => mbtiList[i] || null);
@@ -15,9 +16,9 @@ const Team = ({ max = 1, mbtiList = [] }: ITeamProps) => {
     <ul css={teamWrap}>
       {items.map((item, i) => {
         return (
-          <li key={i}>
+          <li key={i} className={size === 'sm' ? 'small' : ''}>
             <div className={`team-item${item !== null ? ' fill' : ''}`}>
-              <Smile color="#fff" size={21} />
+              <Smile color="#fff" size={size === 'sm' ? 19 : 21} />
             </div>
             {item !== null && <p>{item}</p>}
           </li>
@@ -38,6 +39,7 @@ const teamWrap = css`
     justify-content: flex-start;
     align-items: center;
     gap: 5px;
+
     .team-item {
       width: 35px;
       height: 35px;
@@ -49,6 +51,17 @@ const teamWrap = css`
 
       &.fill {
         background-color: #4a95f2;
+      }
+    }
+    &.small {
+      gap: 3px;
+      .team-item {
+        width: 28px;
+        height: 28px;
+        border-radius: 5px;
+      }
+      p {
+        font-size: 10px;
       }
     }
     p {

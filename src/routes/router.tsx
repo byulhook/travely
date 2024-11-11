@@ -13,6 +13,9 @@ import MyCreatedTravel from '@/pages/MyCreatedTravel'; // 내가 만든 여행 �
 import TravelDetail from '@/pages/TravelDetail';
 import Bookmark from '@/pages/Bookmark';
 import MyAccount from '@/pages/MyAccount';
+import FindGuide from '@/pages/FindGuide';
+import AddForFindGuide from '@/pages/AddForFindGuide';
+import MyFindGuide from '@/pages/MyFindGuide';
 
 const PATH = {
   HOME: '/',
@@ -82,6 +85,10 @@ const router = createBrowserRouter([
                 element: <MyReviews />,
               },
               {
+                path: 'my-find-guide',
+                element: <MyFindGuide />,
+              },
+              {
                 path: 'my-inquiries',
                 element: (
                   <div>
@@ -102,6 +109,14 @@ const router = createBrowserRouter([
           {
             path: 'add-travel',
             element: <AddTravel />,
+          },
+          {
+            path: 'find-guide',
+            element: <FindGuide />,
+          },
+          {
+            path: 'add-for-find-guide',
+            element: <AddForFindGuide />,
           },
         ],
       },

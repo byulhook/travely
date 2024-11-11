@@ -9,7 +9,7 @@ const Nav: React.FC<{ light?: boolean }> = ({ light = false }) => {
           <Link to="/travel-list">함께 떠나요</Link>
         </li>
         <li>
-          <Link to="">가이드 찾아요</Link>
+          <Link to="/find-guide">가이드 찾아요</Link>
         </li>
       </ul>
     </nav>

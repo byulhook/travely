@@ -16,6 +16,7 @@ const breadcrumbsMap: { [key: string]: string } = {
   'manage-my-travel': '내 여행 관리',
   'my-travel': '내 여행',
   'travel-detail': '여행 상세',
+  'find-guide': '가이드 찾아요',
 };
 
 const tagPath = tagDatas.map((tagData) => tagData.path);
@@ -24,13 +25,18 @@ const BreadCrumb = () => {
   const location = useLocation();
   const paths = location.pathname.split('/').filter((item) => item !== '');
   if (paths.length === 0) return null;
-
+  console.log(paths);
   paths.forEach((path, _, arr) => {
+    console.log(path);
     if (path === 'add-travel' || path === 'travel-detail') {
       arr.unshift('travel-list');
     }
     if (path === 'my-travel-list' || path === 'my-created-travel') {
-      arr.splice(1, 0, 'my-travel');
+      if (arr.includes('manage-my-travel')) {
+        arr.pop();
+      } else {
+        arr.splice(1, 0, 'my-travel');
+      }
     }
     if (tagPath.includes(path as TagPath)) {
       arr.pop();
@@ -58,6 +64,9 @@ const BreadCrumb = () => {
         }
         if (path === 'my-created-travel') {
           link = '/my-page/my-created-travel';
+        }
+        if (path === 'manage-my-travel') {
+          link = location.pathname;
         }
         return (
           <li key={i + 1}>
