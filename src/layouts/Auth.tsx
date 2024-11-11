@@ -54,8 +54,6 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
     }
   };
 
-  console.log(user);
-
   if (user) {
     const userThumbnail = user.userProfileImage;
 
@@ -89,11 +87,9 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
           }}
         >
           <Dialog.Trigger asChild>
-            <FiledBtn
-              children="로그인"
-              color="#4a95f2"
-              onClick={() => setModalName('modal-login')}
-            />
+            <FiledBtn color="#4a95f2" onClick={() => setModalName('modal-login')}>
+              로그인
+            </FiledBtn>
           </Dialog.Trigger>
           <Dialog.Portal>
             <div css={loginModalWrap}>
