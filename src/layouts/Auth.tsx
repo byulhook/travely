@@ -1,11 +1,9 @@
 import AlarmBadge from '@/components/AlarmBadge';
 import FiledBtn from '@/components/FiledBtn';
 import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User as FirebaseUser, signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '@/firebase';
-import useLoginStore from '@/stores/useLoginStore';
 import * as Dialog from '@radix-ui/react-dialog';
 import useModalStore from '@/stores/useModalStore';
 import { X } from 'lucide-react';
@@ -13,13 +11,30 @@ import logo from '@/assets/logo-black.png';
 import googleLogo from '@/assets/google-icon.svg';
 import kakaoLogo from '@/assets/kakao-icon.svg';
 import basicProfile from '@/assets/basicProfile.png';
+import axios from 'axios';
+import useUserStore from '@/stores/useUserStore';
 
 const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
-  const [user, setUser] = useState<FirebaseUser | null>(null);
-  const { isLogin, setIsLogin } = useLoginStore((state) => state);
-  const [isLoading, setIsLoading] = useState(true);
+  const { user, setUser } = useUserStore((state) => state);
   const { modalName, setModalName } = useModalStore((state) => state);
   const isOpen = 'modal-login' === modalName;
+
+  const postLogin = async (userInfo: FirebaseUser) => {
+    const user = {
+      socialName: userInfo.displayName,
+      userEmail: userInfo.email,
+      userProfileImage: userInfo.photoURL,
+    };
+    try {
+      const result = await axios.post(`${import.meta.env.VITE_S3_URL}/api/v1/users/login`, {
+        ...user,
+      });
+      const { userProfileImage, socialName, userEmail, isVerifiedUser } = result.data.data;
+      setUser({ userProfileImage, socialName, userEmail, isVerifiedUser });
+    } catch (error) {
+      console.error('로그인 처리에 오류가 발생했습니다.:', error);
+    }
+  };
 
   const handleLogin = (Oauth: 'google' | 'kakao') => {
     if (Oauth === 'google') {
@@ -32,37 +47,15 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
 
   const loginGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
+      const userDataFromGoogle = await signInWithPopup(auth, provider);
+      postLogin(userDataFromGoogle.user);
     } catch (error) {
       console.error('구글 계정 로그인에 실패했습니다.', error);
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-      setIsLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [user, setIsLogin]);
-
-  if (isLogin) {
-    if (!user) return;
-    const userThumbnail = user.photoURL;
+  if (user) {
+    const userThumbnail = user.userProfileImage;
 
     return (
       <div css={logined(light)}>
@@ -83,53 +76,49 @@ const Auth: React.FC<{ light?: boolean }> = ({ light = false }) => {
       </div>
     );
   } else {
-    if (!isLoading) {
-      return (
-        <>
-          <Dialog.Root
-            open={isOpen}
-            onOpenChange={(open) => {
-              if (!open) {
-                setModalName(null);
-              }
-            }}
-          >
-            <Dialog.Trigger asChild>
-              <FiledBtn
-                children="로그인"
-                color="#4a95f2"
-                onClick={() => setModalName('modal-login')}
-              />
-            </Dialog.Trigger>
-            <Dialog.Portal>
-              <div css={loginModalWrap}>
-                <Dialog.Overlay className="modal-overlay" />
-                <Dialog.Content className="modal-content">
-                  <Dialog.Title className="modal-title">
-                    <img src={logo} alt="" />
-                    <p>모두가 가이드가 될 수 있는 곳</p>
-                  </Dialog.Title>
-                  <div className="btn-wrap">
-                    <FiledBtn color="#f3f3f3" onClick={() => handleLogin('google')}>
-                      <img src={googleLogo} alt="" />
-                      구글로 계속하기
-                    </FiledBtn>
+    return (
+      <>
+        <Dialog.Root
+          open={isOpen}
+          onOpenChange={(open) => {
+            if (!open) {
+              setModalName(null);
+            }
+          }}
+        >
+          <Dialog.Trigger asChild>
+            <FiledBtn color="#4a95f2" onClick={() => setModalName('modal-login')}>
+              로그인
+            </FiledBtn>
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <div css={loginModalWrap}>
+              <Dialog.Overlay className="modal-overlay" />
+              <Dialog.Content className="modal-content">
+                <Dialog.Title className="modal-title">
+                  <img src={logo} alt="" />
+                  <p>모두가 가이드가 될 수 있는 곳</p>
+                </Dialog.Title>
+                <div className="btn-wrap">
+                  <FiledBtn color="#f3f3f3" onClick={() => handleLogin('google')}>
+                    <img src={googleLogo} alt="" />
+                    구글로 계속하기
+                  </FiledBtn>
 
-                    <FiledBtn color="#FFE600" onClick={() => handleLogin('kakao')}>
-                      <img src={kakaoLogo} alt="" />
-                      카카오로 계속하기
-                    </FiledBtn>
-                  </div>
-                  <Dialog.Close className="modal-close">
-                    <X size="25px" />
-                  </Dialog.Close>
-                </Dialog.Content>
-              </div>
-            </Dialog.Portal>
-          </Dialog.Root>
-        </>
-      );
-    }
+                  <FiledBtn color="#FFE600" onClick={() => handleLogin('kakao')}>
+                    <img src={kakaoLogo} alt="" />
+                    카카오로 계속하기
+                  </FiledBtn>
+                </div>
+                <Dialog.Close className="modal-close">
+                  <X size="25px" />
+                </Dialog.Close>
+              </Dialog.Content>
+            </div>
+          </Dialog.Portal>
+        </Dialog.Root>
+      </>
+    );
   }
 };
 
