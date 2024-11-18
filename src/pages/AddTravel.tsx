@@ -10,7 +10,7 @@ import Introduction from '@/components/addTravel/Introduction';
 import useImageStore from '@/stores/useImageStore';
 import FloatingMenu from '@/components/addTravel/FloatingMenu';
 import useSectionsStore from '@/stores/useSectionsStore';
-import useHandleImageUpload from '@/hooks/useHandleImageUpload';
+import useHandleImageUpload from '@/hooks/custom/useHandleImageUpload';
 
 const AddTravel = () => {
   const sections = useSectionsStore((state) => state.sections);
