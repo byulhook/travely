@@ -1,4 +1,4 @@
-import useGetImageUrls from '@/hooks/useGetImageUrls';
+import useGetImageUrls from '@/hooks/query/useGetImageUrls';
 import { ImageStore } from '@/stores/useImageStore';
 import prepareImageUpload from '@/utils/prepareImageUpload';
 import { useRef } from 'react';

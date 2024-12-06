@@ -1,4 +1,4 @@
-import useHeaderWithVisual from '@/hooks/useHeaderWithVisual';
+import useHeaderWithVisual from '@/hooks/custom/useHeaderWithVisual';
 import BreadCrumb from '@/layouts/Breadcrumb';
 import Header from '@/layouts/Header';
 import HeaderWithVisual from '@/layouts/HeaderWithVisual';
