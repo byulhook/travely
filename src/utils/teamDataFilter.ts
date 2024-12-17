@@ -1,9 +1,9 @@
-import { TravelData } from '@/types/travelDataType';
+import { TravelTeamData } from '@/types/travelDataType';
 
-const teamDataFilter = (data: TravelData, type: string) => {
+const teamDataFilter = (travelTeamsData: TravelTeamData[], type: string) => {
   const today = new Date();
 
-  const filterData = data.travelTeams.filter((travelTeam) => {
+  const filterData = travelTeamsData.filter((travelTeam) => {
     const endDate = new Date(`20${travelTeam.travelEndDate.replace('.', '-')}`);
     return type === 'ongoing' ? endDate >= today : endDate < today;
   });
