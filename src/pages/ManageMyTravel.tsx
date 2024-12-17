@@ -25,11 +25,7 @@ const ManageMyTravel = () => {
   return (
     <div css={{ color: '#333' }}>
       <TravelManageHeader travelData={travelData} tab={tab} setTab={setTab} />
-      {tab ? (
-        <TravelTeam travelTeamData={teamDataFilter(teamData, 'ongoing')} />
-      ) : (
-        <TravelTeam travelTeamData={teamDataFilter(teamData, 'completed')} />
-      )}
+      <TravelTeam travelTeamData={teamDataFilter(teamData, tab ? 'ongoing' : 'completed')} />
     </div>
   );
 };
