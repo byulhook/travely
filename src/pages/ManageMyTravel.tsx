@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { data } from '@/data/travelMockData';
+import { teamData, travelData } from '@/data/travelMockData';
 import { useEffect, useState } from 'react';
 import TravelTeam from '@/components/manageMyTravel/TravelTeam';
 import TravelManageHeader from '@/components/manageMyTravel/TravelManageHeader';
@@ -13,22 +13,19 @@ const ManageMyTravel = () => {
   const { travelId } = useParams();
 
   useEffect(() => {
-    const filterData = teamDataFilter(data, tab ? 'ongoing' : 'completed');
-    setMultiPagination(filterData.length);
+    const filteredData = teamDataFilter(teamData, tab ? 'ongoing' : 'completed');
+    const filteredTeamIds = filteredData.map((team) => team.teamId);
+    setMultiPagination(filteredTeamIds);
   }, [tab]);
 
-  if (data.id !== travelId) {
+  if (travelData.travelId !== travelId) {
     return;
   }
 
   return (
     <div css={{ color: '#333' }}>
-      <TravelManageHeader travelData={data} tab={tab} setTab={setTab} />
-      {tab ? (
-        <TravelTeam data={teamDataFilter(data, 'ongoing')} />
-      ) : (
-        <TravelTeam data={teamDataFilter(data, 'completed')} />
-      )}
+      <TravelManageHeader travelData={travelData} tab={tab} setTab={setTab} />
+      <TravelTeam travelTeamData={teamDataFilter(teamData, tab ? 'ongoing' : 'completed')} />
     </div>
   );
 };

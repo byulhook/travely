@@ -1,28 +1,26 @@
 import { css } from '@emotion/react';
 import UserTable from '@/components/manageMyTravel/UserTable';
-import { travelTeamData } from '@/types/travelDataType';
+import { TravelTeamData } from '@/types/travelDataType';
 import Team from '@/components/Team';
 import MultiPagination from '@/components/manageMyTravel/MultiPagination';
 
 interface TravelTeamProps {
-  data: travelTeamData[];
+  travelTeamData: TravelTeamData[];
 }
 
-const TravelTeam = ({ data }: TravelTeamProps) => {
-  const userMBTIList: string[][] = [];
-  data.forEach((d) => {
-    const approvalUserMBTIList = d.appliedUser.filter((u) => u.status === 'approved');
-    userMBTIList.push([...approvalUserMBTIList.map((u) => u.mbti)]);
-  });
+const TravelTeam = ({ travelTeamData }: TravelTeamProps) => {
+  const userMBTIList = travelTeamData.map((team) =>
+    team.appliedUser.filter((user) => user.status === 'approved').map((user) => user.mbti),
+  );
 
   return (
     <>
-      {data.map((travelTeam, i) => (
-        <div key={travelTeam.travelStartDate} css={teamWrappeer}>
-          <p>{travelTeam.travelStartDate + ' ~ ' + travelTeam.travelEndDate}</p>
-          <Team max={travelTeam.personLimit} mbtiList={userMBTIList[i]} />
-          <UserTable data={travelTeam.appliedUser} id={i} />
-          <MultiPagination travelTeam={travelTeam} id={i} />
+      {travelTeamData.map((team, i) => (
+        <div key={team.teamId} css={teamWrapper}>
+          <p>{team.travelStartDate + ' ~ ' + team.travelEndDate}</p>
+          <Team max={team.personLimit} mbtiList={userMBTIList[i]} />
+          <UserTable data={team.appliedUser} teamId={team.teamId} />
+          <MultiPagination pageData={team.pagination} teamId={team.teamId} />
         </div>
       ))}
     </>
@@ -31,7 +29,7 @@ const TravelTeam = ({ data }: TravelTeamProps) => {
 
 export default TravelTeam;
 
-const teamWrappeer = css`
+const teamWrapper = css`
   margin-bottom: 20px;
   & p {
     font-weight: 700;

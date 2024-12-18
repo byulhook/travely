@@ -1,27 +1,27 @@
 import { css } from '@emotion/react';
-import { travelTeamData } from '@/types/travelDataType';
+import { PageData } from '@/types/travelDataType';
 import Pagination from '@mui/material/Pagination';
 import usePageStore from '@/stores/usePageStore';
 
 interface MultiPaginationProps {
-  travelTeam: travelTeamData;
-  id: number;
+  pageData: PageData;
+  teamId: string;
 }
 
-const MultiPagination = ({ travelTeam, id }: MultiPaginationProps) => {
+const MultiPagination = ({ pageData, teamId }: MultiPaginationProps) => {
   const pageContainer = usePageStore((state) => state.pageContainer);
   const setCurrentPage = usePageStore((state) => state.setCurrentPage);
-  const matchPageId = pageContainer.filter((p) => p.paginationId === id);
+  const matchPageId = pageContainer.find((p) => p.paginationId === teamId);
 
-  const handleCurrentPage = (_event: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(id, page);
+  const handleCurrentPage = (_: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(teamId, page);
   };
 
   return (
     <div css={paginationWrapper}>
       <Pagination
-        count={Math.ceil(travelTeam.appliedUser.length / 7)}
-        page={matchPageId[0]?.currentPage || 1}
+        count={pageData.totalPages}
+        page={matchPageId?.currentPage || 1}
         onChange={handleCurrentPage}
         color="primary"
         showFirstButton

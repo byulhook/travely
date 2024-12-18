@@ -6,13 +6,13 @@ import usePageStore from '@/stores/usePageStore';
 
 interface UserTableProps {
   data: ApplicationUserData[];
-  id: number;
+  teamId: string;
 }
-const COUNT_PER_PAGE = 7;
+const COUNT_PER_PAGE = 6;
 
-const UserTable = ({ data, id }: UserTableProps) => {
+const UserTable = ({ data, teamId }: UserTableProps) => {
   const pageContainer = usePageStore((state) => state.pageContainer);
-  const matchPageId = pageContainer.filter((p) => p.paginationId === id);
+  const matchPageId = pageContainer.filter((p) => p.paginationId === teamId);
   const currentPage = matchPageId[0]?.currentPage || 1;
 
   const statusData = [
