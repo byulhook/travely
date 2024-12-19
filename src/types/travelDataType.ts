@@ -19,7 +19,8 @@ export interface TravelTeamData {
   travelStartDate: string;
   travelEndDate: string;
   personLimit: number;
-  appliedUser: ApplicationUserData[];
+  appliedUsers: ApplicationUserData[];
+  approvedUsers: ApplicationUserData[];
   pagination: PageData;
 }
 export interface ApplicationUserData {
