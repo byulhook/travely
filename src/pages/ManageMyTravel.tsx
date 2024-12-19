@@ -17,7 +17,7 @@ const ManageMyTravel = () => {
   const { data: travelData } = useGetManageTravel(travelId as string);
   const { data: teamData } = useGetManageTravelTeams(
     travelId as string,
-    usePageStore.getState().pageContainer,
+    pageContainer,
     MANAGE_COUNT_PER_PAGE,
   );
 
@@ -37,11 +37,13 @@ const ManageMyTravel = () => {
 
   return (
     <div css={{ color: '#333' }}>
-      <TravelManageHeader
-        travelData={travelData}
-        isOngoingTab={isOngoingTab}
-        setIsOngoingTab={setIsOngoingTab}
-      />
+      {travelData && (
+        <TravelManageHeader
+          travelData={travelData}
+          isOngoingTab={isOngoingTab}
+          setIsOngoingTab={setIsOngoingTab}
+        />
+      )}
       {travelId && teamData && (
         <TravelTeam
           travelId={travelId}

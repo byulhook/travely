@@ -23,7 +23,7 @@ const TravelTeam = ({ travelId, travelTeamData, isOngoing }: TravelTeamProps) =>
         <div key={team.teamId} css={teamWrapper}>
           <p>{formatDate(team.travelStartDate) + ' ~ ' + formatDate(team.travelEndDate)}</p>
           <Team max={team.personLimit} mbtiList={userMBTIList[i]} />
-          {team.appliedUsers?.length > 0 ? (
+          {team.appliedUsers && team.appliedUsers?.length > 0 ? (
             <>
               <UserTable data={team.appliedUsers} />
               <MultiPagination

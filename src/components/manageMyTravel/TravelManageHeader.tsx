@@ -23,7 +23,7 @@ const TravelManageHeader = ({ travelData, isOngoingTab, setIsOngoingTab }: Manag
         </div>
       </div>
       <div css={dateWrapper}>
-        <p>게시일: {travelData.createAt}</p>
+        <p>게시일: {formatDate(travelData.createdAt)}</p>
         <p>마지막 업데이트: {formatDate(travelData.updateAt)}</p>
       </div>
       <div css={{ display: 'flex', marginBottom: '15px' }}>
