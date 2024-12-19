@@ -9,9 +9,9 @@ export interface PageData {
 export interface TravelData {
   travelId: string;
   travelTitle: string;
-  createAt: string;
+  createdAt: string;
   updateAt: string;
-  travelTeams: string[];
+  teamTeams: string[];
   travelActive: boolean;
 }
 export interface TravelTeamData {
@@ -19,8 +19,8 @@ export interface TravelTeamData {
   travelStartDate: string;
   travelEndDate: string;
   personLimit: number;
-  appliedUsers: ApplicationUserData[];
-  approvedUsers: ApplicationUserData[];
+  appliedUsers?: ApplicationUserData[];
+  approvedUsers?: ApplicationUserData[];
   pagination: PageData;
 }
 export interface ApplicationUserData {
