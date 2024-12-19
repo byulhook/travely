@@ -4,9 +4,10 @@ const teamDataFilter = (travelTeamsData: TravelTeamData[], type: string) => {
   const today = new Date();
 
   const filterData = travelTeamsData.filter((travelTeam) => {
-    const endDate = new Date(`20${travelTeam.travelEndDate.replace('.', '-')}`);
+    const endDate = new Date(travelTeam.travelEndDate);
     return type === 'ongoing' ? endDate >= today : endDate < today;
   });
+
   return filterData;
 };
 
