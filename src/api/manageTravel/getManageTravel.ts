@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
 
-const getManageTravel = async (travelId: string): Promise<TravelData | null> => {
+const getManageTravel = async (travelId: string): Promise<TravelData> => {
   try {
     const response = await axios.get(`${SERVER}/api/v1/travels/manage-my-travel-teams/${travelId}`);
     return response.data.data;
