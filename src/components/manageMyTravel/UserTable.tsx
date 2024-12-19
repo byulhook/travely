@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ApplicationUserData } from '@/types/travelDataType';
 import Profile from '@/components/Profile';
 import FiledBtn from '@/components/FiledBtn';
+import { formatDate } from '@/utils/format';
 
 interface UserTableProps {
   data: ApplicationUserData[];
@@ -30,8 +31,8 @@ const UserTable = ({ data }: UserTableProps) => {
             </td>
             <td>{user.mbti}</td>
             <td>{user.phoneNumber}</td>
-            <td>{user.userId}</td>
-            <td>20{user.appliedAt}</td>
+            <td>{user.userEmail}</td>
+            <td>{formatDate(user.appliedAt)}</td>
             <td css={{ minWidth: '145px' }}>
               {user.status === 'waiting' ? (
                 <div>

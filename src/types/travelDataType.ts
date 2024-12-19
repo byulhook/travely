@@ -26,6 +26,7 @@ export interface TravelTeamData {
 export interface ApplicationUserData {
   status: Status;
   userName: string;
+  userEmail: string;
   userProfileImage: string;
   mbti: string;
   phoneNumber: string;
