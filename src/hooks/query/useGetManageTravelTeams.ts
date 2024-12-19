@@ -11,7 +11,7 @@ const useGetManageTravelTeams = (
   size: number,
 ) => {
   return useQuery({
-    queryKey: [MANAGE_TRAVEL_TEAMS, travelId],
+    queryKey: [MANAGE_TRAVEL_TEAMS, travelId, pageContainer],
     queryFn: () => getManageTravelTeams(travelId, pageContainer, size),
   });
 };
