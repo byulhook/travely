@@ -1,3 +1,4 @@
+import { TravelTeamData } from '@/types/travelDataType';
 import axios from 'axios';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
@@ -9,8 +10,7 @@ const getManageTravelTeams = async (
     currentPage: number;
   }[],
   size: number,
-) => {
-  console.log(pageContainer[1].currentPage, pageContainer[1].paginationId);
+): Promise<TravelTeamData[] | null> => {
   try {
     const responseAll = pageContainer.map(async (current) => {
       const response = await axios.get(

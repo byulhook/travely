@@ -1,8 +1,9 @@
+import { TravelData } from '@/types/travelDataType';
 import axios from 'axios';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
 
-const getManageTravel = async (travelId: string) => {
+const getManageTravel = async (travelId: string): Promise<TravelData | null> => {
   try {
     const response = await axios.get(`${SERVER}/api/v1/travels/manage-my-travel-teams/${travelId}`);
     return response.data.data;
