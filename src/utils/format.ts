@@ -1,4 +1,4 @@
-export default function formatCurrency(input: number | string): string {
+export function formatCurrency(input: number | string): string {
   const number = typeof input === 'string' ? Number(input) : input;
 
   if (isNaN(number)) {
@@ -7,3 +7,7 @@ export default function formatCurrency(input: number | string): string {
 
   return number.toLocaleString();
 }
+
+export const formatDate = (date: string) => {
+  return date.slice(0, 10).replaceAll('-', '.');
+};

@@ -1,29 +1,58 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { css } from '@emotion/react';
 import UserTable from '@/components/manageMyTravel/UserTable';
-import { TravelTeamData } from '@/types/travelDataType';
 import Team from '@/components/Team';
 import MultiPagination from '@/components/manageMyTravel/MultiPagination';
+import { formatDate } from '@/utils/format';
+import useGetManageTravelTeams from '@/hooks/query/useGetManageTravelTeams';
+import isOngoingDate from '@/utils/teamDataFilter';
+import usePageStore from '@/stores/usePageStore';
+import { MANAGE_COUNT_PER_PAGE } from '@/constants/countPerPage';
+import { useEffect } from 'react';
 
 interface TravelTeamProps {
-  travelTeamData: TravelTeamData[];
+  travelId: string;
+  teamId: string;
+  isOngoing: boolean;
+  handleHasData: (hasData: boolean) => void;
 }
 
-const TravelTeam = ({ travelTeamData }: TravelTeamProps) => {
-  const userMBTIList = travelTeamData.map((team) =>
-    team.appliedUser.filter((user) => user.status === 'approved').map((user) => user.mbti),
+const TravelTeam = ({ travelId, teamId, isOngoing, handleHasData }: TravelTeamProps) => {
+  const pageContainer = usePageStore((state) => state.pageContainer);
+  const currentTeam = pageContainer.find((page) => page.paginationId === teamId);
+  const { data: teamData } = useGetManageTravelTeams(
+    travelId,
+    currentTeam?.currentPage || 1,
+    MANAGE_COUNT_PER_PAGE,
+    teamId,
   );
 
+  useEffect(() => {
+    if (teamData && showTeamData) handleHasData(false);
+  }, []);
+
+  if (!teamData) return null;
+
+  const showTeamData = isOngoingDate(teamData.travelEndDate) === isOngoing;
+  const userMBTIList = teamData?.approvedUsers?.map((user) => user.mbti);
+
   return (
-    <>
-      {travelTeamData.map((team, i) => (
-        <div key={team.teamId} css={teamWrapper}>
-          <p>{team.travelStartDate + ' ~ ' + team.travelEndDate}</p>
-          <Team max={team.personLimit} mbtiList={userMBTIList[i]} />
-          <UserTable data={team.appliedUser} teamId={team.teamId} />
-          <MultiPagination pageData={team.pagination} teamId={team.teamId} />
-        </div>
-      ))}
-    </>
+    <div css={teamWrapper}>
+      {teamData && showTeamData && (
+        <>
+          <p>{formatDate(teamData.travelStartDate) + ' ~ ' + formatDate(teamData.travelEndDate)}</p>
+          <Team max={teamData.personLimit} mbtiList={userMBTIList} />
+          {teamData.appliedUsers ? (
+            <div>
+              <UserTable data={teamData.appliedUsers} />
+              <MultiPagination pageData={teamData.pagination} teamId={teamData.teamId} />
+            </div>
+          ) : (
+            <div css={noData}>신청한 유저가 없습니다.</div>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 
@@ -35,4 +64,13 @@ const teamWrapper = css`
     font-weight: 700;
     margin-bottom: 20px;
   }
+`;
+
+const noData = css`
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 18px;
+  color: #888;
+  margin: 100px;
 `;

@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-
+import basicProfile from '@/assets/basicProfile.png';
 interface UserProfileProps {
-  url: string;
+  url?: string;
   size: string;
 }
 
 const Profile = ({ url, size }: UserProfileProps) => {
-  return <div css={wrapper(url, size)}></div>;
+  return <div css={wrapper(url || basicProfile, size)}></div>;
 };
 
 export default Profile;

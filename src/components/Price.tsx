@@ -1,4 +1,4 @@
-import formatCurrency from '@/utils/formatCurrency';
+import { formatCurrency } from '@/utils/format';
 import { css } from '@emotion/react';
 
 interface IPriceProps {

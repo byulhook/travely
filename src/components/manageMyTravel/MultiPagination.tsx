@@ -11,7 +11,7 @@ interface MultiPaginationProps {
 const MultiPagination = ({ pageData, teamId }: MultiPaginationProps) => {
   const pageContainer = usePageStore((state) => state.pageContainer);
   const setCurrentPage = usePageStore((state) => state.setCurrentPage);
-  const matchPageId = pageContainer.find((p) => p.paginationId === teamId);
+  const currentTeam = pageContainer.find((page) => page.paginationId === teamId);
 
   const handleCurrentPage = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(teamId, page);
@@ -21,7 +21,7 @@ const MultiPagination = ({ pageData, teamId }: MultiPaginationProps) => {
     <div css={paginationWrapper}>
       <Pagination
         count={pageData.totalPages}
-        page={matchPageId?.currentPage || 1}
+        page={currentTeam?.currentPage || 1}
         onChange={handleCurrentPage}
         color="primary"
         showFirstButton

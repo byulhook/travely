@@ -3,6 +3,7 @@ import { createTheme } from '@mui/material/styles';
 const colors = {
   primary: '#4A95F2', // 주 색상
   borderColor: '#e0e0e0', // 테두리 색상styles/theme
+  red: '#FF5757',
 };
 
 const fontSizes = {};
