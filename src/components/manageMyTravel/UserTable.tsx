@@ -2,34 +2,12 @@ import { css } from '@emotion/react';
 import { ApplicationUserData } from '@/types/travelDataType';
 import Profile from '@/components/Profile';
 import FiledBtn from '@/components/FiledBtn';
-import usePageStore from '@/stores/usePageStore';
 
 interface UserTableProps {
   data: ApplicationUserData[];
-  teamId: string;
 }
-const COUNT_PER_PAGE = 6;
 
-const UserTable = ({ data, teamId }: UserTableProps) => {
-  const pageContainer = usePageStore((state) => state.pageContainer);
-  const matchPageId = pageContainer.filter((p) => p.paginationId === teamId);
-  const currentPage = matchPageId[0]?.currentPage || 1;
-
-  const statusData = [
-    data.filter((user) => user.status === 'waiting'),
-    data.filter((user) => user.status === 'approved'),
-    data.filter((user) => user.status === 'rejected'),
-  ];
-
-  const newStatusData = statusData.reduce((prev, next) => {
-    return prev.concat(next);
-  });
-
-  const dataPerPage = newStatusData.slice(
-    COUNT_PER_PAGE * (currentPage - 1),
-    COUNT_PER_PAGE * (currentPage - 1) + COUNT_PER_PAGE,
-  );
-
+const UserTable = ({ data }: UserTableProps) => {
   return (
     <table css={tableWrapper}>
       <thead>
@@ -43,7 +21,7 @@ const UserTable = ({ data, teamId }: UserTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {dataPerPage.map((user, index) => (
+        {data.map((user, index) => (
           <tr key={index}>
             <td css={{ minWidth: '80px' }}>
               <div>
@@ -83,6 +61,7 @@ export default UserTable;
 
 const tableWrapper = css`
   width: 100%;
+  margin-top: 40px;
   & thead {
     background-color: #ededed;
   }

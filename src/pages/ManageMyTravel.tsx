@@ -1,31 +1,54 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { teamData, travelData } from '@/data/travelMockData';
 import { useEffect, useState } from 'react';
 import TravelTeam from '@/components/manageMyTravel/TravelTeam';
 import TravelManageHeader from '@/components/manageMyTravel/TravelManageHeader';
 import teamDataFilter from '@/utils/teamDataFilter';
 import usePageStore from '@/stores/usePageStore';
 import { useParams } from 'react-router-dom';
+import useGetManageTravel from '@/hooks/query/useGetManageTravel';
+import useGetManageTravelTeams from '@/hooks/query/useGetManageTravelTeams';
+import { MANAGE_COUNT_PER_PAGE } from '@/constants/countPerPage';
 
 const ManageMyTravel = () => {
-  const [tab, setTab] = useState(true);
+  const [isOngoingTab, setIsOngoingTab] = useState(true);
+  const pageContainer = usePageStore((state) => state.pageContainer);
   const setMultiPagination = usePageStore((state) => state.setMultiPagination);
   const { travelId } = useParams();
+  const { data: travelData } = useGetManageTravel(travelId as string);
+  const { data: teamData } = useGetManageTravelTeams(
+    travelId as string,
+    usePageStore.getState().pageContainer,
+    MANAGE_COUNT_PER_PAGE,
+  );
 
   useEffect(() => {
-    const filteredData = teamDataFilter(teamData, tab ? 'ongoing' : 'completed');
-    const filteredTeamIds = filteredData.map((team) => team.teamId);
-    setMultiPagination(filteredTeamIds);
-  }, [tab]);
+    if (travelData && pageContainer?.length === 0) {
+      if (teamData) {
+        const filteredData = teamDataFilter(teamData, isOngoingTab ? 'ongoing' : 'completed');
+        const filteredTeamIds = filteredData.map((team) => team.teamId);
+        setMultiPagination(filteredTeamIds);
+      } else {
+        setMultiPagination(travelData.teamTeams);
+      }
+    }
+  }, [isOngoingTab, travelData, teamData]);
 
-  if (travelData.travelId !== travelId) {
-    return;
-  }
+  if (travelData?.travelId !== travelId) return;
 
   return (
     <div css={{ color: '#333' }}>
-      <TravelManageHeader travelData={travelData} tab={tab} setTab={setTab} />
-      <TravelTeam travelTeamData={teamDataFilter(teamData, tab ? 'ongoing' : 'completed')} />
+      <TravelManageHeader
+        travelData={travelData}
+        isOngoingTab={isOngoingTab}
+        setIsOngoingTab={setIsOngoingTab}
+      />
+      {travelId && teamData && (
+        <TravelTeam
+          travelId={travelId}
+          travelTeamData={teamDataFilter(teamData, isOngoingTab ? 'ongoing' : 'completed')}
+          isOngoing={isOngoingTab}
+        />
+      )}
     </div>
   );
 };
