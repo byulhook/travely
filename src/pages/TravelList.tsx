@@ -1,6 +1,6 @@
 import BorderBtn from '@/components/BorderBtn';
 import TagCardWrap from '@/components/TagCardWrap';
-import TravelCard from '@/components/TravelCard';
+import TravelCard from '@/components/traveList/TravelCard';
 import { tagDatas } from '@/data/tagDatas';
 import { css } from '@emotion/react';
 import { Link, useLocation } from 'react-router-dom';

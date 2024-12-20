@@ -1,7 +1,7 @@
 import reviewImage from '@/assets/reviewImg.png';
-import ReviewCard from '@/components/ReviewCard';
+import ReviewCard from '@/components/myReview/ReviewCard';
 import { Review } from '@/types/reviewType';
-import ReviewWriteModal from '@/components/ReviewWriteModal';
+import ReviewWriteModal from '@/components/myReview/ReviewWriteModal';
 
 const data = {
   reviews: [

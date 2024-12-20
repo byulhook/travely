@@ -1,4 +1,4 @@
-import TravelCard from '@/components/TravelCard';
+import TravelCard from '@/components/traveList/TravelCard';
 import { css } from '@emotion/react';
 import travelCardMockData from '@/data/travelCardMockData';
 

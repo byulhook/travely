@@ -1,4 +1,4 @@
-import FindGuideCard from '@/components/findGuide/FindGuideCard';
+import FindGuideCard from '@/components/myFindGuide/FindGuideCard';
 import { travelFindGuideMockData } from '@/data/travelFindGuideMockData';
 import styled from '@emotion/styled';
 import { useState } from 'react';

@@ -1,4 +1,4 @@
-import FindGuideContent from '@/components/findGuide/FindGuideContent';
+import FindGuideContent from '@/components/myFindGuide/FindGuideContent';
 
 const MyFindGuide = () => {
   return (

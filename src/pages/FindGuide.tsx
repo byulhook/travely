@@ -1,5 +1,5 @@
 import BorderBtn from '@/components/BorderBtn';
-import GuideCard from '@/components/GuideCard';
+import GuideCard from '@/components/findGuideList/GuideCard';
 import guideCardMockData from '@/data/guideCardMockData';
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';

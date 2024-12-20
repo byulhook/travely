@@ -1,5 +1,5 @@
 import TagCardWrap from '@/components/TagCardWrap';
-import TravelCard from '@/components/TravelCard';
+import TravelCard from '@/components/traveList/TravelCard';
 import travelCardMockData from '@/data/travelCardMockData';
 import { css } from '@emotion/react';
 // import { useQuery } from '@tanstack/react-query';
